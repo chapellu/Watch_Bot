@@ -58,7 +58,7 @@ if(isset($_GET['action'])){
      * puissions voir ce que nous lisons au fur et à mesure. */
     ob_implicit_flush();
 
-    $address = '193.48.125.38';
+    $address = '193.48.125.'.NUM_ROBOTINO;
     $port = 50000;
 
     if (($sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
@@ -69,7 +69,7 @@ if(isset($_GET['action'])){
         die('Impossible de définir l\'option du socket : '. socket_strerror(socket_last_error()) . PHP_EOL);
     }
 
-    if (socket_connect($sock, $address, $port) === false) {
+    if (socket_bind($sock, $address, $port) === false) {
         die("socket_bind() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n");
     }
 
