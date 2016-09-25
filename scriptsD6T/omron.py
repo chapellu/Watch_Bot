@@ -64,6 +64,8 @@ class OmronD6T(object):
 
         #Affichage selon les modes
         offset = 0
+        values = []
+
         if mode=='exact-temp':
             for j in range(0, 4):
                 for i in range(0, 4):

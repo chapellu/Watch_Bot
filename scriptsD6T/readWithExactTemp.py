@@ -5,7 +5,6 @@ if __name__ == '__main__':
     omron = omron.OmronD6T()
     omron.init()
 
-    values = []
     while True:
         omron.read('symbols',28)
 
