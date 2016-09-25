@@ -46,7 +46,9 @@
     </div>
 </div>
 
-
+<div>
+    <h5>Logs</h5>
+    <p>
 <?php
 if(isset($_GET['action'])){
     error_reporting(E_ALL);
@@ -80,15 +82,11 @@ if(isset($_GET['action'])){
     socket_write($socket, $msg, strlen($msg));
     echo "OK.\n";
 
-    echo "Lire la réponse : \n\n";
-    while ($out = socket_read($socket, 2048)) {
-        echo $out;
-    }
+
 
     echo "Fermeture du socket...";
     socket_close($socket);
     echo "OK.\n\n";
-    die();
 
     header('Location: '.BASE_URL.'/admin/robotino');
     exit;
@@ -96,3 +94,6 @@ if(isset($_GET['action'])){
 
 
 ?>
+    </p>
+</div>
+
