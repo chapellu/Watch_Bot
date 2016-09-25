@@ -6,7 +6,7 @@ if __name__ == '__main__':
     omron.init()
 
     while True:
-        omron.read('symbols',28)
+        omron.read('auto',seuil)
 
         time.sleep(1)
 
