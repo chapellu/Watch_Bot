@@ -85,7 +85,7 @@ if(isset($_GET['action'])){
     $out = "";
 
     echo "Envoi de la requête HTTP HEAD...";
-    socket_write($socket, $msg, strlen($in));
+    socket_write($socket, $msg, strlen($msg));
     echo "OK.\n";
 
     echo "Lire la réponse : \n\n";
