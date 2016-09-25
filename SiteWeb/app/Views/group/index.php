@@ -4,7 +4,7 @@
 
 
 
-            <h2><?= $post->title;?></h2>
+            <h2 class="title"><?= $post->title;?></h2>
 
             <p><?= $post->extrait; ?>...<a href="<?= $post->url ?>">Lire la suite &rarr;</a></p><!--&rarr = fleche a droite-->
 

@@ -58,15 +58,16 @@
 
     </div>
 
-    <div class="col-sr-7 post-layout">
-        <div class="content-post">
-            <?php foreach ($posts as $k):?>
+    <?php foreach ($posts as $k):?>
+        <div class="col-sr-7 post-layout">
+            <div class="content-post">
+
                 <h2 class="title"><?= $k->title; ?></h2>
                 <p class="date">Publié le <?= $k->date; ?></p>
                 <p><?= $k->content; ?></p>
-            <?php endforeach; ?>
+            </div>
         </div>
-    </div>
+    <?php endforeach; ?>
     <!-- <div class="col-sm-4">
          <h2>Contact Us</h2>
          <address>

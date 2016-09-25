@@ -1,6 +1,29 @@
 <div class="robotino col-sm-12">
+    <div class="video col-sm-9">
+        <div class="overlayWrapper ">
+            <video id="remote-video" class="img-responsive" autoplay=""></video>
+            <p class="overlay">Live</p>
+        </div>
+        <div id="controls">
+            <button type=button id="pause" onclick="pause();" title="pause or resume local player">Pause/Play</button>
+            <button type=button id="mute" onclick="mute();" title="mute or unmute remote audio source">Muter/Demuter</button>
+            <button type=button id="fullscreen" onclick="fullscreen();">Plein écran</button>
+            <button type=button id="record" onclick="start_stop_record();" title="start or stop recording audio/video">Enregistrer</button>
+        </div>
+    </div>
 
-    <div class="navbar-menu">
+    <div id="commands" class="video-commands col-sm-3">
+        <details open>
+            <summary><b>Options de connexion</b></summary>
+            <fieldset>
+               <input required type="text" id="signalling_server" value="193.48.125.196:8080" title="<host>:<port>, default address is autodetected"/><br>
+             </fieldset>
+        </details>
+        <button id="start" style="background-color: green; color: white" onclick="start();">Connexion</button>
+        <button disabled id="stop" style="background-color: red; color: white" onclick="stop();">Stop</button>
+    </div>
+
+    <!--<div class="navbar-menu">
        <dl>
            <dt>Menu</dt>
            <dd>
@@ -10,7 +33,7 @@
                </ul>
            </dd>
        </dl>
-    </div>
+    </div>-->
 
     <div class="carte">
         <img class="img_carte" src="<?= BASE_URL.'/public/img/carte.png';?>" alt="">
@@ -23,80 +46,92 @@
                 <tr>
                     <td></td>
                     <td>
-                        <?= $form->bouttonRobotino('avancer', 'boutonsRobotino');?>
+                        <?= $form->bouttonRobotino('avancer', 'primary');?>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <?= $form->bouttonRobotino('gauche', 'boutonsRobotino');?>
+                        <?= $form->bouttonRobotino('gauche', 'primary');?>
                     </td>
                     <td></td>
                     <td>
-                        <?= $form->bouttonRobotino('droite', 'boutonsRobotino');?>
+                        <?= $form->bouttonRobotino('droite', 'primary');?>
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
-                        <?= $form->bouttonRobotino('reculer', 'boutonsRobotino');?>
+                        <?= $form->bouttonRobotino('reculer', 'primary');?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?= $form->bouttonRobotino('detection', 'success');?>
                     </td>
                 </tr>
             </table>
         </form>
     </div>
+
+
 </div>
 
 <div>
     <h3>Logs (à faire)</h3>
     <p>
 <?php
-var_dump($this);
-\App::getInstance()->flash['logs'].='++';
-var_dump(\App::getInstance()->flash['logs']);
+
+
 if(isset($_GET['action'])){
-    error_reporting(E_ALL);
+    if($_GET['action']==='avancer' || $_GET['action']==='reculer' || $_GET['action']==='droite' || $_GET['action'] ==='gauche'){
 
-    /* Interdit l'exécution infinie du script, en attente de connexion. */
-    set_time_limit(0);
+        error_reporting(E_ALL);
 
-    /* Active le vidage implicite des buffers de sortie, pour que nous
-     * puissions voir ce que nous lisons au fur et à mesure. */
-    ob_implicit_flush();
+        /* Interdit l'exécution infinie du script, en attente de connexion. */
+        set_time_limit(0);
 
-    $address = '193.48.125.'.NUM_ROBOTINO;
-    $port = 50000;
+        /* Active le vidage implicite des buffers de sortie, pour que nous
+         * puissions voir ce que nous lisons au fur et à mesure. */
+        ob_implicit_flush();
+
+        $address = '193.48.125.'.NUM_ROBOTINO;
+        $port = 50000;
 
 
-    if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
-        echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
-    } else {
-        echo "socket_create() a réussi\n";
+        if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
+            echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
+        } else {
+            echo "socket_create() a réussi\n";
+        }
+
+
+        echo "Essai de connexion à '$address' sur le port '$port'...";
+        $result = socket_connect($socket, $address, $port);
+        if ($socket === false) {
+            echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
+        } else {
+            echo "socket_connect() a réussi\n";
+        }
+
+        $msg = "POST /?action=".$_GET['action']." HTTP/1.1\r\n\r\n";
+        $msg .= "Connection: Close\r\n\r\n";
+        $out = "";
+
+        echo "Envoi de la requête :".$msg;
+        socket_write($socket, $msg, strlen($msg));
+
+
+
+        echo "Fermeture du socket...";
+        socket_close($socket);
+        echo "Socket détruite\n\n";
+
+        header('Location: '.BASE_URL.'/admin/robotino');
+        exit();
     }
-
-
-    echo "Essai de connexion à '$address' sur le port '$port'...";
-    $result = socket_connect($socket, $address, $port);
-    if ($socket === false) {
-        echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
-    } else {
-        echo "socket_connect() a réussi\n";
+    else if($_GET['action']==='detection'){
+        exec('sudo python /home/watchbot/Watch_Bot/scrisD6T/detection', $output, $ret_code);
     }
-
-    $msg = "POST /?action=".$_GET['action']." HTTP/1.1\r\n\r\n";
-    $msg .= "Connection: Close\r\n\r\n";
-    $out = "";
-
-    echo "Envoi de la requête :".$msg;
-    socket_write($socket, $msg, strlen($msg));
-
-
-
-    echo "Fermeture du socket...";
-    socket_close($socket);
-    echo "Socket détruite\n\n";
-
-    header('Location: '.BASE_URL.'/admin/robotino');
-    exit();
 }
 
 

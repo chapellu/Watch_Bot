@@ -58,6 +58,7 @@ class PostTable extends Table
             FROM post
             LEFT JOIN category ON post.category_id = category.id
             WHERE category.title = ?
-            ORDER BY post.date DESC", ['Groupe']);    }
+            ORDER BY post.date DESC", ['Groupe']);
+    }
 
 }

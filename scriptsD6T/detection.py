@@ -102,4 +102,3 @@ if __name__ == '__main__':
 			print 'Alerte ! Humain detecte'
 
 		time.sleep(0.05)
-
