@@ -80,7 +80,9 @@ if(isset($_GET['action'])){
     }
 
     $msg = "POST / HTTP/1.0\r\n\r\n";
-    $out = "Je teste quelque chose";
+    $msg .= "Host: 127.0.0.1\r\n";
+    $msg .= "Connection: keep-alive\r\n\r\n";;
+    $out = "";
 
     echo "Envoi de la requête HTTP HEAD...";
     socket_write($socket, $msg, strlen($in));
