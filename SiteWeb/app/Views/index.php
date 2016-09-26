@@ -1,50 +1,16 @@
 <!-- Carousel
 ================================================== -->
-<div id="myCarousel" class="carousel slide">
-		<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<li data-target="" data-slide-to="0" class="active"></li>
-			<li data-target="" data-slide-to="1"></li>
-		</ol>
-		<div class="carousel-inner">
-			<div class="item active">
-				<div class="carousel-page">
-					<img src="<?= BASE_URL.'/public/img/carousel-1.jpg';?>" class="img-responsive" style="margin:0px auto;">
-				</div>
-				<!--<div class="container-fluid">
-					<div class="carousel-caption">
-						<h1 id="blue">Bienvenue sur le site de l'APP Watchbot</h1>
-					</div>
-				</div>-->
-			</div>
-			<div class="item">
-				<div class="carousel-page">
-				<img src="<?= BASE_URL.'/public/img/carousel-2.jpg';?>" class="img-responsive" style="margin:0px auto;">
-				</div>
-			</div>
-			<!--Model :
-			<div class="item">
-				<img src="http://mooxidesign.com/wp-content/uploads/2014/04/New-york-1500x500.jpg" class="img-responsive">
-				<div class="container">
-					<div class="carousel-caption">
-						<h1>Percentage-based sizing</h1>
-						<p>This Site is fully responsive and adjusts to the size of the browser your using. Meaning that it looks great on smart-phones</p>
-						<p><a class="btn btn-large btn-primary" href="#">Browse gallery</a></p>
-					</div>
-				</div>
-			</div>-->
-		</div>
-		<!-- Controls-->
-		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-			<span class="icon-prev"></span>
-		</a>
-		<a class="right carousel-control" href="#myCarousel" data-slide="next">
-			<span class="icon-next"></span>
-		</a>
-	</div>
-<!-- /.carousel -->
-<div>
 
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+        <div class="carousel-item active">
+            <img class="d-block img-fluid" src="<?= BASE_URL.'/public/img/carousel-1.jpg';?>" alt="First slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block img-fluid" src="<?= BASE_URL.'/public/img/carousel-2.jpg';?>" alt="Second slide">
+        </div>
+    </div>
+</div>
 
 <!-- Page Content -->
 
