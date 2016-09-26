@@ -62,7 +62,9 @@ body{
     padding-right:0;
     margin-top:20px;
 }
-
+.padding {
+    padding-bottom:210px;
+}
 .commandes {
     position: absolute;
     bottom: 0;
