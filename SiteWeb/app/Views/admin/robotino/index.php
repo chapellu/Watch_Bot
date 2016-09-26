@@ -144,7 +144,7 @@ if(isset($_GET['action'])){
         $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
         fwrite($flagscript, 'script=True');
         fclose($flagscript);
-        exec('sudo python '.ROOT_SCRIPT.'mainscript.py');
+        exec('sudo python '.ROOT_SCRIPT.'mainscript.py 2>&1');
     }
     else if($_GET['action']==='stop-detection'){
         $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
@@ -152,7 +152,7 @@ if(isset($_GET['action'])){
         fclose($flagscript);
     }
     else if($_GET['action']==='clear-logs'){
-        $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
+        $log = fopen(ROOT_SCRIPT.'log.txt ', 'w');
         fwrite($log, '');
         fclose($log);
     }
