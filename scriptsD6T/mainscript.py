@@ -15,7 +15,6 @@ if __name__ == '__main__':
 
         # On regarde toutes les secondes si on a pas arreter le script
         text = file("flagscript.txt").read()
-        print text
         if text == 'script=False':
             script = False
 
