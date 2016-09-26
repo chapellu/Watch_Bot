@@ -143,7 +143,7 @@ if(isset($_GET['action'])){
     else if($_GET['action']==='start-detection'){
         $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
         fwrite($flagscript, 'script=True');
-        fclose($flagscript);die();
+        fclose($flagscript);
         exec('sudo python '.ROOT_SCRIPT.'mainscript');
     }
     else if($_GET['action']==='stop-detection'){
