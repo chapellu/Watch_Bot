@@ -145,7 +145,7 @@ if(isset($_GET['action'])){
         fwrite($flagscript, 'script=True');
         fclose($flagscript);
         exec('sudo python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
-        print_r($msg);
+        print_r($msg);die();
     }
     else if($_GET['action']==='stop-detection'){
         $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
