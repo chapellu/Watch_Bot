@@ -15,7 +15,6 @@
                 <summary><b>Advanced options</b></summary>
                 <fieldset>
                     <span>Remote Peer/Signalling Server Address: </span><input required type="text" id="signalling_server" value="193.48.125.196:8080" title="<host>:<port>, default address is autodetected"/><br>
-                    <span>Optional ICE Servers (STUN/TURN): </span><input type="text" id="ice_servers" value="" title="array of RTCIceServer objects as valid JSON string"/>
                 </fieldset>
             </details>
             <button id="start" style="background-color: green; color: white" onclick="start();">Call!</button>
