@@ -152,7 +152,7 @@ if(isset($_GET['action'])){
         fclose($flagscript);
     }
     else if($_GET['action']==='clear-logs'){
-        $log = fopen(ROOT_SCRIPT.'log.txt ', 'w');
+        $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
         fwrite($log, ' ');
         fclose($log);
     }
