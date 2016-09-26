@@ -64,17 +64,28 @@ body{
 }
 
 .commandes {
-    border-top: solid 4px black;
-    border-right: solid 4px black;
-    border-bottom: hidden 4px ;
     position: absolute;
     bottom: 0;
     left:0;
+}
+.d6t, .logs, .commandes-manuelles{
+    float: left;
+    height: 210px;
+}
+.video-commands{
     display: inline;
 }
 .logs{
     display: inline-block;
-    padding:5px 5px 5px 5px;
+}
+.bordered{
+    border: solid 4px black;
+    padding:5px;
+    margin-left:-4px;
+    margin-bottom:-4px;
+}
+.bordered > h2{
+    text-align: center;
 }
 .scroll{
     min-height:100px;
@@ -84,9 +95,10 @@ body{
     overflow:auto;/*pour activer les scrollbarres*/
 }
 .commandes-manuelles{
-    border-right: solid 4px black;
-    float: left;
-    padding:2px 2px 2px 2px;
+
+}
+.table-with-spaces > tbody > tr > td {
+    padding: 5px;
 }
 #clear-logs{
     padding:0;
@@ -170,19 +182,14 @@ img  {
     width: 250px;
     height: 250px;
     position: absolute;
-    bottom: 0;
+    top: 0;
     right:0;
 }
 .liensBoutonsRobotino{
     margin-bottom: 0px;
 }
-.btn.boutonsRobotino.btn-danger, .btn.boutonsRobotino.btn-success{
-    width: 100%;
-    margin-top:10px;
-}
-.btn.boutonsRobotino.btn-danger{
-    margin-left: 10px;
-}
+
+
 .btn.boutonsRobotino.btn-primary{
     width: 100px;
 }

@@ -10,18 +10,18 @@
             <button type=button id="fullscreen" onclick="fullscreen();">Plein écran</button>
             <button type=button id="record" onclick="start_stop_record();" title="start or stop recording audio/video">Enregistrer</button>
         </div>
+        <div id="commands" class="video-commands">
+            <details open>
+                <summary><b>Options de connexion</b></summary>
+                    <input required type="text" id="signalling_server" value="193.48.125.196:8080" title="<host>:<port>, default address is autodetected"/>
+                <button id="start" style="background-color: green; color: white" onclick="start();">Connexion</button>
+                <button disabled id="stop" style="background-color: red; color: white" onclick="stop();">Stop</button>
+            </details>
+
+        </div>
     </div>
 
-    <div id="commands" class="video-commands col-sm-3">
-        <details open>
-            <summary><b>Options de connexion</b></summary>
-            <fieldset>
-               <input required type="text" id="signalling_server" value="193.48.125.196:8080" title="<host>:<port>, default address is autodetected"/><br>
-             </fieldset>
-        </details>
-        <button id="start" style="background-color: green; color: white" onclick="start();">Connexion</button>
-        <button disabled id="stop" style="background-color: red; color: white" onclick="stop();">Stop</button>
-    </div>
+
 
     <!--<div class="navbar-menu">
        <dl>
@@ -40,7 +40,7 @@
     </div>
 
     <div class="commandes">
-        <div class="commandes-manuelles">
+        <div class="commandes-manuelles bordered">
             <form method="post" >
                 <table>
                     <thead><h2>Commandes manuelles</h2></thead>
@@ -66,10 +66,23 @@
                         </td>
                     </tr>
                 </table>
-                <table>
+            </form>
+        </div>
+
+        <div class="d6t bordered">
+            <h2>Capteur D6T</h2>
+
+
+            <form action="<?=BASE_URL.'/admin/robotino/';?>" method="post">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Seuil</span>
+                    <input type="number" class="form-control" name="seuil" placeholder="Veuillez saisir une température" aria-describedby="basic-addon1">
+                </div>
+                <table class="table-with-spaces">
                     <tr>
                         <td>
-                            <?= $form->bouttonRobotino('start-detection', 'success', 'Lancer la detection');?>
+                            <input class="btn btn-success" type="submit" value="Lancer la detection">
+                           <!-- <?= $form->bouttonRobotino('start-detection', 'success', 'Lancer la detection');?>-->
                         </td>
                         <td>
                             <?= $form->bouttonRobotino('stop-detection','danger', 'Arreter la detection');?>
@@ -79,7 +92,7 @@
             </form>
         </div>
 
-        <div class="logs">
+        <div class="logs bordered">
             <h2>Logs</h2>
             <div class="scroll">
                 <table>
@@ -98,7 +111,6 @@
 <?php
 if(isset($_GET['action'])){
     if($_GET['action']==='avancer' || $_GET['action']==='reculer' || $_GET['action']==='droite' || $_GET['action'] ==='gauche'){
-
         error_reporting(E_ALL);
 
         /* Interdit l'exécution infinie du script, en attente de connexion. */
@@ -134,20 +146,9 @@ if(isset($_GET['action'])){
         echo "Envoi de la requête :".$msg;
         socket_write($socket, $msg, strlen($msg));
 
-
-
         echo "Fermeture du socket...";
         socket_close($socket);
         echo "Socket détruite\n\n";
-    }
-    else if($_GET['action']==='start-detection'){
-        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
-        fwrite($flagscript, 'script=True');
-        fclose($flagscript);
-        exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py > /dev/null 2>/dev/null &');
-        //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
-        //var_dump($msg);die();
-
     }
     else if($_GET['action']==='stop-detection'){
         $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
@@ -162,7 +163,20 @@ if(isset($_GET['action'])){
     header('Location: '.BASE_URL.'/admin/robotino');
     exit();
 }
-
+if(isset($_POST['seuil'])){
+    if($_POST['seuil']==='' || $_POST['seuil']<0){
+        echo '<script>alert("Vous devez saisir un seuil (positif)")</script>';
+    } else{
+        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
+        fwrite($flagscript, 'script=True'."\n".$_POST['seuil']);
+        fclose($flagscript);
+        if(DEV == 0) {
+            exec('sudo  -u www-data python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
+        }
+            //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
+        //var_dump($msg);die();
+    }
+}
 
 ?>
 
