@@ -14,10 +14,11 @@
         <link type="text/css" rel="stylesheet" href="<?= BASE_URL.'/public/fonts/font-awesome/css/font-awesome.min.css';?>"/>
         <link type="text/css" rel="stylesheet" href="<?= BASE_URL.'/public/css/style.css'; ?>"/>
         <link type="text/css" rel="stylesheet" href="<?= BASE_URL.'/public/css/footer.css'; ?>"/>
+        <link type="text/css" rel="stylesheet" href="<?= BASE_URL.'/public/css/camera.css'; ?>"/>
 
         <script type="text/javascript">
             var signalling_server_hostname = location.hostname || "193.48.125.196";
-            var signalling_server_address = signalling_server_hostname + ':' + (location.port || 80);
+            var signalling_server_address = signalling_server_hostname + ':' + (location.port || 8080);
             var isFirefox = typeof InstallTrigger !== 'undefined';// Firefox 1.0+
 
             addEventListener("DOMContentLoaded", function() {
@@ -43,6 +44,7 @@
             var audio_video_stream;
             var recorder = null;
             var recordedBlobs;
+            alert("stun:" + signalling_server_hostname + ":3478");
             var pcConfig = {"iceServers": [
                 {"urls": ["stun:stun.l.google.com:19302", "stun:" + signalling_server_hostname + ":3478"]}
             ]};
