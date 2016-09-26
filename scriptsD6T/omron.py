@@ -2,6 +2,8 @@ import pigpio, time, smbus
 from datetime import datetime
 
 class OmronD6T(object):
+    chemin = '/var/www/html/Watch_Bot/scriptsD6T/'
+
     def init(self, rasPiChannel = 1, omronAddress = 0x0a, omronSize = 16):
         self.MAX_RETRIES = 5
         self.roomTemp = 0 #Init temp
@@ -112,7 +114,7 @@ class OmronD6T(object):
 
             if compteurDeColonnes >= 2:
                 print "On detecte"
-                log = open("log.txt", "r+")
+                log = open(self.chemin+"log.txt", "r+")
                 log.write("<tr><td>" + datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "-- Humain detecte" + "</td></tr>\n")
                 log.close()
 
