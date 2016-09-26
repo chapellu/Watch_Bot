@@ -112,6 +112,7 @@ class OmronD6T(object):
 
             if compteurDeColonnes >= 2:
                 open("log.txt", "a").write(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "-- Humain detecte\n")
-                text = open("log.txt", "r").replace('\n', '')
+                text = open("log.txt", "r")
+                text = text.replace('\n', '')
                 file("log.txt", 'w').write(text)
 
