@@ -40,48 +40,62 @@
     </div>
 
     <div class="commandes">
-        <form method="post" >
-            <table>
-                <thead><h2>Commandes mannuelles</h2></thead>
-                <tr>
-                    <td></td>
-                    <td>
-                        <?= $form->bouttonRobotino('avancer', 'primary');?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <?= $form->bouttonRobotino('gauche', 'primary');?>
-                    </td>
-                    <td></td>
-                    <td>
-                        <?= $form->bouttonRobotino('droite', 'primary');?>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <?= $form->bouttonRobotino('reculer', 'primary');?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <?= $form->bouttonRobotino('detection', 'success');?>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <div class="commandes-manuelles">
+            <form method="post" >
+                <table>
+                    <thead><h2>Commandes mannuelles</h2></thead>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <?= $form->bouttonRobotino('avancer', 'primary');?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <?= $form->bouttonRobotino('gauche', 'primary');?>
+                        </td>
+                        <td></td>
+                        <td>
+                            <?= $form->bouttonRobotino('droite', 'primary');?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <?= $form->bouttonRobotino('reculer', 'primary');?>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td>
+                            <?= $form->bouttonRobotino('start-detection', 'success', 'Lancer la detection');?>
+                        </td>
+                        <td>
+                            <?= $form->bouttonRobotino('stop-detection','danger', 'Arreter la detection');?>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div class="logs">
+            <h2>Logs</h2>
+            <div class="scroll">
+                <table>
+                    <tbody id="log"></tbody>
+                </table>
+            </div>
+            <?= $form->bouttonRobotino('clear-logs', 'secondary', 'Effacer la console');?>
+        </div>
     </div>
 
 
 </div>
 
-<div>
-    <h3>Logs (à faire)</h3>
-    <p>
+
+
 <?php
-
-
 if(isset($_GET['action'])){
     if($_GET['action']==='avancer' || $_GET['action']==='reculer' || $_GET['action']==='droite' || $_GET['action'] ==='gauche'){
 
@@ -125,17 +139,27 @@ if(isset($_GET['action'])){
         echo "Fermeture du socket...";
         socket_close($socket);
         echo "Socket détruite\n\n";
-
-        header('Location: '.BASE_URL.'/admin/robotino');
-        exit();
     }
-    else if($_GET['action']==='detection'){
-        exec('sudo python /home/watchbot/Watch_Bot/scrisD6T/detection', $output, $ret_code);
+    else if($_GET['action']==='start-detection'){
+        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
+        fwrite($flagscript, 'script=True');
+        fclose($flagscript);
+        exec('sudo python '.ROOT_SCRIPT.'mainscript');
     }
+    else if($_GET['action']==='stop-detection'){
+        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
+        fwrite($flagscript, 'script=False');
+        fclose($flagscript);
+    }
+    else if($_GET['action']==='clear-logs'){
+        $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
+        fwrite($log, '');
+        fclose($log);
+    }
+    header('Location: '.BASE_URL.'/admin/robotino');
+    exit();
 }
 
 
 ?>
-    </p>
-</div>
 
