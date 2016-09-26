@@ -43,7 +43,7 @@
         <div class="commandes-manuelles">
             <form method="post" >
                 <table>
-                    <thead><h2>Commandes mannuelles</h2></thead>
+                    <thead><h2>Commandes manuelles</h2></thead>
                     <tr>
                         <td></td>
                         <td>
@@ -145,7 +145,7 @@ if(isset($_GET['action'])){
         fwrite($flagscript, 'script=True');
         fclose($flagscript);
         exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
-        print_r($msg);die();
+
     }
     else if($_GET['action']==='stop-detection'){
         $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
