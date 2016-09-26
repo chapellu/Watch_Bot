@@ -75,8 +75,8 @@ class OmronD6T(object):
                 print values
                 values = []
                 offset += 4
-
-
+                print ''
+                print ''
 
         elif mode=='symbols':
             for j in range(0, 4):
@@ -88,6 +88,8 @@ class OmronD6T(object):
                 print values
                 values = []
                 offset += 4
+                print ''
+                print ''
 
         elif mode=='auto':
             # Recupere les valeurs sous formes dun tableau
@@ -109,7 +111,8 @@ class OmronD6T(object):
                     compteurDeColonnes += 1
 
             if compteurDeColonnes >= 2:
-                log = open("log.txt", "a")
-                log.write(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "-- Humain detecte\n")
-        print ''
-        print ''
+                file("log.txt").write(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "-- Humain detecte\n")
+                text = file("log.txt").read()
+                text = text.replace('\n', '')
+                file("log.txt", 'w').write(text)
+
