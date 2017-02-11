@@ -1,6 +1,6 @@
 package Communication;
 
-public class TestServeur implements InterfaceMessageRecu{
+public class TestServeu implements InterfaceMessageRecu{
 
 	/**
 	 * @param args
@@ -8,17 +8,13 @@ public class TestServeur implements InterfaceMessageRecu{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		InterfaceCommunication com = InterfaceCommunication.newInterfaceCommunication();
-		com.startEcoute(this);
+		com.startEcoute(com);
 		com.sendMessage("Ordinateur", "Ordre", "Plop");
 		//com.sendMessage("Robotino Standard", "Ordre", "Plop");
 		
 		//com.closeEcoute();
 	}
 
-	@Override
-	public void newMessageRecu(String s) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

@@ -15,7 +15,7 @@ public class InterfaceCommunication{
 	private String nom;
 	private BaseDeDonnee bd;
 	private int portServeur = 50001;
-	public static Thread t;
+	private static Thread t;
 	private static InterfaceCommunication instance = null;
 	private ServerSocket socketserver;
 	
@@ -27,10 +27,11 @@ public class InterfaceCommunication{
 			nom = bd.getNom(ip);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
+			ip = "0.0.0.0";
+			nom = "erreur";
 			e.printStackTrace();
 		}
-		// Acces base de donnee
-	};
+	}
 	
 	public static InterfaceCommunication newInterfaceCommunication(){
 		if(instance==null){
@@ -38,12 +39,14 @@ public class InterfaceCommunication{
 		}
 		return(instance);
 	}
+	
 	public boolean sendMessage(String destinataire, String type, String message){
-		System.out.println("Envoi...");
+		//System.out.println("Envoi...");
 		PrintWriter out = null;
 		String ipDest = bd.getIP(destinataire);
 		Message mes = new Message(nom, ip, destinataire, ipDest, type, message);
 		String messageJson = crypterMessage(mes);
+		
         try {
 			Socket socket = new Socket(ipDest, portServeur);
 			out = new PrintWriter(socket.getOutputStream());
@@ -93,10 +96,10 @@ public class InterfaceCommunication{
 		Gson gson = builder.create();
 		return(gson.toJson(mes));
 	}
-
+*/
 	public void newMessageRecu(String mess) {
 		System.out.println(mess);
 		decrypterMessage(mess);
 	}
-	*/
+	
 }
