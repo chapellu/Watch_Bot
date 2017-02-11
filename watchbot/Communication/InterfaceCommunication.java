@@ -21,6 +21,7 @@ public class InterfaceCommunication{
 	
 	private InterfaceCommunication(){
 		// On recupere l'adresse IP de la machine afin de definir celui qui envoi le message
+		// On se connecte à la base afin de connaitre son nom
 		try {
 			ip = InetAddress.getLocalHost ().getHostAddress ();
 			bd = BaseDeDonnee.connect();
@@ -33,6 +34,7 @@ public class InterfaceCommunication{
 		}
 	}
 	
+	// Utilisation d'un Singleton cela permet de rendre unique l'interface et la connexion à la BD
 	public static InterfaceCommunication newInterfaceCommunication(){
 		if(instance==null){
 			instance = new InterfaceCommunication();
@@ -40,6 +42,7 @@ public class InterfaceCommunication{
 		return(instance);
 	}
 	
+	// Methode pour envoyer un message. Le destinataire est ici connu par son nom
 	public boolean sendMessage(String destinataire, String type, String message){
 		//System.out.println("Envoi...");
 		PrintWriter out = null;
@@ -63,6 +66,31 @@ public class InterfaceCommunication{
 		return true;
 	}
 	
+	// Methode pour envoyer un message. Le destinataire est ici connu par son IP
+	public boolean sendMessageIP(String ipDest, String type, String message){
+		//System.out.println("Envoi...");
+		PrintWriter out = null;
+		String destinataire = bd.getNom(ipDest);
+		Message mes = new Message(nom, ip, destinataire, ipDest, type, message);
+		String messageJson = crypterMessage(mes);
+		
+        try {
+			Socket socket = new Socket(ipDest, portServeur);
+			out = new PrintWriter(socket.getOutputStream());
+			out.println(messageJson);
+			out.flush();
+			socket.close();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	// Cette methode permet a une application de recevoir des message a condition qu'elle  implements InterfaceMessageRecu
 	public void startEcoute(InterfaceMessageRecu abonne){
 		try {
 			socketserver = new ServerSocket(portServeur);
@@ -72,9 +100,10 @@ public class InterfaceCommunication{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
+	// Cette methode ferme l'ecoute. L'application ne peut plus recevoir de message.
+	// Surement à modifié, fermeture des threads ?
 	public void closeEcoute(){
 		try {
 			socketserver.close();
@@ -84,6 +113,7 @@ public class InterfaceCommunication{
 		}
 	}
 	
+	// Cette methode permet de transformer un Message en Json puis celui-ci en String afin d'être envoyé
 	public String crypterMessage(Message mes){
 		GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
@@ -91,15 +121,16 @@ public class InterfaceCommunication{
 	}
 	
 	/*
+	 * Methode a rediger mais surtout à définir plus particulièrement
 	public Message decrypterMessage(String mes){
 		GsonBuilder builder = new GsonBuilder();
 		Gson gson = builder.create();
 		return(gson.toJson(mes));
 	}
-*/
+
 	public void newMessageRecu(String mess) {
 		System.out.println(mess);
 		decrypterMessage(mess);
 	}
-	
+	*/
 }
