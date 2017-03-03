@@ -90,7 +90,7 @@ if __name__ == '__main__':
 		#Recupere chaque colonne du tableau et stocke en ligne
 		for j in range(0, 4):
 			for i in range(0, 4):
-				print lignes[i][j]
+				print lignes[j][i]
 
 			print ''
 		print ''
