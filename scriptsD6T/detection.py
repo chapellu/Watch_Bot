@@ -77,21 +77,19 @@ if __name__ == '__main__':
 	omron = OmronD6T()
 
 	while True:
-		values = []
-		lignes = []
+
+		ligne = []
 		omron.read()
 
 		#Recupere les valeurs sous formes d'un tableau
 		for j in range(0, 4):
 			for i in range(0, 4):
-				values.append(round(omron.temperature[i + 4*j], 1))
-			lignes.append(values)
+				ligne.append(round(omron.temperature[i + 4*j], 1))
+			values.append(ligne)
+			ligne = []
 
 		#Recupere chaque colonne du tableau et stocke en ligne
-		for j in range(0, 4):
-			print lignes[j]
-
-			print ''
+		print values
 		print ''
 		print ''
 		time.sleep(1)
