@@ -82,10 +82,7 @@ if __name__ == '__main__':
 
 		for j in range(0, 4):
 			for i in range(0, 4):
-				values.append(round(omron.temperature[i + j], 1))
-
-
-			values = []
+				values.append(round(omron.temperature[i + 4*j], 1))
 
 		print values
 		print ''
