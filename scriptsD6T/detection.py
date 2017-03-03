@@ -69,6 +69,7 @@ class OmronD6T(object):
 if __name__ == '__main__':
 	#Init
 	seuil = 0
+	ligne = []
 
 	# Programme
 	while (seuil < 20 or seuil > 40):
