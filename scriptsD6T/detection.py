@@ -69,7 +69,6 @@ class OmronD6T(object):
 if __name__ == '__main__':
 	#Init
 	seuil = 0
-	lignes = []
 
 	# Programme
 	while (seuil < 20 or seuil > 40):
@@ -79,6 +78,7 @@ if __name__ == '__main__':
 
 	while True:
 		values = []
+		lignes = []
 		omron.read()
 
 		#Recupere les valeurs sous formes d'un tableau
@@ -87,8 +87,11 @@ if __name__ == '__main__':
 				values.append(round(omron.temperature[i + 4*j], 1))
 			lignes.append(values)
 
+		#Recupere chaque colonne du tableau et stocke en ligne
+		for j in range(0, 4):
+			for i in range(0, 4):
+				print lignes(j)(i)
 
-		print lignes
 		print ''
 		print ''
 		time.sleep(1)
