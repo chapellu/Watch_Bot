@@ -95,13 +95,12 @@ if __name__ == '__main__':
 				tempPixel = values[j+4*i] #Recupere les valeurs des pixels colonne par colonne
 				if tempPixel > seuil:
 					compteurDePixels += 1
+			print compteurDePixels
 			if compteurDePixels == 3:
 				compteurDeLignes += 1
 
-		if compteurDeLignes > 2:
+		if compteurDeLignes >= 2:
 			print 'Alerte ! Humain detecte'
 
-		print ''
-		print ''
-		time.sleep(0.05)
+		time.sleep(1)
 
