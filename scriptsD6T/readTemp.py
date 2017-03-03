@@ -67,7 +67,12 @@ class OmronD6T(object):
 
 
 if __name__ == '__main__':
+	# Initialisations
+	mode = ""
+	seuil = 0
 
+
+	#Programme
 	while (mode != "s" and mode != "t"):
 		mode = raw_input("symboles ou temperatures ? : ")
 
