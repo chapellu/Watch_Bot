@@ -93,7 +93,7 @@ if __name__ == '__main__':
 
 			for i in range(0, 4):
 				tempPixel = values[j+4*i] #Recupere les valeurs des pixels colonne par colonne
-				if tempPixel > seuil:
+				if tempPixel >= seuil:
 					compteurDePixels += 1
 			if compteurDePixels >= 3:
 				compteurDeLignes += 1
