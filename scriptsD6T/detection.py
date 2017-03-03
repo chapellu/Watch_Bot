@@ -78,7 +78,7 @@ if __name__ == '__main__':
 
 	while True:
 
-		ligne = []
+		values = []
 		omron.read()
 
 		#Recupere les valeurs sous formes d'un tableau
