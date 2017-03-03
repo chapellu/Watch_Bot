@@ -88,7 +88,7 @@ if __name__ == '__main__':
 			lignes.append(values)
 
 
-		print values
+		print lignes
 		print ''
 		print ''
 		time.sleep(1)
