@@ -80,12 +80,12 @@ if __name__ == '__main__':
 		values = []
 		omron.read()
 
-		#Recupere les valeurs sous formes d'un tableau
+		#Recupere les valeurs sous formes dun tableau
 		for j in range(0, 4):
 			for i in range(0, 4):
 				values.append(round(omron.temperature[i + 4*j], 1))
 
-		#Compteur de valeurs supérieurs au seuil
+		#Compteur de valeurs superieurs au seuil
 		compteurDeLignes = 0
 		for j in range(0, 4):
 			colonne = []
@@ -99,7 +99,7 @@ if __name__ == '__main__':
 				compteurDeLignes += 1
 
 		if compteurDeLignes > 2:
-			print 'Alerte ! Humain détecté'
+			print 'Alerte ! Humain detecte'
 
 		print ''
 		print ''
