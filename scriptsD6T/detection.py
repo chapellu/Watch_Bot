@@ -101,5 +101,5 @@ if __name__ == '__main__':
 		if compteurDeLignes >= 2:
 			print 'Alerte ! Humain detecte'
 
-		time.sleep(1)
+		time.sleep(0.05)
 
