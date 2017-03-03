@@ -69,13 +69,26 @@ class OmronD6T(object):
 if __name__ == '__main__':
 	#Init
 	seuil = 0
+	values = []
 
 	# Programme
 	while (seuil < 20 or seuil > 40):
 		seuil = input("Veuillez saisir un seuil compris entre 20 et 40 : ")
 
 	omron = OmronD6T()
-	print omron.temperature
 
-	time.sleep(1)
+	while True:
+		omron.read()
+
+		for j in range(0, 4):
+			for i in range(0, 4):
+				values.append(round(omron.temperature[i + j], 1))
+
+
+			values = []
+
+		print values
+		print ''
+		print ''
+		time.sleep(1)
 
