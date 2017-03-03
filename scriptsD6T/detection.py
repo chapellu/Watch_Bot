@@ -70,6 +70,7 @@ if __name__ == '__main__':
 	#Init
 	seuil = 0
 	ligne = []
+	tab = []
 
 	# Programme
 	while (seuil < 20 or seuil > 40):
@@ -87,11 +88,17 @@ if __name__ == '__main__':
 			for i in range(0, 4):
 				ligne.append(round(omron.temperature[i + 4*j], 1))
 			values.append(ligne)
+			print ligne
 			ligne = []
-
+		print ''
+		print 'donne'
+		print ''
+		for j in range(0, 4):
+			for i in range(0, 4):
+				tab[i][j] = values[j][i]
+			print tab[i]
 		#Recupere chaque colonne du tableau et stocke en ligne
-		print values
 		print ''
 		print ''
-		time.sleep(1)
+		time.sleep(10)
 
