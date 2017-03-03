@@ -84,8 +84,8 @@ if __name__ == '__main__':
 		#Recupere les valeurs sous formes d'un tableau
 		for j in range(0, 4):
 			for i in range(0, 4):
-				values[j].append(round(omron.temperature[i + 4*j], 1))
-
+				values.append(round(omron.temperature[i + 4*j], 1))
+			lignes.append(values)
 
 
 		print values
