@@ -50,17 +50,22 @@
 
 <div class="container-fluid">
     <div class="col-sr-7 post-layout">
-        <h2 class="title">Bienvenue !</h2>
-        <p>Bonjour à tous, nous vous souhaitons la bienvenue sur notre site.</p>
-        <p>Bonne visite :)</p>
+        <div class="content-post">
+            <h2 class="title">Bienvenue !</h2>
+            <p>Bonjour à tous, nous vous souhaitons la bienvenue sur notre site.</p>
+            <p>Bonne visite :)</p>
+        </div>
+
     </div>
 
     <div class="col-sr-7 post-layout">
-        <?php foreach ($posts as $k):?>
-            <h2 class="title"><?= $k->title; ?></h2>
-            <p class="date">Publié le <?= $k->date; ?></p>
-            <p><?= $k->content; ?></p>
-        <?php endforeach; ?>
+        <div class="content-post">
+            <?php foreach ($posts as $k):?>
+                <h2 class="title"><?= $k->title; ?></h2>
+                <p class="date">Publié le <?= $k->date; ?></p>
+                <p><?= $k->content; ?></p>
+            <?php endforeach; ?>
+        </div>
     </div>
     <!-- <div class="col-sm-4">
          <h2>Contact Us</h2>

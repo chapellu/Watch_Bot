@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : alan
 */
 body{
-    background-color:#f5f8fa;
+    background-color:#7FC6BC;
 }
 
 /*Navbar*/
@@ -74,8 +74,17 @@ p.date{
 h2.title {
     margin-bottom:0px;
 }
+
+/*Articles*/
 .post-layout {
     background-color: white;
     border-radius: 6px;
     margin-top:50px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.content-post {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
