@@ -16,10 +16,10 @@ class Autoloader{
 		//echo " Namespace =" . __NAMESPACE__;
 		if(strpos($class, __NAMESPACE__ . '\\') === 0) {
 			$class = str_replace(__NAMESPACE__ . '\\', '', $class);
-			echo "----------------Classe1=". $class;
-			$class = str_replace('\\', '/', $class);
-			echo "----------------Classe2=". __DIR__ . '\\' . $class . '.php';
-			require __DIR__ . '\\' . $class . '.php';
+			//echo "----------------Classe1=". $class;
+			$class = str_replace('\\', DS, $class);
+			//echo "----------------Classe2=". __DIR__ . DS . $class . '.php';
+			require __DIR__ . DS . $class . '.php';
 		}
 	}
 

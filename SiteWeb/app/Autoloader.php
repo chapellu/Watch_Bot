@@ -16,8 +16,8 @@ class Autoloader{
     	if (strpos($class, 'stdClass') === false) {
 			if(strpos($class, __NAMESPACE__ . '\\') === 0) {
 				$class = str_replace(__NAMESPACE__ . '\\', '', $class);
-				$class = str_replace('\\', '\\', $class);
-				require __DIR__ . '\\' . $class . '.php';
+				$class = str_replace('\\', DS, $class);
+				require __DIR__ . DS . $class . '.php';
 			}    		
     	} 
 	}
