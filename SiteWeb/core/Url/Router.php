@@ -15,7 +15,7 @@ class Router
     static $prefixes = array();
 
     static function parse($url,$request){
-        $offset = 1; //Variable qui permet aux differents paramètres de bien prendre les bonnes infos
+        $offset = 0; //Variable qui permet aux differents paramètres de bien prendre les bonnes infos
         $url = trim($url,'/'); //trim enlève les espaces en début et fin de chaine
 
         foreach (Router::$routes as $k => $v) {
