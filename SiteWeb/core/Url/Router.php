@@ -39,7 +39,12 @@ class Router
             }
         }
 
-        $request->controller=isset($params[$offset]) ? $params[$offset] : 'home';
+        if(!isset($params[$offset]) || ($params[$offset]==="")){
+            $request->controller = 'home';
+        } else {
+            $request->controller = $params[$offset];
+        }
+
         if(!isset($params[$offset+1]) || (strpos($params[$offset+1], '?') ===0)) {
             $request->action = 'index';
         }else{
