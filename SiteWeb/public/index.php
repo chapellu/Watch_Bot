@@ -15,6 +15,9 @@ App::load();
 new Core\Url\Dispatcher();
 */
 
+
+define('BASE_URL',dirname(dirname($_SERVER['SCRIPT_NAME'])));
+define('NUM_ROBOTINO','37');
 echo '<meta http-equiv="Refresh" content="0; url=http://193.48.125.'.NUM_ROBOTINO.':50000?action=avancer">';
 sleep(1);
 header('Location: '.BASE_URL.'/admin/robotino/');
