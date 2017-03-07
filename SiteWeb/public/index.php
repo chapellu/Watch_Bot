@@ -16,6 +16,7 @@ new Core\Url\Dispatcher();*/
 
 define('NUM_ROBOTINO','37');
 echo '<meta http-equiv="Refresh" content="0; url=http://193.48.125.'.NUM_ROBOTINO.':50000?action='.$_GET['action'].'">';
+sleep(1);
 header('Location: http://www.google.fr');
 exit();
 
