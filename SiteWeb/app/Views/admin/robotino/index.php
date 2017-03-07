@@ -33,8 +33,8 @@
 
 <?php
 if(isset($_GET['action'])){
-    /*echo '<meta http-equiv="Refresh" content="0; url=http://193.48.125.'.NUM_ROBOTINO.':50000/?action='.$_GET['action'].'">';
-    echo '<meta http-equiv="Refresh" content="2; url='.BASE_URL.'/admin/robotino/'.'">';*/
+    /*echo '<meta http-equiv="Refresh" content="0; url=http://193.48.125.'.NUM_ROBOTINO.':50000/?action='.$_GET['action'].'">';*/
+    echo '<meta http-equiv="Refresh" content="2; url='.BASE_URL.'/admin/robotino/'.'">';
 
     header('Location: http://193.48.125.'.NUM_ROBOTINO.':50000/?action='.$_GET['action']);
     /*sleep(1);
