@@ -30,7 +30,7 @@
         </table>
     </form>
 </div>
-<meta http-equiv="Refresh" content="1; url='.BASE_URL.'/admin/robotino/'.'">
+<meta http-equiv="Refresh" content="1; url=<?=BASE_URL.'/admin/robotino/';?>">
 <?php
 if(isset($_GET['action'])){
     /*echo '<meta http-equiv="Refresh" content="0; url=http://193.48.125.'.NUM_ROBOTINO.':50000/?action='.$_GET['action'].'">';
