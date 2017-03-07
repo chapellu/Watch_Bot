@@ -1,0 +1,81 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14 janv. 2017, 15:04:08
+    Author     : alan
+*/
+body{
+    background-color:#f5f8fa;
+}
+
+/*Navbar*/
+.navbar,.nav{
+    margin-bottom: 0px;
+    background-color: #3097D1;
+
+    border-radius:0px;
+    border: 0px;
+}
+
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-brand {
+    color: #ffffff;
+}
+
+/*Footer*/
+.footer {
+    position: absolute;
+    text-align: center;
+    padding-bottom: 0;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+/*Robotino*/
+.tableBoutonsRobotino {
+    border: solid 4px black;
+}
+.liensBoutonsRobotino{
+    margin-bottom: 0px;
+}
+.btn.boutonsRobotino{
+    width: 100px;
+}
+
+/*Partie connexion*/
+.login-button{
+    margin-top: 5px;
+}
+
+.login-register{
+    font-size: 11px;
+    text-align: center;
+}
+
+
+
+/*Page d'accueil*/
+.carousel-page
+{
+    width:100%;
+    height:400px;
+    background-color:#ffffff;
+    color:white;
+}
+p.date{
+    font-style: italic;
+    color: black;
+    font-size: small;
+}
+h2.title {
+    margin-bottom:0px;
+}
+.post-layout {
+    background-color: white;
+    border-radius: 6px;
+    margin-top:50px;
+}
