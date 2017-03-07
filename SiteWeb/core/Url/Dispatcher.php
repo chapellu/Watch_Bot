@@ -19,12 +19,13 @@ class Dispatcher
         $this->request = new Request();
         Router::parse($this->request->url, $this->request);
         $action = $this->request->action;
-        var_dump($this->request);
+        //var_dump($this->request);
         if($this->request->prefix){
             $controller = $this->loadController(true);
         } else {
             $controller = $this->loadController(false);
         }
+
         if(!in_array($action, array_diff(get_class_methods($controller),get_class_methods(new Controller())))){ //Permet d'affichier une vue en testant simplement les méthodes du controleur concernées et pas celles du super controller
             $this->error();
         }
