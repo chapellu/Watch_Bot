@@ -49,7 +49,7 @@ class Form {
     }
 
     public function bouttonRobotino($name){
-        return $this->surround('<a class="btn btn-primary boutonsRobotino" type="submit" name="'.$name.'" href="'.BASE_URL.'/admin/robotino/?action='.$name.'">'.ucfirst($name).'</a>', 'liensBoutonsRobotino');
+        return $this->surround('<a class="btn btn-primary boutonsRobotino" type="submit" name="'.$name.'" href="193.48.125.'.NUM_ROBOTINO.':50000/?action='.$name.'">'.ucfirst($name).'</a>', 'liensBoutonsRobotino');
 
     }
 }
