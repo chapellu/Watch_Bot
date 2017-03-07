@@ -6,6 +6,7 @@ define('ROOT', dirname(__DIR__));
 //define('BASE_URL',dirname(dirname($_SERVER['SCRIPT_NAME'])));
 define('BASE_URL', '192.168.118.28/Watch_Bot/SiteWeb');
 define('NUM_ROBOTINO','38');
+echo 'ok';
 require ROOT . '/app/App.php';
 
 App::load();
