@@ -13,14 +13,11 @@ class Configurations
             'db_host'   => 'localhost',
             'db_name'   => 'watchbot',
             'db_user'   => 'root',
-            'db_pass'    => 'Commemysql74%'
+            'db_pass'    => ''
         )
     );
 
-   	public function __construct()
-   	{
-   		
-   	}
+
 }
 
 
