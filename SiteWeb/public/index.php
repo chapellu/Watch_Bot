@@ -1,5 +1,5 @@
 <?php
-$debut = microtime(true);
+/*$debut = microtime(true);
 
 define('DS',DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__DIR__));
@@ -13,7 +13,12 @@ require ROOT . '/app/App.php';
 App::load();
 
 new Core\Url\Dispatcher();
+*/
 
+echo '<meta http-equiv="Refresh" content="0; url=http://193.48.125.'.NUM_ROBOTINO.':50000?action=avancer">';
+sleep(1);
+header('Location: '.BASE_URL.'/admin/robotino/');
+exit();
 
 
 
