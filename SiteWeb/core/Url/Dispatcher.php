@@ -19,7 +19,7 @@ class Dispatcher
         $this->request = new Request();
         Router::parse($this->request->url, $this->request);
         $action = $this->request->action;
-        //var_dump($this->request);
+        var_dump($this->request);
         if($this->request->prefix){
             $controller = $this->loadController(true);
         } else {
