@@ -33,7 +33,7 @@ class App
                 'localhost',
                 'dupina',
                 'root',
-                'app2018');
+                '');
         }
         return $this->db_instance;
     }

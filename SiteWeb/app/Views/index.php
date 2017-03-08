@@ -9,7 +9,7 @@
 		<div class="carousel-inner">
 			<div class="item active">
 				<div class="carousel-page">
-					<img src="http://localhost/watchbot/public/img/carousel-1.jpg" class="img-responsive" style="margin:0px auto;">
+					<img src="<?= BASE_URL.'/public/img/carousel-1.jpg';?>" class="img-responsive" style="margin:0px auto;">
 				</div>
 				<!--<div class="container-fluid">
 					<div class="carousel-caption">
@@ -19,7 +19,7 @@
 			</div>
 			<div class="item">
 				<div class="carousel-page">
-				<img src="http://localhost/watchbot/public/img/carousel-2.jpg" class="img-responsive" style="margin:0px auto;">
+				<img src="<?= BASE_URL.'/public/img/carousel-2.jpg';?>" class="img-responsive" style="margin:0px auto;">
 				</div>
 			</div>
 			<!--Model :

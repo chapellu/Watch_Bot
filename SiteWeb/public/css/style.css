@@ -8,14 +8,13 @@ and open the template in the editor.
     Author     : alan
 */
 body{
-    background-color:#7FC6BC;
+    background-color:#A4EDE3;
 }
 
 /*Navbar*/
 .navbar,.nav{
     margin-bottom: 0px;
     background-color: #3097D1;
-
     border-radius:0px;
     border: 0px;
 }
@@ -62,7 +61,7 @@ body{
 .carousel-page
 {
     width:100%;
-    height:400px;
+    height:auto;
     background-color:#ffffff;
     color:white;
 }
