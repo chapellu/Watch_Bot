@@ -13,6 +13,7 @@
             <div class="col-sm-5 col-sm-offset-2 paddingtop-bottom">
                 <h6 class="heading7">Notre groupe :</h6>
                 <ul class="footer-ul">
+                    <li><a href="<?= BASE_URL.'/group/view/?id=5';?>">Alan</a></li>
                     <li><a href="#">Sandrine</a></li>
                     <li><a href="#">Arnaud</a></li>
                     <li><a href="#">Jason</a></li>

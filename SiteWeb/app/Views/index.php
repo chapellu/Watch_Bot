@@ -82,7 +82,7 @@
          </address>
      </div>
 
-     <hr>-->
+     <hr>
 
          <div class="col-sl-4">
              <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">
