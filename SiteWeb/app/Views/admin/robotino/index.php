@@ -30,14 +30,51 @@
         </table>
     </form>
 </div>
-<meta http-equiv="Refresh" content="2; url=<?=BASE_URL.'/admin/robotino/';?>">
+
 <?php
 if(isset($_GET['action'])){
-    /*echo '<meta http-equiv="Refresh" content="0; url=http://193.48.125.'.NUM_ROBOTINO.':50000/?action='.$_GET['action'].'">';
-    echo '<meta http-equiv="Refresh" content="0; url='.BASE_URL.'/admin/robotino/'.'">';*/
+    set_time_limit(0);
+    ob_implicit_flush();
 
-    //header('Location: http://193.48.125.'.NUM_ROBOTINO.':50000/?action='.$_GET['action']);
-    /*sleep(1);
-    header('Location: '.BASE_URL.'/admin/robotino/');*/
-    exit();
+    $address = '193.48.125.37';
+    $port = 50000;
+    if (($sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
+        echo "socket_create() a échoué : raison : " . socket_strerror(socket_last_error()) . "\n";
+    }
+
+    do {
+        if (($msgsock = socket_accept($sock)) === false) {
+            echo "socket_accept() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n";
+            break;
+        }
+        /* Send instructions. */
+        $msg = "C'est Alan qui vient tester";
+        socket_write($msgsock, $msg, strlen($msg));
+/*
+        do {
+            if (false === ($buf = socket_read($msgsock, 2048, PHP_NORMAL_READ))) {
+                echo "socket_read() a échoué : raison : " . socket_strerror(socket_last_error($msgsock)) . "\n";
+                break 2;
+            }
+            if (!$buf = trim($buf)) {
+                continue;
+            }
+            if ($buf == 'quit') {
+                break;
+            }
+            if ($buf == 'shutdown') {
+                socket_close($msgsock);
+                break 2;
+            }
+            $talkback = "PHP: You said '$buf'.\n";
+            socket_write($msgsock, $talkback, strlen($talkback));
+            echo "$buf\n";
+        } while (true);*/
+        socket_close($msgsock);
+    } while (true);
+
+    socket_close($sock);
+
+    header('Location: '.BASE_URL.'/admin/robotino');
+    exit;
 }
