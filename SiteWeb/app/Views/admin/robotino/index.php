@@ -48,7 +48,7 @@ if(isset($_GET['action'])){
             break;
         }
         /* Send instructions. */
-        $msg = "C'est Alan qui vient tester";
+        $msg = "C'est Alan qui teste";
         socket_write($msgsock, $msg, strlen($msg));
 /*
         do {
