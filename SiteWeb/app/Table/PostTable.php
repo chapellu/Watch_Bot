@@ -25,7 +25,15 @@ class PostTable extends Table
             LEFT JOIN category ON category_id = category.id
             WHERE post.id = ?", [$id], true);
     }
-    
+
+    public function findByName($name){
+        return $this->query("
+            SELECT post.id, post.title, post.content, post.date, category.title as categorie, post.category_id 
+            FROM post
+            LEFT JOIN category ON category_id = category.id
+            WHERE post.title = ?", [$name], true);
+    }
+
     public function lastByCategory($category_id){
         return $this->query("
             SELECT post.id, post.title, post.content, post.date, category.title as categorie

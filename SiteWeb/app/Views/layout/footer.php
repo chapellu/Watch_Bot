@@ -13,13 +13,15 @@
             <div class="col-sm-5 col-sm-offset-2 paddingtop-bottom">
                 <h6 class="heading7">Notre groupe :</h6>
                 <ul class="footer-ul">
-                    <li><a href="<?= BASE_URL.'/group/view/?id=5';?>">Alan</a></li>
-                    <li><a href="#">Sandrine</a></li>
-                    <li><a href="#">Arnaud</a></li>
-                    <li><a href="#">Jason</a></li>
-                    <li><a href="#">Ludovic</a></li>
-                    <li><a href="#">William</a></li>
-                    <li><a href="#">Damien</a></li>
+                    <li><a href="<?= BASE_URL.'/group/view/?name=alan.dupin';?>">Alan</a></li>
+                    <li><a href="<?= BASE_URL.'/group/view/?name=sandrine.broutin';?>">Sandrine</a></li>
+                    <li><a href="<?= BASE_URL.'/group/view/?name=arnaud.mignotte';?>">Arnaud</a></li>
+                    <li><a href="<?= BASE_URL.'/group/view/?name=jason.boileau';?>">Jason</a></li>
+                    <li><a href="<?= BASE_URL.'/group/view/?name=ludovic.chapelet';?>">Ludovic</a></li>
+                    <li><a href="<?= BASE_URL.'/group/view/?name=william.simon';?>">William</a></li>
+                    <li><a href="<?= BASE_URL.'/group/view/?name=damien.morel';?>">Damien</a>
+                    <li><a href="<?= BASE_URL.'/group/view/?name=nicolas.java';?>">Nicolas</a>
+                    <li><a href="<?= BASE_URL.'/group/view/?name=quentin';?>">Quentin</a>
                 </ul>
             </div>
             <!--<div class="col-md-3 col-sm-6 paddingtop-bottom">

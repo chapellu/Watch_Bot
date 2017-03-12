@@ -29,7 +29,6 @@ class Database{
 
 	public function query($statement, $class_name = null, $one = false){
 		$req = $this->getPDO()->query($statement);
-
 		if(strpos($statement, 'UPDATE')===0 ||
 			strpos($statement, 'INSERT')===0 ||
 			strpos($statement, 'DELETE')===0){
@@ -52,6 +51,7 @@ class Database{
 	public function prepare($statement, $attributes, $class_name = null, $one = false){
 		$req = $this->getPDO()->prepare($statement);
 		$res = $req->execute($attributes);
+
 
 		if(strpos($statement, 'UPDATE')===0 ||
 			strpos($statement, 'INSERT')===0 ||

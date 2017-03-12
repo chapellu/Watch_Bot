@@ -21,7 +21,8 @@ class GroupController extends AppController{
     }
 
     public function view(){
-        $post = $this->post->findWithCategory($_GET['id']);
+
+        $post = $this->post->findByName(str_replace('.',' ', $_GET['name']));
         $this->render('group.view', compact('post'));
     }
 
