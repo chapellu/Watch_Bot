@@ -46,11 +46,11 @@ if(isset($_GET['action'])){
      * puissions voir ce que nous lisons au fur et à mesure. */
     ob_implicit_flush();
 
-    $address = 'http://193.48.125.'.NUM_ROBOTINO;
+    $address = '193.48.125.'.NUM_ROBOTINO;
     $port = 50000;
 
     echo "Création socket---------";
-    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die("Could not create socket\n");
+    $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket\n");
     echo "Socket créée---------";
 
     /*Fixe les timeout de lecture/Ecriture à 1 seconde*/
