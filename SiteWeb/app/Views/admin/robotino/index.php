@@ -67,6 +67,6 @@ if(isset($_GET['action'])){
     echo "Fermeture du socket...";
     socket_close($socket);
     echo "OK.\n\n";
-    //header('Location: '.BASE_URL.'/admin/robotino');
-    //exit;
+    header('Location: '.BASE_URL.'/admin/robotino');
+    exit;
 }
