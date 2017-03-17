@@ -33,40 +33,62 @@
 
 <?php
 if(isset($_GET['action'])){
-    error_reporting(E_ALL);
+//    //just in case
+//    if (!extension_loaded('sockets')) {
+//        die('The sockets extension is not loaded.');
+//    }
+//    error_reporting(E_ALL);
+//
+//    /* Autorise l'exécution infinie du script, en attente de connexion. */
+//    set_time_limit(0);
+//
+//    /* Active le vidage implicite des buffers de sortie, pour que nous
+//     * puissions voir ce que nous lisons au fur et à mesure. */
+//    ob_implicit_flush();
+//
+//    $address = '193.48.125.'.NUM_ROBOTINO;
+//    $port = 50000;
+//
+//    echo "Création socket---------";
+//    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die("Could not create socket\n");
+//    echo "Socket créée---------";
+//
+//    /*Fixe les timeout de lecture/Ecriture à 1 seconde*/
+//    socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 1, 'usec' => 0));
+//    socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => 1, 'usec' => 0));
+//
+//
+//    echo 'Essai de connexion à '.$address.' sur le port '.$port.'...---------';
+//    $result = socket_connect($socket, $address, $port) or die("Could not connect to server\n");
+//    echo "Connexion réussie---------";
+//
+//
+//    echo "Envoie du message---------";
+//    $msg = "MARCHE BORDEL";
+//    socket_write($socket, $msg, strlen($msg)) or die("Impossible d'envoyer le message");
+//    echo "Message envoyé.---------";
+//
+//    echo "Fermeture du socket...---------";
+//    socket_close($socket);
+//    echo "OK.---------";
+    $options = array( 'http' => array(
 
-    /* Autorise l'exécution infinie du script, en attente de connexion. */
-    set_time_limit(0);
-
-    /* Active le vidage implicite des buffers de sortie, pour que nous
-     * puissions voir ce que nous lisons au fur et à mesure. */
-    ob_implicit_flush();
-
-    $address = '193.48.125.'.NUM_ROBOTINO;
-    $port = 50000;
-
-    echo "Création socket\n";
-    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die("Could not create socket\n");
-    echo "Socket créée\n";
-
-    /*Fixe les timeout de lecture/Ecriture à 1 seconde*/
-    socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 1, 'usec' => 0));
-    socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => 1, 'usec' => 0));
+        'user_agent'    => 'alan',        // who am i
+        'max_redirects' => 10,              // stop after 10 redirects
+        'timeout'       => 2,               // timeout on response
+    ) );
 
 
-    echo 'Essai de connexion à '.gethostbyname($address).' sur le port '.$port.'...\n';
-    $result = socket_connect($socket, gethostbyname($address), $port) or die("Could not connect to server\n");
-    echo "Connexion réussie\n";
+    $context = stream_context_create( $options );
 
+    $url = "http://193.48.125.38:50000";
+    $dh = fopen( "$url",'r',false,$context);
 
-    echo "Envoie du message\n";
-    $msg = "MARCHE BORDEL";
-    socket_write($socket, $msg, strlen($msg)) or die("Impossible d'envoyer le message");
-    echo "Message envoyé.\n";
+    fwrite($dh, "post");
 
-    echo "Fermeture du socket...";
-    socket_close($socket);
-    echo "OK.\n\n";
+    $result = fread($dh,8192);
+    echo $result;
+
     header('Location: '.BASE_URL.'/admin/robotino');
     exit;
 }
