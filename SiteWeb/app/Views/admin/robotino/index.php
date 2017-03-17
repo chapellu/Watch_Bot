@@ -52,7 +52,7 @@ if(isset($_GET['action'])){
 
 
     echo 'Essai de connexion à '.$address.' sur le port '.$port.'...---------';
-    $result = socket_bind($socket, $address, $port) or die('Can\'t bind socket'.socket_strerror(socket_last_error($socket)));
+    $result = socket_connect($socket, $address, $port) or die('Can\'t bind socket'.socket_strerror(socket_last_error($socket)));
     echo "Connexion réussie---------";
 
     $msgsock = socket_accept($socket) or die('Can\'t accept socket'.socket_strerror(socket_last_error($socket)));;
