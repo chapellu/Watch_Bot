@@ -56,8 +56,8 @@ if(isset($_GET['action'])){
         echo "OK.\n";
     }
 
-    $in = "HEAD / HTTP/1.0\r\n\r\n";
-    $in .= "action=avancer\r\n";
+    $in = "POST / HTTP/1.1\n";
+    $in .= "action=avancer\n";
     $in .= "Connection: Close\r\n\r\n";
     $out = '';
 
