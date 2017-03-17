@@ -47,9 +47,17 @@ if(isset($_GET['action'])){
     if (($sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
         die("socket_create() a échoué : raison : " . socket_strerror(socket_last_error()) . "\n");
     }
-    if (socket_set_option($socket, SOL_SOCKET, SO_REUSEADR, 1) === false) {
+    if (socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1) === false) {
         die('Impossible de définir l\'option du socket : '. socket_strerror(socket_last_error()) . PHP_EOL);
     }
+    $rval = socket_get_option($socket, SOL_SOCKET, SO_REUSEADDR);
+
+    if ($rval === false) {
+        echo 'Impossible de récupérer l\'option du socket : '. socket_strerror(socket_last_error()) . PHP_EOL;
+    } else if ($rval !== 0) {
+        echo 'SO_REUSEADDR est défini sur le socket !' . PHP_EOL;
+    }
+
     if (socket_bind($sock, $address, $port) === false) {
         die("socket_bind() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n");
     }
