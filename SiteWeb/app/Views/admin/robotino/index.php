@@ -69,7 +69,7 @@ if(isset($_GET['action'])){
         die('Impossible de définir l\'option du socket : '. socket_strerror(socket_last_error()) . PHP_EOL);
     }
 
-    if (socket_bind($sock, $address, $port) === false) {
+    if (socket_connect($sock, $address, $port) === false) {
         die("socket_bind() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n");
     }
 
