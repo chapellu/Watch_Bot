@@ -30,7 +30,6 @@
         </table>
     </form>
 </div>
-
 <?php
 if(isset($_GET['action'])){
     error_reporting(E_ALL);
@@ -49,6 +48,8 @@ if(isset($_GET['action'])){
     $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die('Could not create socket : ' . socket_strerror(socket_last_error($socket)));
     echo "Socket créée---------";
 
+    socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 1, 'usec' => 0));
+    socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => 1, 'usec' => 0));
 
 
     echo 'Essai de connexion à '.$address.' sur le port '.$port.'...---------';
