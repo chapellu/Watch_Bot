@@ -33,14 +33,10 @@
 
 <?php
 if(isset($_GET['action'])){
-    //just in case
-    if (!extension_loaded('sockets')) {
-        die('The sockets extension is not loaded.');
-    }
     error_reporting(E_ALL);
 
-    /* Autorise l'exécution infinie du script, en attente de connexion. */
-    set_time_limit(0);
+    /* Interdit l'exécution infinie du script, en attente de connexion. */
+    set_time_limit(2);
 
     /* Active le vidage implicite des buffers de sortie, pour que nous
      * puissions voir ce que nous lisons au fur et à mesure. */
@@ -50,25 +46,23 @@ if(isset($_GET['action'])){
     $port = 50000;
 
     echo "Création socket---------";
-    $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket\n");
+    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die('Could not create socket : ' . socket_strerror(socket_last_error($socket));
     echo "Socket créée---------";
 
-    /*Fixe les timeout de lecture/Ecriture à 1 seconde*/
-    socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 1, 'usec' => 0));
-    socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => 1, 'usec' => 0));
 
 
     echo 'Essai de connexion à '.$address.' sur le port '.$port.'...---------';
-    $result = socket_connect($socket, $address, $port) or die("Could not connect to server\n");
+    $result = socket_bind($socket, $address, $port) or die('Can\'t bind socket'.socket_strerror(socket_last_error($socket)));
     echo "Connexion réussie---------";
 
-
+    $msgsock = socket_accept($socket) or die('Can\'t accept socket'.socket_strerror(socket_last_error($socket)));;
     echo "Envoie du message---------";
     $msg = "MARCHE BORDEL";
-    socket_write($socket, $msg, strlen($msg)) or die("Impossible d'envoyer le message");
+    socket_write($msgsock, $msg, strlen($msg)) or die("Impossible d'envoyer le message");
     echo "Message envoyé.---------";
 
     echo "Fermeture du socket...---------";
+    socket_close($msgsock);
     socket_close($socket);
     echo "OK.---------";
     header('Location: '.BASE_URL.'/admin/robotino');
