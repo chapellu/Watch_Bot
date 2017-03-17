@@ -45,18 +45,17 @@ if(isset($_GET['action'])){
     $port = 50000;
 
     if (($sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
-        echo "socket_create() a échoué : raison : " . socket_strerror(socket_last_error()) . "\n";
-        die();
+        die("socket_create() a échoué : raison : " . socket_strerror(socket_last_error()) . "\n");
     }
-
+    if (!socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1)) {
+        die('Impossible de définir l\'option du socket : '. socket_strerror(socket_last_error()) . PHP_EOL);
+    }
     if (socket_bind($sock, $address, $port) === false) {
-        echo "socket_bind() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n";
-        die();
+        die("socket_bind() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n");
     }
 
     if (socket_listen($sock, 5) === false) {
-        echo "socket_listen() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n";
-        die();
+        die("socket_listen() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n");
     }
 
     do {
