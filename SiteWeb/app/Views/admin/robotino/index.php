@@ -92,5 +92,5 @@ if(isset($_GET['action'])){
     socket_close($sock);
 
     header('Location: '.BASE_URL.'/admin/robotino');
-    //exit;
+    exit;
 }
