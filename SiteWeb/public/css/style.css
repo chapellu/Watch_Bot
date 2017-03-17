@@ -12,15 +12,18 @@ body{
 }
 
 /*Navbar*/
-.navbar,.nav{
+.navbar, .nav, .dropdown-menu{
     margin-bottom: 0px;
     background-color: #3097D1;
     border-radius:0px;
     border: 0px;
 }
 
-.navbar-default .navbar-nav > li > a, .navbar-default .navbar-brand {
-    color: #ffffff;
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-brand, .navbar-default .navbar-nav .open .dropdown-menu > li > a{
+    color: white;
+}
+.dropdown-header {
+    color : black;
 }
 
 /*Footer*/
@@ -35,8 +38,93 @@ body{
 }
 
 /*Robotino*/
-.tableBoutonsRobotino {
+.robotino{
     border: solid 4px black;
+    min-height: 700px;
+    padding-left:0;
+    padding-right:0;
+}
+.commandes {
+    border-top: solid 4px black;
+    border-right: solid 4px black;
+    border-bottom: hidden 4px ;
+    position: absolute; /* le bloc se positionnera en haut à gauche de ta page car il n'a pas de bloc parent */
+    bottom: 0;
+    left:0;
+}
+.commandes > form {
+    padding: 10px;
+}
+.commandes > form > h2 {
+    margin-top:0;
+}
+.navbar-menu{
+    position: absolute; /* le bloc se positionnera en haut à gauche de ta page car il n'a pas de bloc parent */
+    top: 0;
+    right:0;
+    background-color: #E5E0FE;
+}
+dl{
+    height:40px;
+    margin:0;padding:0;
+    display:block;
+    float:left;
+    background-color: #3097D1;
+}
+
+dd ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+dd ul li a {
+    color: white;
+    display: block;
+    text-decoration: none;
+    height: 30px;
+    line-height: 30px;
+    background: #3097D1;
+    width: 150px;
+    text-align: center;
+}
+
+dt{
+    width:150px;
+    display: block;
+    height:40px;
+    color: #fff;
+    line-height: 40px;
+    text-align: center;
+}
+dl dd{
+    display: none;
+}
+dd{
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+dl:hover dd{
+    display: block;
+}
+.menu{
+    background-color: #D2D3D3;
+}
+img  {
+    max-width: 100%;
+    max-height: 100%;
+}
+.img_carte{
+    position: absolute;
+    bottom: 0;
+    right:0;
+}
+.carte{
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    bottom: 0;
+    right:0;
 }
 .liensBoutonsRobotino{
     margin-bottom: 0px;
@@ -44,6 +132,7 @@ body{
 .btn.boutonsRobotino{
     width: 100px;
 }
+
 
 /*Partie connexion*/
 .login-button{

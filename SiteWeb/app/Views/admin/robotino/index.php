@@ -1,35 +1,52 @@
-<div class="col-sm-12">
+<div class="robotino col-sm-12">
 
+    <div class="navbar-menu">
+       <dl>
+           <dt>Menu</dt>
+           <dd>
+               <ul>
+                   <li><a href="#">Un truc</a></li>
+                   <li><a href="#">Un deuxième truc</a></li>
+               </ul>
+           </dd>
+       </dl>
+    </div>
+
+    <div class="carte">
+        <img class="img_carte" src="<?= BASE_URL.'/public/img/carte.png';?>" alt="">
+    </div>
+
+    <div class="commandes">
+        <form method="post" >
+            <table>
+                <thead><h2>Commandes mannuelles</h2></thead>
+                <tr>
+                    <td></td>
+                    <td>
+                        <?= $form->bouttonRobotino('avancer', 'boutonsRobotino');?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?= $form->bouttonRobotino('gauche', 'boutonsRobotino');?>
+                    </td>
+                    <td></td>
+                    <td>
+                        <?= $form->bouttonRobotino('droite', 'boutonsRobotino');?>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <?= $form->bouttonRobotino('reculer', 'boutonsRobotino');?>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </div>
 
-<div class="col-sm-12">
-    <form method="post" >
-        <table class="tableBoutonsRobotino">
-            <thead><h2>Commandes mannuelles</h2></thead>
-            <tr>
-                <td></td>
-                <td>
-                    <?= $form->bouttonRobotino('avancer', 'boutonsRobotino');?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <?= $form->bouttonRobotino('gauche', 'boutonsRobotino');?>
-                </td>
-                <td></td>
-                <td>
-                    <?= $form->bouttonRobotino('droite', 'boutonsRobotino');?>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <?= $form->bouttonRobotino('reculer', 'boutonsRobotino');?>
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
+
 <?php
 if(isset($_GET['action'])){
     error_reporting(E_ALL);
@@ -52,7 +69,7 @@ if(isset($_GET['action'])){
         die('Impossible de définir l\'option du socket : '. socket_strerror(socket_last_error()) . PHP_EOL);
     }
 
-    if (socket_connect($sock, $address, $port) === false) {
+    if (socket_bind($sock, $address, $port) === false) {
         die("socket_bind() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n");
     }
 

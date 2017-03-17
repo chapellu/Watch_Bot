@@ -6,7 +6,7 @@ use \Core\Entity\Entity;
 class PostEntity extends Entity{
 
     public function getUrl(){
-        return BASE_URL . '/group/view/?id=' . $this->id;
+        return BASE_URL . '/group/view/?name=' . str_replace(' ', '.', $this->title);
     }
     
     public function getExtrait(){
