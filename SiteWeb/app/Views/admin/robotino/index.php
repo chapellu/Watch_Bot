@@ -34,7 +34,6 @@
 <?php
 if(isset($_GET['action'])){
     error_reporting(E_ALL);
-    echo "On rentre dans le if";
 
     /* Autorise l'exécution infinie du script, en attente de connexion. */
     set_time_limit(0);
@@ -46,21 +45,23 @@ if(isset($_GET['action'])){
     $address = '193.48.125.'.NUM_ROBOTINO;
     $port = 50000;
 
+    echo "Création socket\n";
     $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die("Could not create socket\n");
+    echo "Socket créée\n";
 
     /*Fixe les timeout de lecture/Ecriture à 1 seconde*/
     socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 1, 'usec' => 0));
     socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => 1, 'usec' => 0));
 
 
-    echo "Essai de connexion à '$address' sur le port '$port'...\n";
+    echo 'Essai de connexion à '.gethostbyname($address).' sur le port '.$port.'...\n';
     $result = socket_connect($socket, gethostbyname($address), $port) or die("Could not connect to server\n");
-
+    echo "Connexion réussie\n";
 
 
     echo "Envoie du message\n";
     $msg = "MARCHE BORDEL";
-    socket_write($socket, $msg, strlen($msg));
+    socket_write($socket, $msg, strlen($msg)) or die("Impossible d'envoyer le message");
     echo "Message envoyé.\n";
 
     echo "Fermeture du socket...";
@@ -69,3 +70,6 @@ if(isset($_GET['action'])){
     header('Location: '.BASE_URL.'/admin/robotino');
     exit;
 }
+
+
+?>
