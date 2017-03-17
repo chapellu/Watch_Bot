@@ -43,7 +43,7 @@ if(isset($_GET['action'])){
      * puissions voir ce que nous lisons au fur et à mesure. */
     ob_implicit_flush();
 
-    $address = '193.48.125'.NUM_ROBOTINO;
+    $address = '193.48.125.'.NUM_ROBOTINO;
     $port = 50000;
 
     $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die("Could not create socket\n");
