@@ -52,7 +52,7 @@ if(isset($_GET['action'])){
     } else {
         echo "OK.\n";
     }
-die();
+
     echo "Essai de connexion à '$address' sur le port '$service_port'...\n";
     $result = socket_connect($socket, gethostbyname($address), $port);
     if ($socket === false) {
@@ -60,6 +60,7 @@ die();
     } else {
         echo "OK.\n";
     }
+    die();
     echo "Envoie du message\n";
     $msg = "MARCHE BORDEL";
     socket_write($socket, $msg, strlen($msg));
