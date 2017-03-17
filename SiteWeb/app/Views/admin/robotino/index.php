@@ -36,7 +36,7 @@ if(isset($_GET['action'])){
     set_time_limit(0);
     ob_implicit_flush();
 
-    $address = '193.48.125.37';
+    $address = '193.48.125.'.NUM_ROBOTINO;
     $port = 50000;
     if (($sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
         echo "socket_create() a échoué : raison : " . socket_strerror(socket_last_error()) . "\n";
@@ -48,9 +48,9 @@ if(isset($_GET['action'])){
             break;
         }
         /* Send instructions. */
-        $msg = "C'est Alan qui teste";
+        $msg = 'action='.$_GET['action'];
         socket_write($msgsock, $msg, strlen($msg));
-/*
+
         do {
             if (false === ($buf = socket_read($msgsock, 2048, PHP_NORMAL_READ))) {
                 echo "socket_read() a échoué : raison : " . socket_strerror(socket_last_error($msgsock)) . "\n";
@@ -69,7 +69,7 @@ if(isset($_GET['action'])){
             $talkback = "PHP: You said '$buf'.\n";
             socket_write($msgsock, $talkback, strlen($talkback));
             echo "$buf\n";
-        } while (true);*/
+        } while (true);
         socket_close($msgsock);
     } while (true);
 
