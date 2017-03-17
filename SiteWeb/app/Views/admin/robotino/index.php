@@ -34,7 +34,7 @@
 <?php
 if(isset($_GET['action'])){
     error_reporting(E_ALL);
-    echo "On rentre dans le if";
+    echo "On rentre dans le if";die();
 
     /* Autorise l'exécution infinie du script, en attente de connexion. */
     set_time_limit(0);
