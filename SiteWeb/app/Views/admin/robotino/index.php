@@ -53,7 +53,7 @@ if(isset($_GET['action'])){
     socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => 1, 'usec' => 0));
 
 
-    echo "Essai de connexion à '$address' sur le port '$service_port'...\n";
+    echo "Essai de connexion à '$address' sur le port '$port'...\n";
     $result = socket_connect($socket, gethostbyname($address), $port) or die("Could not connect to server\n");
 
 
