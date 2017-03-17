@@ -34,7 +34,7 @@
 <?php
 if(isset($_GET['action'])){
     error_reporting(E_ALL);
-    echo "On rentre dans le if";die();
+    echo "On rentre dans le if";
 
     /* Autorise l'exécution infinie du script, en attente de connexion. */
     set_time_limit(0);
@@ -52,7 +52,7 @@ if(isset($_GET['action'])){
     } else {
         echo "OK.\n";
     }
-
+die();
     echo "Essai de connexion à '$address' sur le port '$service_port'...\n";
     $result = socket_connect($socket, gethostbyname($address), $port);
     if ($socket === false) {
