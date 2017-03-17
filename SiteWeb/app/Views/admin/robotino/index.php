@@ -36,11 +36,15 @@ if(isset($_GET['action'])){
     set_time_limit(0);
     ob_implicit_flush();
 
+    echo 'je rentre dans le if';
+
     $address = '193.48.125.'.NUM_ROBOTINO;
     $port = 50000;
     if (($sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
         echo "socket_create() a échoué : raison : " . socket_strerror(socket_last_error()) . "\n";
     }
+
+    var_dump($sock);die();
 
     do {
         if (($msgsock = socket_accept($sock)) === false) {
