@@ -33,52 +33,48 @@
 
 <?php
 if(isset($_GET['action'])){
-    set_time_limit(0);
-    ob_implicit_flush();
 
-    echo 'je rentre dans le if';
+    error_reporting(E_ALL);
 
-    $address = '193.48.125.'.NUM_ROBOTINO;
+    /* Lit l'adresse IP du serveur de destination */
+    $address = 'http://193.48.125.'.NUM_ROBOTINO;
     $port = 50000;
-    if (($sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
-        echo "socket_create() a échoué : raison : " . socket_strerror(socket_last_error()) . "\n";
+
+    /* Crée un socket TCP/IP. */
+    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+    if ($socket === false) {
+        echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
+    } else {
+        echo "OK.\n";
     }
 
-    var_dump($sock);die();
+    echo "Essai de connexion à '$address' sur le port '$port'...";
+    $result = socket_connect($socket, $address, $port);
+    if ($socket === false) {
+        echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
+    } else {
+        echo "OK.\n";
+    }
 
-    do {
-        if (($msgsock = socket_accept($sock)) === false) {
-            echo "socket_accept() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n";
-            break;
-        }
-        /* Send instructions. */
-        $msg = 'action='.$_GET['action'];
-        socket_write($msgsock, $msg, strlen($msg));
+    $in = "HEAD / HTTP/1.0\r\n\r\n";
+    $in .= "action=avancer\r\n";
+    $in .= "Connection: Close\r\n\r\n";
+    $out = '';
 
-        do {
-            if (false === ($buf = socket_read($msgsock, 2048, PHP_NORMAL_READ))) {
-                echo "socket_read() a échoué : raison : " . socket_strerror(socket_last_error($msgsock)) . "\n";
-                break 2;
-            }
-            if (!$buf = trim($buf)) {
-                continue;
-            }
-            if ($buf == 'quit') {
-                break;
-            }
-            if ($buf == 'shutdown') {
-                socket_close($msgsock);
-                break 2;
-            }
-            $talkback = "PHP: You said '$buf'.\n";
-            socket_write($msgsock, $talkback, strlen($talkback));
-            echo "$buf\n";
-        } while (true);
-        socket_close($msgsock);
-    } while (true);
+    echo "Envoi de la requête HTTP HEAD...";
+    socket_write($socket, $in, strlen($in));
+    echo "OK.\n";
 
-    socket_close($sock);
+    echo "Lire la réponse : \n\n";
+    while ($out = socket_read($socket, 2048)) {
+        echo $out;
+    }
 
-    header('Location: '.BASE_URL.'/admin/robotino');
-    exit;
+    echo "Fermeture du socket...";
+    socket_close($socket);
+    echo "OK.\n\n";
+
+
+    //header('Location: '.BASE_URL.'/admin/robotino');
+    //exit;
 }
