@@ -36,7 +36,7 @@ if(isset($_GET['action'])){
     error_reporting(E_ALL);
 
     /* Interdit l'exécution infinie du script, en attente de connexion. */
-    set_time_limit(2);
+    set_time_limit(0);
 
     /* Active le vidage implicite des buffers de sortie, pour que nous
      * puissions voir ce que nous lisons au fur et à mesure. */
