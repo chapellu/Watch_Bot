@@ -70,7 +70,7 @@ if(isset($_GET['action'])){
     }
 
     if (socket_bind($sock, $address, $port) === false) {
-        die("socket_bind() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n");
+        die("socket_bind() à l'adresse--".$address."--sur le port--".$port."--a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n");
     }
 
     if (socket_listen($sock, 5) === false) {
