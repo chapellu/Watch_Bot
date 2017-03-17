@@ -46,7 +46,7 @@ if(isset($_GET['action'])){
     $port = 50000;
 
     echo "Création socket---------";
-    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die('Could not create socket : ' . socket_strerror(socket_last_error($socket));
+    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die('Could not create socket : ' . socket_strerror(socket_last_error($socket)));
     echo "Socket créée---------";
 
 
