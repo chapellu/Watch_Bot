@@ -46,21 +46,13 @@ if(isset($_GET['action'])){
     $address = '193.48.125'.NUM_ROBOTINO;
     $port = 50000;
 
-    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-    if ($socket === false) {
-        echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
-    } else {
-        echo "OK.\n";
-    }
+    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die("Could not create socket\n");
 
     echo "Essai de connexion à '$address' sur le port '$service_port'...\n";
-    $result = socket_connect($socket, gethostbyname($address), $port);
-    if ($socket === false) {
-        echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
-    } else {
-        echo "OK.\n";
-    }
-    die();
+    $result = socket_connect($socket, gethostbyname($address), $port) or die("Could not connect to server\n");
+
+
+
     echo "Envoie du message\n";
     $msg = "MARCHE BORDEL";
     socket_write($socket, $msg, strlen($msg));
