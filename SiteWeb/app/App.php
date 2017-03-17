@@ -31,9 +31,9 @@ class App
         if(is_null($this->db_instance)) {
             $this->db_instance = new Database(
                 'localhost',
-                'dupina',
+                'watchbot',
                 'root',
-                '');
+                'app2018');
         }
         return $this->db_instance;
     }
