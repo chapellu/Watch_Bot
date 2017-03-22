@@ -47,7 +47,7 @@
 </div>
 
 <div>
-    <h5>Logs</h5>
+    <h3>Logs (à faire)</h3>
     <p>
 <?php
 if(isset($_GET['action'])){
@@ -90,7 +90,7 @@ if(isset($_GET['action'])){
     echo "OK.\n\n";
 
     header('Location: '.BASE_URL.'/admin/robotino');
-    exit;
+    exit();
 }
 
 
