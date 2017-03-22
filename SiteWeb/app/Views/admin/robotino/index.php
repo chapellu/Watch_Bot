@@ -79,12 +79,10 @@ if(isset($_GET['action'])){
         echo "OK.\n";
     }
 
-    $msg = "POST / HTTP/1.0\r\n\r\n";
-    $msg .= "Host: 127.0.0.1\r\n";
-    $msg .= "Connection: keep-alive\r\n\r\n";;
+    $msg = "POST /?action=".$_GET['action']." HTTP/1.1";
     $out = "";
 
-    echo "Envoi de la requête HTTP HEAD...";
+    echo "Envoi de la requête".$msg;
     socket_write($socket, $msg, strlen($msg));
     echo "OK.\n";
 
