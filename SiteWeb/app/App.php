@@ -10,12 +10,13 @@ class App
     private $db_instance;
     public $name_website = 'Watchbot';
     public $title = "APPRS2018 - Watchbot";
-
+    public $flash;
 
     public static function getInstance()
     {
         if(is_null(self::$_instance)) {
             self::$_instance = new App();
+            self::$_instance->flash['logs']='';
         }
         return self::$_instance;
     }
@@ -33,7 +34,7 @@ class App
                 'localhost',
                 'watchbot',
                 'root',
-                'app2018');
+                '');
         }
         return $this->db_instance;
     }

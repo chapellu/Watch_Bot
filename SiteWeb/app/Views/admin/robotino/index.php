@@ -50,6 +50,9 @@
     <h3>Logs (à faire)</h3>
     <p>
 <?php
+var_dump($this);
+\App::getInstance()->flash['logs'].='++';
+var_dump(\App::getInstance()->flash['logs']);
 if(isset($_GET['action'])){
     error_reporting(E_ALL);
 
@@ -63,31 +66,34 @@ if(isset($_GET['action'])){
     $address = '193.48.125.'.NUM_ROBOTINO;
     $port = 50000;
 
+
     if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
-        die("socket_create() a échoué : raison : " . socket_strerror(socket_last_error()) . "\n");
+        echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
+    } else {
+        echo "socket_create() a réussi\n";
     }
+
 
     echo "Essai de connexion à '$address' sur le port '$port'...";
     $result = socket_connect($socket, $address, $port);
     if ($socket === false) {
         echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
     } else {
-        echo "OK.\n";
+        echo "socket_connect() a réussi\n";
     }
 
     $msg = "POST /?action=".$_GET['action']." HTTP/1.1\r\n\r\n";
     $msg .= "Connection: Close\r\n\r\n";
     $out = "";
 
-    echo "Envoi de la requête".$msg;
+    echo "Envoi de la requête :".$msg;
     socket_write($socket, $msg, strlen($msg));
-    echo "OK.\n";
 
 
 
     echo "Fermeture du socket...";
     socket_close($socket);
-    echo "OK.\n\n";
+    echo "Socket détruite\n\n";
 
     header('Location: '.BASE_URL.'/admin/robotino');
     exit();

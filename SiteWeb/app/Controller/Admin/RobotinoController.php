@@ -14,8 +14,11 @@ class RobotinoController extends AppController {
     }
 
     public function index(){
-        $errors = false;
         $form = new \Core\HTML\BootstrapForm($_POST);
-        $this->render('admin.robotino.index', compact('form','errors'));
+        $this->render('admin.robotino.index', compact('form'));
+    }
+
+    public function camera(){
+        $this->render('admin.robotino.camera', compact(''));
     }
 }
