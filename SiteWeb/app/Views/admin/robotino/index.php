@@ -75,7 +75,8 @@ if(isset($_GET['action'])){
         echo "OK.\n";
     }
 
-    $msg = "POST /?action=".$_GET['action']." HTTP/1.1";
+    $msg = "POST /?action=".$_GET['action']." HTTP/1.1\r\n\r\n";
+    $msg .= "Connection: Close\r\n\r\n";
     $out = "";
 
     echo "Envoi de la requête".$msg;
