@@ -5,7 +5,7 @@ define('DS',DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__DIR__));
 //define('BASE_URL',dirname(dirname($_SERVER['SCRIPT_NAME'])));
 define('NUM_ROBOTINO','37');
-define('BASE_URL', "http://192.168.118.28");
+define('BASE_URL', "http://193.48.125.196");
 
 
 require ROOT . '/app/App.php';
