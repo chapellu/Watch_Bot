@@ -69,47 +69,33 @@ if(isset($_GET['action'])){
         die('Impossible de définir l\'option du socket : '. socket_strerror(socket_last_error()) . PHP_EOL);
     }
 
-    if (socket_connect($sock, $address, $port) === false) {
-        die("socket_bind() à l'adresse--".$address."--sur le port--".$port."--a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n");
+
+
+    echo "Essai de connexion à '$address' sur le port '$port'...";
+    $result = socket_connect($socket, $address, $port);
+    if ($socket === false) {
+        echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
+    } else {
+        echo "OK.\n";
     }
 
-    if (socket_listen($sock, 5) === false) {
-        die("socket_listen() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n");
+    $msg = "test alan";
+    $out = "";
+
+    echo "Envoi de la requête HTTP HEAD...";
+    socket_write($socket, $msg, strlen($in));
+    echo "OK.\n";
+
+    echo "Lire la réponse : \n\n";
+    while ($out = socket_read($socket, 2048)) {
+        echo $out;
     }
 
-    do {
-        if (($msgsock = socket_accept($sock)) === false) {
-            echo "socket_accept() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n";
-            die();
-        }
-        /* Send instructions. */
-        $msg = "Bienvenue sur le serveur de test PHP.\n" .
-            "Pour quitter, tapez 'quit'. Pour éteindre le serveur, tapez 'shutdown'.\n";
-        socket_write($msgsock, $msg, strlen($msg));
+    echo "Fermeture du socket...";
+    socket_close($socket);
+    echo "OK.\n\n";
 
-        do {
-            if (false === ($buf = socket_read($msgsock, 2048, PHP_NORMAL_READ))) {
-                echo "socket_read() a échoué : raison : " . socket_strerror(socket_last_error($msgsock)) . "\n";
-                die();
-            }
-            if (!$buf = trim($buf)) {
-                continue;
-            }
-            if ($buf == 'quit') {
-                break;
-            }
-            if ($buf == 'shutdown') {
-                socket_close($msgsock);
-                break 2;
-            }
-            $talkback = "PHP: You said '$buf'.\n";
-            socket_write($msgsock, $talkback, strlen($talkback));
-            echo "$buf\n";
-        } while (true);
-        socket_close($msgsock);
-    } while (true);
 
-    socket_close($sock);
     header('Location: '.BASE_URL.'/admin/robotino');
     exit;
 }
