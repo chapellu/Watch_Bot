@@ -79,8 +79,8 @@ if(isset($_GET['action'])){
         echo "OK.\n";
     }
 
-    $msg = "test alan";
-    $out = "";
+    $msg = "POST / HTTP/1.0\r\n\r\n";
+    $out = "Je teste quelque chose";
 
     echo "Envoi de la requête HTTP HEAD...";
     socket_write($socket, $msg, strlen($in));
@@ -94,7 +94,7 @@ if(isset($_GET['action'])){
     echo "Fermeture du socket...";
     socket_close($socket);
     echo "OK.\n\n";
-
+    die();
 
     header('Location: '.BASE_URL.'/admin/robotino');
     exit;
