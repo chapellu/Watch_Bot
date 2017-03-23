@@ -6,7 +6,7 @@ use App\Controller\Admin\AppController;
 
 class RobotinoController extends AppController {
 
-    protected $layout = 'default';
+    protected $layout = 'robotino';
 
     public function __construct()
     {

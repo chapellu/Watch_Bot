@@ -56,5 +56,6 @@
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="<?= BASE_URL.'/public/js/bootstrap.min.js';?>"></script>
 
+
   </body>
 </html>

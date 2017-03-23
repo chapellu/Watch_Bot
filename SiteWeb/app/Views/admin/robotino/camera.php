@@ -272,7 +272,7 @@
 
             var protocol = location.protocol === "https:" ? "wss:" : "ws:";
             ws = new WebSocket(protocol + '//' + server + '/stream/webrtc');
-
+            alert(protocol + '//' + server + '/stream/webrtc');
             function offer(stream) {
                 createPeerConnection();
                 if (stream) {

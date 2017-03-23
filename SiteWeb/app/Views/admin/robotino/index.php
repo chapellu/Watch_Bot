@@ -1,6 +1,34 @@
 <div class="robotino col-sm-12">
+    <div class="video col-sm-9">
+        <div>
+            <div class="overlayWrapper">
+                <video id="remote-video" autoplay="" width="640" height="480"></video>
+                <p class="overlay">Live</p>
+            </div>
+        </div>
+        <div id="controls">
+            <button type=button id="pause" onclick="pause();" title="pause or resume local player">Pause/Resume</button>
+            <button type=button id="mute" onclick="mute();" title="mute or unmute remote audio source">Mute/Unmute</button>
+            <button type=button id="fullscreen" onclick="fullscreen();">Fullscreen</button>
+            <button type=button id="record" onclick="start_stop_record();" title="start or stop recording audio/video">Start Recording</button>
+            <button id="start commands" style="background-color: green; color: white" onclick="start();">Call!</button>
+            <button disabled id="stop commands" style="background-color: red; color: white" onclick="stop();">Hang up</button>
+        </div>
 
-    <div class="navbar-menu">
+
+
+    </div>
+
+    <div id="commands" class="video-commands col-sm-2">
+        <details open>
+            <summary><b>Advanced options</b></summary>
+            <fieldset>
+               <input required type="text" id="signalling_server" value="193.48.125.196:8080" title="<host>:<port>, default address is autodetected"/><br>
+             </fieldset>
+        </details>
+    </div>
+
+    <!--<div class="navbar-menu">
        <dl>
            <dt>Menu</dt>
            <dd>
@@ -10,7 +38,7 @@
                </ul>
            </dd>
        </dl>
-    </div>
+    </div>-->
 
     <div class="carte">
         <img class="img_carte" src="<?= BASE_URL.'/public/img/carte.png';?>" alt="">
@@ -50,9 +78,8 @@
     <h3>Logs (à faire)</h3>
     <p>
 <?php
-var_dump($this);
-\App::getInstance()->flash['logs'].='++';
-var_dump(\App::getInstance()->flash['logs']);
+
+
 if(isset($_GET['action'])){
     error_reporting(E_ALL);
 

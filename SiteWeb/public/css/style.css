@@ -19,8 +19,11 @@ body{
     border: 0px;
 }
 
-.navbar-default .navbar-nav > li > a, .navbar-default .navbar-brand, .navbar-default .navbar-nav .open .dropdown-menu > li > a{
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-brand, .dropdown-menu > li > a, .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: white;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover{
+    color: black;
 }
 .dropdown-header {
     color : black;

@@ -34,7 +34,7 @@ class App
                 'localhost',
                 'watchbot',
                 'root',
-                'app2018');
+                '');
         }
         return $this->db_instance;
     }
