@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-4 col-sm-6 footerleft ">
                 <div class="logofooter"><img class="img-footer" src="<?= BASE_URL.'/public/img/logo.png';?>" alt=""/></div>
-                <p>Watchbot est un projet réalisé par des étudiants de l'école Polytech Annecy en filière Informatique</p>
+                <p>Watchbot est un projet réalisé par des étudiants de l'école Polytech Annecy en filière automatique et informatique</p>
                <!-- <p><i class="fa fa-map-pin"></i> 210, Aggarwal Tower, Rohini sec 9, New Delhi -        110085, INDIA</p>
                 <p><i class="fa fa-phone"></i> Phone (India) : +91 9999 878 398</p>
                 <p><i class="fa fa-envelope"></i> E-mail : info@webenlance.com</p>-->

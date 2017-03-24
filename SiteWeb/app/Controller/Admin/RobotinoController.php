@@ -6,7 +6,7 @@ use App\Controller\Admin\AppController;
 
 class RobotinoController extends AppController {
 
-    protected $layout = 'default';
+    protected $layout = 'robotino';
 
     public function __construct()
     {
@@ -14,8 +14,11 @@ class RobotinoController extends AppController {
     }
 
     public function index(){
-        $errors = false;
         $form = new \Core\HTML\BootstrapForm($_POST);
-        $this->render('admin.robotino.index', compact('form','errors'));
+        $this->render('admin.robotino.index', compact('form'));
+    }
+
+    public function camera(){
+        $this->render('admin.robotino.camera', compact(''));
     }
 }

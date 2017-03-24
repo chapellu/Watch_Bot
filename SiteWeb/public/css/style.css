@@ -11,22 +11,37 @@ body{
     background-color:#E5E0FE;
 }
 
-/*Navbar*/
+/*-------------------------------------------
+------------------Navbar---------------------
+---------------------------------------------*/
 .navbar, .nav, .dropdown-menu{
     margin-bottom: 0px;
-    background-color: #3097D1;
+    background-color: /*#3097D1*/#0c1a2e;
     border-radius:0px;
     border: 0px;
 }
-
-.navbar-default .navbar-nav > li > a, .navbar-default .navbar-brand, .navbar-default .navbar-nav .open .dropdown-menu > li > a{
+.navbar-default .navbar-brand{
+    color:white;
+}
+.navbar-default .navbar-nav > li > a, .dropdown-menu > li > a, .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: white;
 }
+/*Quand on selectionne un onglet de la barre de navigation*/
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: #3097D1;
+    color: black;
+}
+/*Quand on passe la souris sur la marque*/
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
+    color: #3097D1;
+}
 .dropdown-header {
-    color : black;
+    color : white;
 }
 
-/*Footer*/
+/*-------------------------------------------
+------------------Footer---------------------
+---------------------------------------------*/
 .footer {
     position: absolute;
     text-align: center;
@@ -37,13 +52,16 @@ body{
     width: 100%;
 }
 
-/*Robotino*/
+/*-------------------------------------------
+-----------------Robotino--------------------
+---------------------------------------------*/
 .robotino{
     border: solid 4px black;
     min-height: 700px;
     padding-left:0;
     padding-right:0;
 }
+
 .commandes {
     border-top: solid 4px black;
     border-right: solid 4px black;
@@ -63,6 +81,11 @@ body{
     top: 0;
     right:0;
     background-color: #E5E0FE;
+}
+@media (max-width: 990px) {
+    .robotino{
+        min-height: 900px;
+    }
 }
 dl{
     height:40px;
@@ -134,7 +157,9 @@ img  {
 }
 
 
-/*Partie connexion*/
+/*-------------------------------------------
+-----------------Connexion-------------------
+---------------------------------------------*/
 .login-button{
     margin-top: 5px;
 }
@@ -146,7 +171,9 @@ img  {
 
 
 
-/*Page d'accueil*/
+/*-------------------------------------------
+--------------Page d'accueil-----------------
+---------------------------------------------*/
 .carousel-page
 {
     width:100%;
@@ -154,21 +181,31 @@ img  {
     background-color:#ffffff;
     color:white;
 }
+.carousel-control.right{
+    background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,200,.5) 100%);
+}
+.carousel-control.left{
+    background-image: linear-gradient(to left,rgba(0,0,0,.0001) 0,rgba(0,0,200,.5) 100%);
+}
 p.date{
     font-style: italic;
-    color: black;
+    color: #000;
     font-size: small;
+    margin-top:-10px;
 }
 h2.title {
-    margin-bottom:0px;
+    color: #0c1a2e;
 }
 
-/*Articles*/
+/*-------------------------------------------
+-----------------Articles--------------------
+---------------------------------------------*/
 .post-layout {
-    background-color: white;
+    background-color:rgba(255,255,255,0.6);
     border-radius: 6px;
     margin-top:50px;
-    border: 1px solid rgba(0, 0, 0, 0.125);
+    border: 3px solid #0c1a2e;
+    color: #000;
 }
 
 .content-post {

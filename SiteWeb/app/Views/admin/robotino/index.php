@@ -1,6 +1,32 @@
 <div class="robotino col-sm-12">
+    <div class="video col-sm-9">
+        <div class="overlayWrapper ">
+            <video id="remote-video" class="img-responsive" autoplay=""></video>
+            <p class="overlay">Live</p>
+        </div>
+        <div id="controls">
+            <button type=button id="pause" onclick="pause();" title="pause or resume local player">Pause/Play</button>
+            <button type=button id="mute" onclick="mute();" title="mute or unmute remote audio source">Muter/Demuter</button>
+            <button type=button id="fullscreen" onclick="fullscreen();">Plein écran</button>
+            <button type=button id="record" onclick="start_stop_record();" title="start or stop recording audio/video">Enregistrer</button>
+        </div>
 
-    <div class="navbar-menu">
+
+
+    </div>
+
+    <div id="commands" class="video-commands col-sm-3">
+        <details open>
+            <summary><b>Options de connexion</b></summary>
+            <fieldset>
+               <input required type="text" id="signalling_server" value="193.48.125.196:8080" title="<host>:<port>, default address is autodetected"/><br>
+             </fieldset>
+        </details>
+        <button id="start" style="background-color: green; color: white" onclick="start();">Connexion</button>
+        <button disabled id="stop" style="background-color: red; color: white" onclick="stop();">Stop</button>
+    </div>
+
+    <!--<div class="navbar-menu">
        <dl>
            <dt>Menu</dt>
            <dd>
@@ -10,7 +36,7 @@
                </ul>
            </dd>
        </dl>
-    </div>
+    </div>-->
 
     <div class="carte">
         <img class="img_carte" src="<?= BASE_URL.'/public/img/carte.png';?>" alt="">
@@ -46,8 +72,12 @@
     </div>
 </div>
 
-
+<div>
+    <h3>Logs (à faire)</h3>
+    <p>
 <?php
+
+
 if(isset($_GET['action'])){
     error_reporting(E_ALL);
 
@@ -58,61 +88,44 @@ if(isset($_GET['action'])){
      * puissions voir ce que nous lisons au fur et à mesure. */
     ob_implicit_flush();
 
-    $address = '193.48.125.38';
+    $address = '193.48.125.'.NUM_ROBOTINO;
     $port = 50000;
 
-    if (($sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
-        die("socket_create() a échoué : raison : " . socket_strerror(socket_last_error()) . "\n");
-    }
-    //Autorise l'utilisation d'adresse locales
-    if (socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1) === false) {
-        die('Impossible de définir l\'option du socket : '. socket_strerror(socket_last_error()) . PHP_EOL);
-    }
 
-    if (socket_bind($sock, $address, $port) === false) {
-        die("socket_bind() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n");
+    if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
+        echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
+    } else {
+        echo "socket_create() a réussi\n";
     }
 
-    if (socket_listen($sock, 5) === false) {
-        die("socket_listen() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n");
+
+    echo "Essai de connexion à '$address' sur le port '$port'...";
+    $result = socket_connect($socket, $address, $port);
+    if ($socket === false) {
+        echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
+    } else {
+        echo "socket_connect() a réussi\n";
     }
 
-    do {
-        if (($msgsock = socket_accept($sock)) === false) {
-            echo "socket_accept() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n";
-            die();
-        }
-        /* Send instructions. */
-        $msg = "Bienvenue sur le serveur de test PHP.\n" .
-            "Pour quitter, tapez 'quit'. Pour éteindre le serveur, tapez 'shutdown'.\n";
-        socket_write($msgsock, $msg, strlen($msg));
+    $msg = "POST /?action=".$_GET['action']." HTTP/1.1\r\n\r\n";
+    $msg .= "Connection: Close\r\n\r\n";
+    $out = "";
 
-        do {
-            if (false === ($buf = socket_read($msgsock, 2048, PHP_NORMAL_READ))) {
-                echo "socket_read() a échoué : raison : " . socket_strerror(socket_last_error($msgsock)) . "\n";
-                die();
-            }
-            if (!$buf = trim($buf)) {
-                continue;
-            }
-            if ($buf == 'quit') {
-                break;
-            }
-            if ($buf == 'shutdown') {
-                socket_close($msgsock);
-                break 2;
-            }
-            $talkback = "PHP: You said '$buf'.\n";
-            socket_write($msgsock, $talkback, strlen($talkback));
-            echo "$buf\n";
-        } while (true);
-        socket_close($msgsock);
-    } while (true);
+    echo "Envoi de la requête :".$msg;
+    socket_write($socket, $msg, strlen($msg));
 
-    socket_close($sock);
+
+
+    echo "Fermeture du socket...";
+    socket_close($socket);
+    echo "Socket détruite\n\n";
+
     header('Location: '.BASE_URL.'/admin/robotino');
-    exit;
+    exit();
 }
 
 
 ?>
+    </p>
+</div>
+
