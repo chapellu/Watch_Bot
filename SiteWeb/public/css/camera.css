@@ -18,3 +18,7 @@ video {
 p {
     margin: 0.125em;
 }
+.overlayWrapper > video{
+    height: 350px;
+    width: auto;
+}

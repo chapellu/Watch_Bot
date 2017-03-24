@@ -1,10 +1,8 @@
 <div class="robotino col-sm-12">
     <div class="video col-sm-9">
-        <div>
-            <div class="overlayWrapper">
-                <video id="remote-video" autoplay="" width="640" height="480"></video>
-                <p class="overlay">Live</p>
-            </div>
+        <div class="overlayWrapper ">
+            <video id="remote-video" autoplay=""></video>
+            <p class="overlay">Live</p>
         </div>
         <div id="controls">
             <button type=button id="pause" onclick="pause();" title="pause or resume local player">Pause/Resume</button>

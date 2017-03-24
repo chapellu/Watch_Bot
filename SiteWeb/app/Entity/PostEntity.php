@@ -14,14 +14,14 @@ class PostEntity extends Entity{
     }
 
     public function getCategory(){
-        $posts = \App::getInstance()->getTable('group');
-        $categories = \App::getInstance()->getTable('category');
+        $posts = \App::getInstance()->getTable('post');
+
 
         $post = $posts->query("
             SELECT category.title as category 
-            FROM group 
+            FROM post 
             LEFT JOIN category ON category_id = category.id
-            WHERE group.category_id = ?",[$this->category_id],true);
+            WHERE post.category_id = ?",[$this->category_id],true);
 
         return $post->category;
     }

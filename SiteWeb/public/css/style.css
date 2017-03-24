@@ -47,6 +47,7 @@ body{
     padding-left:0;
     padding-right:0;
 }
+
 .commandes {
     border-top: solid 4px black;
     border-right: solid 4px black;
@@ -66,6 +67,11 @@ body{
     top: 0;
     right:0;
     background-color: #E5E0FE;
+}
+@media (max-width: 990px) {
+    .robotino{
+        min-height: 900px;
+    }
 }
 dl{
     height:40px;
@@ -159,7 +165,7 @@ img  {
 }
 p.date{
     font-style: italic;
-    color: black;
+    color: #fff;
     font-size: small;
 }
 h2.title {
@@ -168,10 +174,11 @@ h2.title {
 
 /*Articles*/
 .post-layout {
-    background-color: white;
+    background-color: #3097D1;
     border-radius: 6px;
     margin-top:50px;
     border: 1px solid rgba(0, 0, 0, 0.125);
+    color: #fff;
 }
 
 .content-post {

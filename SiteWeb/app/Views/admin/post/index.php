@@ -6,10 +6,12 @@
             <td>ID</td>
             <td>Titre</td>
             <td>Actions</td>
+            <td>Catégorie</td>
         </tr>
     </thead>
 
     <tbody>
+
         <?php foreach($posts as $post):?>
             <tr>
                 <td><?= $post->id;?></td>
@@ -22,6 +24,7 @@
                         <button type="submit" class="btn btn-danger" href="<?= BASE_URL.'/admin/post/delete/?id='.$post->id;?>">Supprimer</button>
                     </form>
                 </td>
+                <td><?= $post->category;?></td>
             </tr>
 
 
