@@ -2,7 +2,7 @@ import omron, time
 
 if __name__ == '__main__':
     seuil = 28
-    omron = OmronD6T()
+    omron = omron.OmronD6T()
     omron.init()
 
     values = []
