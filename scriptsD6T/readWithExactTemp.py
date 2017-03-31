@@ -7,18 +7,8 @@ if __name__ == '__main__':
 
     values = []
     while True:
-        omron.read()
-        offset= 0
+        omron.read('symbols',28)
 
-        for j in range(0,4):
-            for i in range(0,4):
-                values.append(round(omron.temperature[i+offset],1))
-                values.append("------")
-            print values
-            values = []
-            offset+=4
-        print ''
-        print ''
         time.sleep(1)
 
         # for j in range(0,4):

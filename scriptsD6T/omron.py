@@ -30,7 +30,7 @@ class OmronD6T(object):
 
 
 	# function to read the omron temperature array
-    def read(self):
+    def read(self, mode, seuil):
         self.temperature_data_raw=[0]*self.BUFFER_LENGTH
         self.temperature=[0.0]*self.arraySize         # holds the recently measured temperature
         self.values=[0]*self.BUFFER_LENGTH
@@ -62,4 +62,28 @@ class OmronD6T(object):
                 for i in range(0, self.bytes_read):
                     self.values[i] = self.temperature_data_raw[i]
 
-        return self.temperature
+        #Affichage selon les modes
+        offset = 0
+        if mode=='exact-temp':
+            for j in range(0, 4):
+                for i in range(0, 4):
+                    values.append(round(self.temperature[i + offset], 1))
+                    values.append("------")
+                print values
+                values = []
+                offset += 4
+
+
+
+        elif mode=='symbols':
+            for j in range(0, 4):
+                for i in range(0, 4):
+                    if (self.temperature[i + offset] > seuil):
+                        values.append("x ")
+                    else:
+                        values.append("o ")
+                print values
+                values = []
+                offset += 4
+        print ''
+        print ''
