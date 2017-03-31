@@ -57,7 +57,7 @@ class Form {
      * orange = warning
      */
     public function bouttonRobotino($name, $type){
-        return $this->surround('<a class="btn btn-'.$type.' boutonsRobotino" type="submit" name="'.$name.'" href="'.BASE_URL.'/admin/robotino/?action='.$name.'">'.ucfirst($name).'</a>', 'liensBoutonsRobotino');
+        return $this->surround('<a class="btn btn-'.$type.' boutonsRobotino" id="'.$name.'" type="submit" name="'.$name.'" href="'.BASE_URL.'/admin/robotino/?action='.$name.'">'.ucfirst($name).'</a>', 'liensBoutonsRobotino');
 
     }
 }

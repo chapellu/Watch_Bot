@@ -52,8 +52,7 @@
 
 
         <!-- jQuery -->
-        <script src="<?= BASE_URL.'/public/js/jquery.js';?>"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
         <script type="text/javascript" src="<?= BASE_URL.'/public/js/bootstrap.min.js';?>"></script>
@@ -63,5 +62,17 @@
         <script src="https://rawgit.com/dorukeker/gyronorm.js/master/dist/gyronorm.complete.min.js" async></script>
         <script type="text/javascript" src="<?=BASE_URL.'/public/js/camera.js';?>"></script>
 
+        <!--<script type="text/javascript">
+            $(document).ready( function() {
+                $("#log").load(<?='"'.BASE_URL.'/public/robotino/log.php"';?>);
+            });
+        </script>-->
+        <script type="text/javascript">
+        $(document).ready( function() {
+            var auto_refresh = setInterval(function () {
+                $("#log").load(<?='"'.BASE_URL.'/public/robotino/log.php"';?>).fadeIn("slow");
+            }, 1000);
+        });
+        </script>
     </body>
 </html>

@@ -3,7 +3,7 @@ $debut = microtime(true);
 
 define('DS',DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__DIR__));
-define('BASE_URL',dirname(dirname($_SERVER['SCRIPT_NAME'])));
+define('BASE_URL','http://localhost/watchbot/SiteWeb');
 define('NUM_ROBOTINO','38');
 //define('BASE_URL', "http://193.48.125.196");
 

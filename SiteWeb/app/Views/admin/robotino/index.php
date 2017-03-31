@@ -76,16 +76,8 @@
 
 </div>
 
-<div>
-    <h3>Logs (à faire)</h3>
-    <?php
-        $monfichier = fopen('/var/www/html/Watch_Bot/scriptsD6T/log.txt', 'r');
-        $logs = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
-        fclose($monfichier);
-
-        echo '<p>$logs</p>';
-    ?>
-</div>
+<h3>Logs</h3>
+<div id="log"></div>
 
 <?php
 if(isset($_GET['action'])){
