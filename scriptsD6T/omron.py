@@ -1,4 +1,5 @@
 import pigpio, time, smbus
+from datetime import datetime
 
 class OmronD6T(object):
     def init(self, rasPiChannel = 1, omronAddress = 0x0a, omronSize = 16):
@@ -87,5 +88,28 @@ class OmronD6T(object):
                 print values
                 values = []
                 offset += 4
+
+        elif mode=='auto':
+            # Recupere les valeurs sous formes dun tableau
+            for j in range(0, 4):
+                for i in range(0, 4):
+                    values.append(round(self.temperature[i + 4 * j], 1))
+
+            # Compteur de valeurs superieurs au seuil
+            compteurDeColonnes = 0
+            for j in range(0, 4):
+                colonne = []
+                compteurDePixels = 0
+
+                for i in range(0, 4):
+                    tempPixel = values[j + 4 * i]  # Recupere les valeurs des pixels colonne par colonne
+                    if tempPixel >= seuil:
+                        compteurDePixels += 1
+                if compteurDePixels >= 3:
+                    compteurDeColonnes += 1
+
+            if compteurDeColonnes >= 2:
+                log = open("log.txt", "w")
+                log.write(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "-- Humain détécté")
         print ''
         print ''
