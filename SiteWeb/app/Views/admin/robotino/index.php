@@ -78,10 +78,10 @@
 
 <div>
     <h3>Logs (à faire)</h3>
-    <p>
+
+</div>
+
 <?php
-
-
 if(isset($_GET['action'])){
     if($_GET['action']==='avancer' || $_GET['action']==='reculer' || $_GET['action']==='droite' || $_GET['action'] ==='gauche'){
 
