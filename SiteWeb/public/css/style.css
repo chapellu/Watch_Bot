@@ -67,9 +67,32 @@ body{
     border-top: solid 4px black;
     border-right: solid 4px black;
     border-bottom: hidden 4px ;
-    position: absolute; /* le bloc se positionnera en haut à gauche de ta page car il n'a pas de bloc parent */
+    position: absolute;
     bottom: 0;
     left:0;
+    display: inline;
+}
+.logs{
+    display: inline-block;
+    padding:5px 5px 5px 5px;
+}
+.scroll{
+    min-height:100px;
+    height:60px;/*pour IE qui comprend rien, et qui ne reconnait pas min-height, mais qui comprend mal height*/
+    min-width:300px;
+    width:60px;/*pour IE qui comprend rien*/
+    overflow:auto;/*pour activer les scrollbarres*/
+}
+.commandes-manuelles{
+    border-right: solid 4px black;
+    float: left;
+    padding:2px 2px 2px 2px;
+}
+#clear-logs{
+    padding:0;
+}
+.commande > div{
+    display: inline-block;
 }
 .commandes > form {
     padding: 10px;
