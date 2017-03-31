@@ -78,7 +78,13 @@
 
 <div>
     <h3>Logs (à faire)</h3>
+    <?php
+        $monfichier = fopen('/var/www/html/Watch_Bot/scriptsD6T/log.txt', 'r');
+        $logs = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
+        fclose($monfichier);
 
+        echo '<p>$logs</p>';
+    ?>
 </div>
 
 <?php
@@ -130,12 +136,10 @@ if(isset($_GET['action'])){
         exit();
     }
     else if($_GET['action']==='detection'){
-        exec('sudo python /home/watchbot/Watch_Bot/scrisD6T/detection', $output, $ret_code);
+        exec('sudo python /var/www/html/Watch_Bot/scriptsD6T/mainscript');
     }
 }
 
 
 ?>
-    </p>
-</div>
 
