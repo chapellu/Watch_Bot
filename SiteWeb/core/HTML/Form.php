@@ -56,8 +56,9 @@ class Form {
      * rouge = danger
      * orange = warning
      */
-    public function bouttonRobotino($name, $type){
-        return $this->surround('<a class="btn btn-'.$type.' boutonsRobotino" id="'.$name.'" type="submit" name="'.$name.'" href="'.BASE_URL.'/admin/robotino/?action='.$name.'">'.ucfirst($name).'</a>', 'liensBoutonsRobotino');
+    public function bouttonRobotino($name, $type, $title=null){
+        $label = $title?$title:ucfirst($name);
+        return $this->surround('<a class="btn btn-'.$type.' boutonsRobotino" id="'.$name.'" type="submit" name="'.$name.'" href="'.BASE_URL.'/admin/robotino/?action='.$name.'">'.$label.'</a>', 'liensBoutonsRobotino');
 
     }
 }

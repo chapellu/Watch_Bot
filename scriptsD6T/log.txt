@@ -1,3 +1,0 @@
-Salut je teste les logs\n
-Ca va?\nOui et toi?
-

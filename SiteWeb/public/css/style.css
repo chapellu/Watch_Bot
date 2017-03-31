@@ -152,7 +152,14 @@ img  {
 .liensBoutonsRobotino{
     margin-bottom: 0px;
 }
-.btn.boutonsRobotino{
+.btn.boutonsRobotino.btn-danger, .btn.boutonsRobotino.btn-success{
+    width: 100%;
+    margin-top:10px;
+}
+.btn.boutonsRobotino.btn-danger{
+    margin-left: 10px;
+}
+.btn.boutonsRobotino.btn-primary{
     width: 100px;
 }
 

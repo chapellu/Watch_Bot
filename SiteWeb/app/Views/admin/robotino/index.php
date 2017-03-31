@@ -64,9 +64,14 @@
                         <?= $form->bouttonRobotino('reculer', 'primary');?>
                     </td>
                 </tr>
+            </table>
+            <table>
                 <tr>
                     <td>
-                        <?= $form->bouttonRobotino('detection', 'success');?>
+                        <?= $form->bouttonRobotino('start-detection', 'success', 'Lancer la detection');?>
+                    </td>
+                    <td>
+                        <?= $form->bouttonRobotino('stop-detection','danger', 'Arreter la detection');?>
                     </td>
                 </tr>
             </table>
@@ -76,8 +81,11 @@
 
 </div>
 
-<h3>Logs</h3>
-<div id="log"></div>
+<div class="logs">
+    <h3>Logs</h3>
+    <?= $form->bouttonRobotino('clear-logs', 'secondary', 'Effacer la console');?>
+    <div id="log"></div>
+</div>
 
 <?php
 if(isset($_GET['action'])){
@@ -123,13 +131,25 @@ if(isset($_GET['action'])){
         echo "Fermeture du socket...";
         socket_close($socket);
         echo "Socket détruite\n\n";
-
-        header('Location: '.BASE_URL.'/admin/robotino');
-        exit();
     }
-    else if($_GET['action']==='detection'){
-        exec('sudo python /var/www/html/Watch_Bot/scriptsD6T/mainscript');
+    else if($_GET['action']==='start-detection'){
+        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
+        fwrite($flagscript, 'script=True');
+        fclose($flagscript);
+        exec('sudo python'.ROOT_SCRIPT.'mainscript');
     }
+    else if($_GET['action']==='stop-detection'){
+        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
+        fwrite($flagscript, 'script=False');
+        fclose($flagscript);
+    }
+    else if($_GET['action']==='clear-logs'){
+        $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
+        fwrite($log, '');
+        fclose($log);
+    }
+    header('Location: '.BASE_URL.'/admin/robotino');
+    exit();
 }
 
 
