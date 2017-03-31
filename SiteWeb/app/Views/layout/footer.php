@@ -53,7 +53,7 @@
             </div>
             <div class="col-sm-6">
                 <ul class="bottom_ul">
-                    <li><a href="#">Contact us</a></li>
+                    <li><a href="mailto:alan.dupin@etu.univ-smb.fr">Contact us</a></li>
                 </ul>
             </div>
         </div>
