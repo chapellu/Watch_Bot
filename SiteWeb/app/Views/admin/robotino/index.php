@@ -81,11 +81,19 @@
 
 </div>
 
-<div class="logs">
-    <h3>Logs</h3>
-    <?= $form->bouttonRobotino('clear-logs', 'secondary', 'Effacer la console');?>
-    <div id="log"></div>
-</div>
+<table>
+    <thead>
+        <tr>
+            <th>Logs</th>
+            <th><?= $form->bouttonRobotino('clear-logs', 'secondary', 'Effacer la console');?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <div id="log"></div>
+        </tr>
+    </tbody>
+</table>
 
 <?php
 if(isset($_GET['action'])){
