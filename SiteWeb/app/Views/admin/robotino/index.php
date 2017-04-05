@@ -154,7 +154,7 @@ if(isset($_GET['action'])){
     else if($_GET['action']==='clear-logs'){
         $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
         fwrite($log, '');
-        fclose($log);
+        fclose($log);die();
     }
     header('Location: '.BASE_URL.'/admin/robotino');
     exit();
