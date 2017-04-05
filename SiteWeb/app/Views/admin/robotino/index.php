@@ -43,7 +43,7 @@
         <div class="commandes-manuelles">
             <form method="post" >
                 <table>
-                    <thead><h2>Commandes mannuelles</h2></thead>
+                    <thead><h2>Commandes manuelles</h2></thead>
                     <tr>
                         <td></td>
                         <td>
