@@ -11,6 +11,7 @@ if __name__ == '__main__':
 
 
     while script:
+        print "je passe"
         omron.read('auto', seuil)
 
         # On regarde toutes les secondes si on a pas arreter le script
