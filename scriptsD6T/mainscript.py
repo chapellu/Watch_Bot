@@ -13,7 +13,7 @@ if __name__ == '__main__':
     while script:
         omron.read('auto', seuil)
 
-        # On regarde toutes les secondes si on a pas arrêter le script
+        # On regarde toutes les secondes si on a pas arreter le script
         text = file("flagscript.txt").read()
         if text == 'script=False':
             script = False
