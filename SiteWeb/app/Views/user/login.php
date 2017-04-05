@@ -5,7 +5,7 @@
 <?php endif; ?>
 
 
-<form method="post">
+<form method="post" style="padding-top: 50px;">
     <?= $form->input('login', 'Pseudo'); ?>
     <?= $form->input('password', 'Mot de passe', ['type'=>'password']); ?>
     <?= $form->submit('Envoyer'); ?>
