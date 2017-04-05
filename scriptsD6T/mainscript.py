@@ -14,7 +14,7 @@ if __name__ == '__main__':
         omron.read('auto', seuil)
 
         # On regarde toutes les secondes si on a pas arreter le script
-        flagscript = open("/var/www/html/Watch_Bot/SiteWeb/scriptsD6T/flagscript.txt", "r")
+        flagscript = open("/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt", "r")
         text = flagscript.read()
         flagscript.close()
         if text == 'script=False':
