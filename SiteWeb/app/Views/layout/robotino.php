@@ -42,11 +42,8 @@
         <script src="https://rawgit.com/dorukeker/gyronorm.js/master/dist/gyronorm.complete.min.js" async></script>
         <script type="text/javascript" src="<?=BASE_URL.'/public/js/camera.js';?>"></script>
 
-        <!--<script type="text/javascript">
-            $(document).ready( function() {
-                $("#log").load(<?='"'.BASE_URL.'/public/robotino/log.php"';?>);
-            });
-        </script>-->
+
+        <?php if(DEV == 0):?>
         <script type="text/javascript">
         $(document).ready( function() {
             var auto_refresh = setInterval(function () {
@@ -54,5 +51,6 @@
             }, 1000);
         });
         </script>
+        <?php endif;?>
     </body>
 </html>
