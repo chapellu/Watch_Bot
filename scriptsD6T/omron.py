@@ -118,12 +118,12 @@ class OmronD6T(object):
                 log.write("<tr><td>" + datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "-- Humain detecte" + "</td></tr>\n")
                 log.close()
 
-                file = open("log.txt", "r")
+                file = open(self.chemin+"log.txt", "r")
                 text = file.read()
                 file.close()
                 text = text.replace('\n', '')
 
-                log = open("log.txt", "w")
+                log = open(self.chemin+"log.txt", "w")
                 log.write(text)
                 log.close()
 
