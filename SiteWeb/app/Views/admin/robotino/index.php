@@ -111,7 +111,6 @@
 <?php
 if(isset($_GET['action'])){
     if($_GET['action']==='avancer' || $_GET['action']==='reculer' || $_GET['action']==='droite' || $_GET['action'] ==='gauche'){
-
         error_reporting(E_ALL);
 
         /* Interdit l'exécution infinie du script, en attente de connexion. */
@@ -147,16 +146,9 @@ if(isset($_GET['action'])){
         echo "Envoi de la requête :".$msg;
         socket_write($socket, $msg, strlen($msg));
 
-
-
         echo "Fermeture du socket...";
         socket_close($socket);
         echo "Socket détruite\n\n";
-    }
-    else if($_GET['action']==='start-detection'){
-
-
-
     }
     else if($_GET['action']==='stop-detection'){
         $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
@@ -176,10 +168,12 @@ if(isset($_POST['seuil'])){
         echo '<script>alert("Vous devez saisir un seuil (positif)")</script>';
     } else{
         $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
-        fwrite($flagscript, 'script=True');
+        fwrite($flagscript, 'script=True'."\n".$_POST['seuil']);
         fclose($flagscript);
-        exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py > /dev/null 2>/dev/null &');
-        //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
+        if(DEV == 0) {
+            exec('sudo  -u www-data python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
+        }
+            //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
         //var_dump($msg);die();
     }
 }
