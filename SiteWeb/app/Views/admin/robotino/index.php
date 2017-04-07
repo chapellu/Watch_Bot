@@ -171,10 +171,11 @@ if(isset($_POST['seuil'])){
         fwrite($flagscript, 'script=True'."\n".$_POST['seuil']);
         fclose($flagscript);
         if(DEV == 0) {
-            exec('sudo  -u www-data python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
+            //exec('sudo  -u www-data python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
+            exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
+            var_dump($msg);die();
         }
-            //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
-        //var_dump($msg);die();
+
     }
 }
 
