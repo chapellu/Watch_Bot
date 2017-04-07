@@ -10,8 +10,7 @@ public class BaseDeDonnee {
 	public Connection conn = null;
 	private static BaseDeDonnee instance = null;
 	private java.sql.Statement st = null;
-
-// Constructeur privé afin d'assurer une connexion unique. Singleton	
+	
 private BaseDeDonnee(){
 	try {
 	 	 Class.forName("com.mysql.jdbc.Driver");
@@ -31,7 +30,6 @@ public static BaseDeDonnee connect(){
 	return(instance);
 }
 
-//Methode rendant l'ip en fonction d'un nom
 public String getIP(String dest){
 	String sql = "SELECT IP from nomIP where nom='"+dest+"';";
 		try {
@@ -44,8 +42,6 @@ public String getIP(String dest){
 		return (null);
 }
 
-//Methode retournant le nom en fonction d'une IP.
-//A modifié pour ajouté plusieurs ordinateurs avec des ID différents
 public String getNom(String ip){
 	String sql = "SELECT nom from nomIP where ip='"+ip+"';";
 	try {

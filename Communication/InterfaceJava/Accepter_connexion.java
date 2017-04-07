@@ -20,7 +20,6 @@ public class Accepter_connexion implements Runnable {
 		try {
             while(true){
 	            socket = socketserver.accept();
-	            //Création d'un nouveau threads pour le traitement du message recu
 	            t1 = new Thread(new MessageEntrant(socket,abonne));
 	            t1.start();
             }
