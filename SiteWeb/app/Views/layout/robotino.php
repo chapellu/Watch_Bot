@@ -44,6 +44,7 @@
             var audio_video_stream;
             var recorder = null;
             var recordedBlobs;
+            alert("stun:" + signalling_server_hostname + ":3478");
             var pcConfig = {"iceServers": [
                 {"urls": ["stun:stun.l.google.com:19302", "stun:" + signalling_server_hostname + ":3478"]}
             ]};
