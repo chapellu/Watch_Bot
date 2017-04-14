@@ -1,28 +1,6 @@
 <div class="robotino col-sm-12">
     <div class="video col-sm-9">
-        <div id="container">
-            <div class="overlayWrapper">
-                <video id="remote-video" autoplay="" width="640" height="480">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
-        <div id="controls">
-            <button type=button id="pause" onclick="pause();" title="pause or resume local player">Pause/Play</button>
-            <button type=button id="mute" onclick="mute();" title="mute or unmute remote audio source">Muter/Demuter</button>
-            <button type=button id="fullscreen" onclick="fullscreen();">Plein écran</button>
-            <button type=button id="record" onclick="start_stop_record();" title="start or stop recording audio/video">Enregistrer</button>
-        </div>
-        <div id="commands">
-            <details open>
-                <summary><b>Advanced options</b></summary>
-                <fieldset>
-                    <span>Remote Peer/Signalling Server Address: </span><input required type="text" id="signalling_server" value="193.48.125.196:8080" title="<host>:<port>, default address is autodetected"/><br>
-                </fieldset>
-            </details>
-            <button id="start" style="background-color: green; color: white" onclick="start();">Call!</button>
-            <button disabled id="stop" style="background-color: red; color: white" onclick="stop();">Hang up</button>
-        </div>
+        <img src="http://193.48.125.196:8080/?action=stream" alt=""/>
     </div>
 
     <div class="padding col-sm-12"><br></div>
