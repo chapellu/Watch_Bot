@@ -15,7 +15,7 @@
         <link type="text/css" rel="stylesheet" href="<?= BASE_URL.'/public/css/style.css'; ?>"/>
         <link type="text/css" rel="stylesheet" href="<?= BASE_URL.'/public/css/footer.css'; ?>"/>
 
-        <script>
+        <script type="text/javascript">
             var signalling_server_hostname = location.hostname || "193.48.125.196";
             var signalling_server_address = signalling_server_hostname + ':' + (location.port || 80);
             var isFirefox = typeof InstallTrigger !== 'undefined';// Firefox 1.0+
@@ -952,7 +952,27 @@
 
 
         </script>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
+        <!-- Bootstrap Core JavaScript -->
+        <script type="text/javascript" src="<?= BASE_URL.'/public/js/bootstrap.min.js';?>"></script>
+
+        <!--Script pour la caméra-->
+        <script src="https://raw.githubusercontent.com/dorukeker/gyronorm.js/master/dist/gyronorm.complete.min.js" async></script>
+        <script src="https://rawgit.com/dorukeker/gyronorm.js/master/dist/gyronorm.complete.min.js" async></script>
+        <script type="text/javascript" src="<?=BASE_URL.'/public/js/camera.js';?>"></script>
+
+
+        <?php if(DEV == 0):?>
+            <script type="text/javascript">
+                $(document).ready( function() {
+                    var auto_refresh = setInterval(function () {
+                        $("#log").load(<?='"'.BASE_URL.'/public/robotino/log.php"';?>).fadeIn("slow");
+                    }, 1000);
+                });
+            </script>
+        <?php endif;?>
     </head>
 
     <body>
@@ -969,26 +989,6 @@
         ?>
 
 
-        <!-- jQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-        <!-- Bootstrap Core JavaScript -->
-        <script type="text/javascript" src="<?= BASE_URL.'/public/js/bootstrap.min.js';?>"></script>
-
-        <!--Script pour la caméra-->
-        <script src="https://raw.githubusercontent.com/dorukeker/gyronorm.js/master/dist/gyronorm.complete.min.js" async></script>
-        <script src="https://rawgit.com/dorukeker/gyronorm.js/master/dist/gyronorm.complete.min.js" async></script>
-        <script type="text/javascript" src="<?=BASE_URL.'/public/js/camera.js';?>"></script>
-
-
-        <?php if(DEV == 0):?>
-        <script type="text/javascript">
-        $(document).ready( function() {
-            var auto_refresh = setInterval(function () {
-                $("#log").load(<?='"'.BASE_URL.'/public/robotino/log.php"';?>).fadeIn("slow");
-            }, 1000);
-        });
-        </script>
-        <?php endif;?>
     </body>
 </html>
