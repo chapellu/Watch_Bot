@@ -1,8 +1,11 @@
 <div class="robotino col-sm-12">
     <div class="video col-sm-9">
-        <div class="overlayWrapper ">
-            <video id="remote-video" class="img-responsive" autoplay=""></video>
-            <p class="overlay">Live</p>
+        <div id="container">
+            <div class="overlayWrapper">
+                <video id="remote-video" autoplay="" width="640" height="480">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
         </div>
         <div id="controls">
             <button type=button id="pause" onclick="pause();" title="pause or resume local player">Pause/Play</button>
