@@ -10,6 +10,7 @@ public class Accepter_connexion implements Runnable {
 	private ServerSocket socketserver = null;
 	public Thread t1;
 	private InterfaceMessageRecu abonne;
+	private static boolean running = true;
 	
 	public Accepter_connexion(ServerSocket ss, InterfaceMessageRecu abonne){
 		 socketserver = ss;
@@ -18,7 +19,7 @@ public class Accepter_connexion implements Runnable {
 	
 	public void run() {
 		try {
-            while(true){
+            while(running){
 	            socket = socketserver.accept();
 	            t1 = new Thread(new MessageEntrant(socket,abonne));
 	            t1.start();
@@ -29,5 +30,10 @@ public class Accepter_connexion implements Runnable {
         
     }
 	}
+	
+	public static void arret(){
+		running = false;
+	}
+	
 
 }

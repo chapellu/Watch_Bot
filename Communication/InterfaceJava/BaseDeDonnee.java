@@ -14,7 +14,7 @@ public class BaseDeDonnee {
 private BaseDeDonnee(){
 	try {
 	 	 Class.forName("com.mysql.jdbc.Driver");
-	 	 String url = "jdbc:mysql://192.168.118.28:3306/Pi";
+	 	 String url = "jdbc:mysql://193.48.125.196:3306/Pi";
 	 	 conn = DriverManager.getConnection(url, "watchbot", "app2018");
 	 	 st = conn.createStatement();
 	 	 System.out.println("conn built");
@@ -49,16 +49,27 @@ public String getNom(String ip){
 		utilisateur.next();
 		return(utilisateur.getString("nom"));
 	} catch (SQLException e){
-		sql = "INSERT INTO nomIP VALUES ('Ordinateur', '"+ip+"');";
+		String sql1 = "SELECT nom from nomIP where nom Like 'Ordinateur%';";
+		int idOrdi = 0;
+		try{
+			ResultSet numOrdi = st.executeQuery(sql1);
+			numOrdi.next();
+			String num = numOrdi.getString("nom");
+			String [] tokens = num.split(" ");
+			idOrdi = Integer.valueOf(tokens[1]);
+		}catch (SQLException e1) {
+			//e1.printStackTrace();
+		}
+		sql = "INSERT INTO nomIP VALUES ('Ordinateur "+idOrdi+"', '"+ip+"');";
 		try {
 			st.executeUpdate(sql);
-			return("Ordinateur");
-		} catch (SQLException e1) {
+			return("Ordinateur "+idOrdi);
+		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e2.printStackTrace();
+		}
 		}
 		//e.printStackTrace();
-	}
 	return (null);
 }
 }
