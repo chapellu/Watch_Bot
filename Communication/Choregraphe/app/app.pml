@@ -2,11 +2,14 @@
 <Package name="app" format_version="4">
     <Manifest src="manifest.xml" />
     <BehaviorDescriptions>
-        <BehaviorDescription name="behavior" src="behavior_1" xar="behavior.xar" />
+        <BehaviorDescription name="behavior" src="Socket" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="bd" xar="behavior.xar" />
+        <BehaviorDescription name="behavior" src="comportement" xar="behavior.xar" />
     </BehaviorDescriptions>
     <Dialogs />
-    <Resources />
+    <Resources>
+        <File name="choice_sentences" src="comportement/Aldebaran/choice_sentences.xml" />
+    </Resources>
     <Topics />
     <IgnoredPaths />
 </Package>

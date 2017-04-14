@@ -10,11 +10,15 @@
   <language>en_US</language>
  </descriptionLanguages>
  <contents>
-  <behaviorContent path="behavior_1">
+  <behaviorContent path="Socket">
    <nature>interactive</nature>
    <permissions/>
   </behaviorContent>
   <behaviorContent path="bd">
+   <nature>interactive</nature>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="comportement">
    <nature>interactive</nature>
    <permissions/>
   </behaviorContent>
