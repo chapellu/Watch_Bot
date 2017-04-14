@@ -62,9 +62,7 @@ body{
     padding-right:0;
     margin-top:20px;
 }
-.padding {
-    padding-bottom:210px;
-}
+
 .commandes {
     position: absolute;
     bottom: 0;
@@ -85,6 +83,7 @@ body{
     padding:5px;
     margin-left:-4px;
     margin-bottom:-4px;
+    width: 350px;
 }
 .bordered > h2{
     text-align: center;
@@ -252,4 +251,24 @@ h2.title {
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
+}
+
+/*-------------------------------------------
+----------------Responsive-------------------
+---------------------------------------------*/
+@media (min-width:768px) and (max-width:992px){
+    .padding {
+        padding-bottom:420px;
+    }
+}
+@media (min-width:992px){
+    .padding {
+        padding-bottom:210px;
+    }
+}
+
+@media (max-width:750px){
+    .padding {
+        padding-bottom:630px;
+    }
 }

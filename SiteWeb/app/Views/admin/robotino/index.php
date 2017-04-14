@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="padding"><br></div>
+    <div class="padding col-sm-12"><br></div>
 
     <!--<div class="navbar-menu">
        <dl>
