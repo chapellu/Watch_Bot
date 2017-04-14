@@ -1,9 +1,93 @@
+<?php
+if(isset($_GET['action'])){
+    if($_GET['action']==='avancer' || $_GET['action']==='reculer' || $_GET['action']==='droite' || $_GET['action'] ==='gauche'){
+        error_reporting(E_ALL);
+
+        /* Interdit l'exécution infinie du script, en attente de connexion. */
+        set_time_limit(0);
+
+        /* Active le vidage implicite des buffers de sortie, pour que nous
+         * puissions voir ce que nous lisons au fur et à mesure. */
+        ob_implicit_flush();
+
+        $address = '193.48.125.'.NUM_ROBOTINO;
+        $port = 50000;
+
+
+        if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
+            echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
+        } else {
+            echo "socket_create() a réussi\n";
+        }
+
+
+        echo "Essai de connexion à '$address' sur le port '$port'...";
+        $result = socket_connect($socket, $address, $port);
+        if ($socket === false) {
+            echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
+        } else {
+            echo "socket_connect() a réussi\n";
+        }
+
+        $msg = "POST /?action=".$_GET['action']." HTTP/1.1\r\n\r\n";
+        $msg .= "Connection: Close\r\n\r\n";
+        $out = "";
+
+        echo "Envoi de la requête :".$msg;
+        socket_write($socket, $msg, strlen($msg));
+
+        echo "Fermeture du socket...";
+        socket_close($socket);
+        echo "Socket détruite\n\n";
+    }
+    else if($_GET['action']==='stop-detection'){
+        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
+        fwrite($flagscript, 'script=False');
+        fclose($flagscript);
+    }
+    else if($_GET['action']==='clear-logs'){
+        $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
+        fwrite($log, ' ');
+        fclose($log);
+    }
+    else if($_GET['action']==='camera'){
+        exec('sudo  -u www-data bash /etc/init.d/watchbot-camera start > /dev/null 2>/dev/null &', $msg);
+        $camera = True;
+    }
+    header('Location: '.BASE_URL.'/admin/robotino');
+    exit();
+} else {
+    $camera = False;
+}
+if(isset($_POST['seuil'])){
+    if($_POST['seuil']==='' || $_POST['seuil']<0){
+        echo '<script>alert("Vous devez saisir un seuil (positif)")</script>';
+    } else{
+        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
+        fwrite($flagscript, 'script=True'."\n".$_POST['seuil']);
+        fclose($flagscript);
+        if(DEV == 0) {
+            exec('sudo  -u www-data python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
+            //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
+            //var_dump($msg);die();
+        }
+
+    }
+}
+
+?>
+
+
+
 <div class="robotino col-sm-12">
     <div class="video col-sm-9">
-        <form action="<?=BASE_URL.'/admin/robotino/?action=camera';?>" method="post">
-            <input class="btn btn-success" type="submit" value="Lancer la camera">
-        </form>
-        <img src="http://193.48.125.196:8080/?action=stream" alt=""/>
+        <?php if($camera): ?>
+            <img src="http://193.48.125.196:8080/?action=stream" alt=""/>
+        <?php else: ?>
+            <form action="<?=BASE_URL.'/admin/robotino/?action=camera';?>" method="post">
+                <input class="btn btn-success" type="submit" value="Lancer la camera">
+            </form>
+        <?php endif; ?>
     </div>
 
     <div class="padding col-sm-12"><br></div>
@@ -92,81 +176,4 @@
 </div>
 
 
-
-<?php
-if(isset($_GET['action'])){
-    if($_GET['action']==='avancer' || $_GET['action']==='reculer' || $_GET['action']==='droite' || $_GET['action'] ==='gauche'){
-        error_reporting(E_ALL);
-
-        /* Interdit l'exécution infinie du script, en attente de connexion. */
-        set_time_limit(0);
-
-        /* Active le vidage implicite des buffers de sortie, pour que nous
-         * puissions voir ce que nous lisons au fur et à mesure. */
-        ob_implicit_flush();
-
-        $address = '193.48.125.'.NUM_ROBOTINO;
-        $port = 50000;
-
-
-        if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
-            echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
-        } else {
-            echo "socket_create() a réussi\n";
-        }
-
-
-        echo "Essai de connexion à '$address' sur le port '$port'...";
-        $result = socket_connect($socket, $address, $port);
-        if ($socket === false) {
-            echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
-        } else {
-            echo "socket_connect() a réussi\n";
-        }
-
-        $msg = "POST /?action=".$_GET['action']." HTTP/1.1\r\n\r\n";
-        $msg .= "Connection: Close\r\n\r\n";
-        $out = "";
-
-        echo "Envoi de la requête :".$msg;
-        socket_write($socket, $msg, strlen($msg));
-
-        echo "Fermeture du socket...";
-        socket_close($socket);
-        echo "Socket détruite\n\n";
-    }
-    else if($_GET['action']==='stop-detection'){
-        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
-        fwrite($flagscript, 'script=False');
-        fclose($flagscript);
-    }
-    else if($_GET['action']==='clear-logs'){
-        $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
-        fwrite($log, ' ');
-        fclose($log);
-    }
-    else if($_GET['action']==='camera'){
-        exec('sudo  -u www-data bash /etc/init.d/watchbot-camera start > /dev/null 2>/dev/null &', $msg);
-        //var_dump($msg);die();
-    }
-    header('Location: '.BASE_URL.'/admin/robotino');
-    exit();
-}
-if(isset($_POST['seuil'])){
-    if($_POST['seuil']==='' || $_POST['seuil']<0){
-        echo '<script>alert("Vous devez saisir un seuil (positif)")</script>';
-    } else{
-        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
-        fwrite($flagscript, 'script=True'."\n".$_POST['seuil']);
-        fclose($flagscript);
-        if(DEV == 0) {
-            exec('sudo  -u www-data python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
-            //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
-            //var_dump($msg);die();
-        }
-
-    }
-}
-
-?>
 
