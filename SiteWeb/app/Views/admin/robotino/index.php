@@ -1,6 +1,8 @@
 <?php
 if(isset($_GET['action'])){
-    if($_GET['action']==='avancer' || $_GET['action']==='reculer' || $_GET['action']==='droite' || $_GET['action'] ==='gauche'){
+    $action = $_GET['action'];
+    var_dump($action);
+    if($action==='avancer' || $action==='reculer' || $action==='droite' || $action ==='gauche'){
         error_reporting(E_ALL);
 
         /* Interdit l'exécution infinie du script, en attente de connexion. */
@@ -29,7 +31,7 @@ if(isset($_GET['action'])){
             echo "socket_connect() a réussi\n";
         }
 
-        $msg = "POST /?action=".$_GET['action']." HTTP/1.1\r\n\r\n";
+        $msg = "POST /?action=".$action." HTTP/1.1\r\n\r\n";
         $msg .= "Connection: Close\r\n\r\n";
         $out = "";
 
@@ -40,19 +42,20 @@ if(isset($_GET['action'])){
         socket_close($socket);
         echo "Socket détruite\n\n";
     }
-    else if($_GET['action']==='stop-detection'){
+    else if($action==='stop-detection'){
         $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
         fwrite($flagscript, 'script=False');
         fclose($flagscript);
     }
-    else if($_GET['action']==='clear-logs'){
+    else if($action==='clear-logs'){
         $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
         fwrite($log, ' ');
         fclose($log);
     }
-    else if($_GET['action']==='camera'){
+    else if($action==='camera'){
+        echo 'ok';
         exec('sudo  -u www-data bash /etc/init.d/watchbot-camera start > /dev/null 2>/dev/null &', $msg);
-        $camera = True;
+        $camera = True;die();
     }
     header('Location: '.BASE_URL.'/admin/robotino');
     exit();
