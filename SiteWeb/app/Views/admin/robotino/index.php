@@ -10,14 +10,16 @@
             <button type=button id="fullscreen" onclick="fullscreen();">Plein écran</button>
             <button type=button id="record" onclick="start_stop_record();" title="start or stop recording audio/video">Enregistrer</button>
         </div>
-        <div id="commands" class="video-commands">
+        <div id="commands">
             <details open>
-                <summary><b>Options de connexion</b></summary>
-                    <input required type="text" id="signalling_server" value="193.48.125.196:8080" title="<host>:<port>, default address is autodetected"/>
-                <button id="start" style="background-color: green; color: white" onclick="start();">Connexion</button>
-                <button disabled id="stop" style="background-color: red; color: white" onclick="stop();">Stop</button>
+                <summary><b>Advanced options</b></summary>
+                <fieldset>
+                    <span>Remote Peer/Signalling Server Address: </span><input required type="text" id="signalling_server" value="193.48.125.196:8080" title="<host>:<port>, default address is autodetected"/><br>
+                    <span>Optional ICE Servers (STUN/TURN): </span><input type="text" id="ice_servers" value="" title="array of RTCIceServer objects as valid JSON string"/>
+                </fieldset>
             </details>
-
+            <button id="start" style="background-color: green; color: white" onclick="start();">Call!</button>
+            <button disabled id="stop" style="background-color: red; color: white" onclick="stop();">Hang up</button>
         </div>
     </div>
 
