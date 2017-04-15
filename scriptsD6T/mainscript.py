@@ -19,7 +19,7 @@ if __name__ == '__main__':
         with flagscript as f:
             for line in f:
                 if i == 0:
-                    if line == 'script=False':
+                    if line.__contains__('script=False'):
                         script = False
                 elif i == 1:
                     seuil = line
@@ -27,3 +27,5 @@ if __name__ == '__main__':
 
         omron.read('exact-temp', float(seuil))
         omron.read('auto', float(seuil))
+
+        time.sleep(1)
