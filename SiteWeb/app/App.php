@@ -58,5 +58,35 @@ class App
         Core\Url\Router::prefix('admin','admin'); //Mot clé pour entrer dans le mode admin
     }
 
+    public static function sendSocket($address, $port, $msg){
+        error_reporting(E_ALL);
+        set_time_limit(0);
+        ob_implicit_flush();
+
+
+
+        if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
+            echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
+        } else {
+            echo "socket_create() a réussi\n";
+        }
+
+
+        echo "Essai de connexion à '$address' sur le port '$port'...";
+        $result = socket_connect($socket, $address, $port);
+        if ($socket === false) {
+            echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
+        } else {
+            echo "socket_connect() a réussi\n";
+        }
+
+        echo "Envoi de la requête :".$msg;
+        socket_write($socket, $msg, strlen($msg));
+
+        echo "Fermeture du socket...";
+        socket_close($socket);
+        echo "Socket détruite\n\n";
+
+    }
    
 }

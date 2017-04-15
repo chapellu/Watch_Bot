@@ -6,6 +6,9 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
@@ -22,24 +25,39 @@ public class InterfaceCommunication implements InterfaceMessageRecu{
 	private ServerSocket socketserver;
 	static private final String IPV4_REGEX = "(([0-1]?[0-9]{1,2}\\.)|(2[0-4][0-9]\\.)|(25[0-5]\\.)){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))";
 	static private Pattern PATTERN = Pattern.compile(IPV4_REGEX);
+	private static final Logger LOGGER = Logger.getLogger( InterfaceCommunication.class.getName() );
+	private static FileHandler fileTxt;
 	
 	private InterfaceCommunication(){
 		// On recupere l'adresse IP de la machine afin de definir celui qui envoi le message
+		try {
+			fileTxt = new FileHandler("InterfaceCommunication.txt");
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+		 LOGGER.addHandler(fileTxt);
+		 
 		try {
 			ip = InetAddress.getLocalHost ().getHostAddress ();
 			bd = BaseDeDonnee.connect();
 			nom = bd.getNom(ip);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE,e.toString(),e);
 		}
+		
+		
 		// Acces base de donnee
 	};
 	
 	public static InterfaceCommunication newInterfaceCommunication(){
 		if(instance==null){
+			LOGGER.log(Level.FINE, "Creating instance of InterfaceCommunication");
 			instance = new InterfaceCommunication();
 		}
+		LOGGER.log(Level.FINE, "Returning instance of InterfaceCommunication");
 		return(instance);
 	}
 	
@@ -47,7 +65,6 @@ public class InterfaceCommunication implements InterfaceMessageRecu{
 		String nomDest = null;
 		String ipDest = null;
 		Message mes;
-		System.out.println("Envoi...");
 		PrintWriter out = null;
 		if(validate(destinataire)){
 			nomDest = bd.getNom(destinataire);
@@ -58,25 +75,23 @@ public class InterfaceCommunication implements InterfaceMessageRecu{
 			nomDest = destinataire;
 			ipDest = bd.getIP(destinataire);
 			mes = new Message(nom, ip, nomDest, ipDest, type, message);
-		}		
+		}
+		LOGGER.log(Level.INFO, "Sending : " + mes);
 		String messageJson = crypterMessage(mes);
         try {
-        	System.out.println("---------------ip: "+ipDest);
 			Socket socket = new Socket(ipDest, portServeur);
 			out = new PrintWriter(socket.getOutputStream());
 			out.println(messageJson);
 			out.flush();
-			System.out.println(socket.getRemoteSocketAddress());
-			System.out.println(messageJson);
-			System.out.println(messageJson.length());
+//			System.out.println(socket.getRemoteSocketAddress());
+//			System.out.println(messageJson);
+//			System.out.println(messageJson.length());
 			
 			socket.close();
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE,e.toString(),e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE,e.toString(),e);
 		}
 		return true;
 	}
@@ -84,24 +99,24 @@ public class InterfaceCommunication implements InterfaceMessageRecu{
 	public void startEcoute(InterfaceMessageRecu abonne){
 		try {
 			socketserver = new ServerSocket(portServeur);
+			LOGGER.log(Level.INFO,"listening on port " + portServeur);
 			t = new Thread(new Accepter_connexion(socketserver,abonne));
 			t.start();
+            Thread.currentThread();
+			Thread.yield();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE,e.toString(),e);
 		}
 		
 	}
 	
 	public void closeEcoute(){
 		try {
+			LOGGER.log(Level.INFO,"Serveur closed " + socketserver.isClosed());
 			Accepter_connexion.arret();
-			socketserver.close();
-			System.out.println("Serveur closed " + socketserver.isClosed());
-			
+			socketserver.close();			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
+			LOGGER.log(Level.SEVERE,e.toString(),e);
 		}
 	}
 	
@@ -122,7 +137,7 @@ public class InterfaceCommunication implements InterfaceMessageRecu{
 	}
 
 	public void newMessageRecu(Message mess) {
-		System.out.println(mess);
+		LOGGER.log(Level.INFO,mess.toString());
 		decrypterMessage(mess.toString());
 	}
 

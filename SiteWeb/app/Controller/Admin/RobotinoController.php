@@ -15,7 +15,8 @@ class RobotinoController extends AppController {
 
     public function index(){
         $form = new \Core\HTML\BootstrapForm($_POST);
-        $this->render('admin.robotino.index', compact('form'));
+        $raspberry = new \App\DialogRaspberry\DialogRaspberry();
+        $this->render('admin.robotino.index', compact('form', 'raspberry'));
     }
 
 
