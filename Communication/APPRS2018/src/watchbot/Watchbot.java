@@ -29,27 +29,26 @@ public class Watchbot implements InterfaceMessageRecu{
 	private Watchbot(){
 		try {
 			fileTxt = new FileHandler("Watchbot.txt");
+			LOGGER.addHandler(fileTxt);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		 LOGGER.addHandler(fileTxt);
-		 LOGGER.setLevel(Level.ALL);
+		} 
 	}
 	
 	public static Watchbot create(){
 		if (instance == null){
-			LOGGER.log(Level.FINE, "Creating instance of Watchbot");
+			LOGGER.log(Level.INFO, "Creating instance of Watchbot");
 			instance = new Watchbot();}
-		LOGGER.log(Level.FINE, "Returning instance of Watchbot");
+		LOGGER.log(Level.INFO, "Returning instance of Watchbot");
 		return(instance);
 		}
 		
 	public void startSurveillance(String seuil){
-		if (etat==Etat.Repos) {
+		//if (etat==Etat.Repos) {
 			String fichier ="/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt";
 
 	        //creation ou ajout dans le fichier texte
@@ -66,7 +65,7 @@ public class Watchbot implements InterfaceMessageRecu{
 	        
 	        //Lancement du script 
 	        try {
-	        	Process p = Runtime.getRuntime().exec("sudo python /var/www/html/Watch_Bot/scriptsD6T/mainscript.py > /dev/null 2>/dev/null &");				
+	        	Process p = Runtime.getRuntime().exec("");				
 	        	etat=Etat.Surveillance;
 				LOGGER.log(Level.FINE, "Surveillance started");
 	        } catch (IOException e) {
@@ -74,19 +73,19 @@ public class Watchbot implements InterfaceMessageRecu{
 				e.printStackTrace();
 			}
 	        
-		}
+		//}
 	}
 	
 	public void stopSurveillance(){
-		if (etat==Etat.Surveillance) {
+		//if (etat==Etat.Surveillance) {
 	        String fichier ="/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt";
 
-			 //création ou ajout dans le fichier texte
+			 //crÃ©ation ou ajout dans le fichier texte
 	        try {
 	            FileWriter fw = new FileWriter (fichier);
 	            BufferedWriter bw = new BufferedWriter (fw);
 	            PrintWriter fichierSortie = new PrintWriter (bw);
-	            fichierSortie.println ("script=True"+"\n"+"0");
+	            fichierSortie.println ("script=False"+"\n"+"0");
 	            fichierSortie.close();
 	            etat=Etat.Repos;
 				LOGGER.log(Level.FINE, "Surveillance stopped");
@@ -95,20 +94,20 @@ public class Watchbot implements InterfaceMessageRecu{
 	            System.out.println(e.toString());
 	        }
 			
-		}
+		//}
 	}
 	
 	public void startCartographie(){
 		if (etat==Etat.Repos) {
 			etat=Etat.Cartographie;
-			LOGGER.log(Level.FINE, "Cartographie started");
+			LOGGER.log(Level.INFO, "Cartographie started");
 		}
 	}
 	
 	public void stopCartographie(){
 		if (etat==Etat.Cartographie) {
 			etat=Etat.Repos;
-			LOGGER.log(Level.FINE, "Cartographie stopped");
+			LOGGER.log(Level.INFO, "Cartographie stopped");
 		}
 	}
 
@@ -133,7 +132,7 @@ public class Watchbot implements InterfaceMessageRecu{
 		default:
 			break;
 		}
-		LOGGER.log(Level.WARNING,mes.getMessage());
+		LOGGER.log(Level.SEVERE,mes.getMessage());
 		
 	}
 	
@@ -172,7 +171,7 @@ public class Watchbot implements InterfaceMessageRecu{
 			case droite:
 				break;
 			default:
-				LOGGER.log(Level.FINE, mes.toString());
+				LOGGER.log(Level.INFO, mes.toString());
 				break;
 			}
 		}
@@ -218,13 +217,13 @@ public class Watchbot implements InterfaceMessageRecu{
 		InterfaceCommunication com = InterfaceCommunication.newInterfaceCommunication();
 		
 		if(InterfaceCommunication.validate(mes)){
-			LOGGER.log(Level.FINE, "ip: "+mes+" \n");
-			LOGGER.log(Level.FINE, com.getBd().getNom(mes)+" \n");
+			LOGGER.log(Level.INFO, "ip: "+mes+" \n");
+			LOGGER.log(Level.INFO, com.getBd().getNom(mes)+" \n");
 			com.sendMessage("Nao Orange", "Message", com.getBd().getNom(mes));
 		}
 		else{
-			LOGGER.log(Level.FINE, "nom destinataire: "+mes +" \n");
-			LOGGER.log(Level.FINE, com.getBd().getIP(mes));
+			LOGGER.log(Level.INFO, "nom destinataire: "+mes +" \n");
+			LOGGER.log(Level.INFO, com.getBd().getIP(mes));
 			com.sendMessage("Nao Orange", "Message", com.getBd().getIP(mes));
 		}
 	}
