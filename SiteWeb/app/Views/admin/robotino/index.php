@@ -2,8 +2,10 @@
 if(isset($_GET['action'])){
     $action = $_GET['action'];
     if($action==='avance' || $action==='recule' || $action==='droite' || $action ==='gauche'){
-        $msg = $action;
         App::sendSocket('Raspberry','193.48.125.196','Ordre',$action);
+    }
+    else if($action==='auto'){
+        App::sendSocket('Raspberry','193.48.125.196','Ordre','startCartographie');
     }
     else if($action==='stop-detection'){
         if(SERVEUR == 0){
@@ -105,6 +107,12 @@ if(isset($_POST['seuil'])){
                         <td></td>
                         <td>
                             <?= $form->bouttonRobotino('recule', 'primary');?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <?= $form->bouttonRobotino('auto', 'primary');?>
                         </td>
                     </tr>
                 </table>
