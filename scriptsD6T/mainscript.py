@@ -24,6 +24,6 @@ if __name__ == '__main__':
                 elif i == 1:
                     seuil = line
                 i += 1
-
+        print seuil
         omron.read('exact-temp', float(seuil))
         omron.read('auto', float(seuil))
