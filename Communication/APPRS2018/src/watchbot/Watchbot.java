@@ -164,20 +164,20 @@ public class Watchbot implements InterfaceMessageRecu{
 				stopCartographie();
 				break;
 			case avance:
-				com.sendMessage("193.48.125.68","Ordre",mes.toString());	
+				com.sendMessage("Robotino Standard","Ordre",mes.getMessage());	
 				break;
 			case recule:
-				com.sendMessage("Robotino Standard","Ordre",mes.toString());
+				com.sendMessage("Robotino Standard","Ordre",mes.getMessage());
 				break;
 			case gauche:
-				com.sendMessage("Robotino Standard","Ordre",mes.toString());
+				com.sendMessage("Robotino Standard","Ordre",mes.getMessage());
 				break;
 			case droite:
-				com.sendMessage("Robotino Standard","Ordre",mes.toString());
+				com.sendMessage("Robotino Standard","Ordre",mes.getMessage());
 				break;
 			case intruderDetected:
 				if (utilisateurPresent){
-					com.sendMessage("Nao Orange","Ordre",mes.toString());
+					com.sendMessage("Nao Orange","Ordre",mes.getMessage());
 				}
 				else{
 					try {
