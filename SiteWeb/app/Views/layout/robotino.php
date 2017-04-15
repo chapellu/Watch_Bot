@@ -29,7 +29,7 @@
             <script type="text/javascript">
                 $(document).ready( function() {
                     setInterval(function () {
-                        $(".d6t").load(<?='"'.BASE_URL.'/public/robotino/detection.php"';?>).fadeIn("slow");
+                        $("#d6t").load(<?='"'.BASE_URL.'/public/robotino/detection.php"';?>).fadeIn("slow");
                     }, 1000);
                 });
                 $(document).ready( function() {
