@@ -3,9 +3,9 @@
 $detection = fopen('/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt', 'r');
 $content='';
 if($detection){
-    var_dump($detection);die();
     $ligne = fgets($detection);
     $seuil = fgets($detection) ? fgets($detection) : '0';
+    var_dump($ligne,$seuil);die();
     App::getInstance()->detection_en_cours = strstr($ligne,'script=False') ? True : False;
     fclose($detection);
 } else{
