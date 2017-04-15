@@ -5,7 +5,7 @@ $ligne = fgets($flagscript);
 $seuil = fgets($flagscript);
 $detection = strstr($ligne,'script=False') ? false : true;
 fclose($flagscript);
-
+var_dump($seuil, $detection);die();
 ?>
 
 <form action="<?=BASE_URL.'/admin/robotino/';?>" method="post">
