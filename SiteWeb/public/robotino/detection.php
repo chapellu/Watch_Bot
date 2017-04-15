@@ -13,7 +13,7 @@ fclose($flagscript);
         <span class="input-group-addon" id="basic-addon1">Seuil</span>
         <?= 'ok';?>
         <input type="number" class="form-control" name="seuil" value="<?= $seuil;?>" placeholder="Veuillez saisir une température" aria-describedby="basic-addon1">
-        <?= 'plus ok';?>
+        <?= 'plus ok';die()?>
     </div>
     <table class="table-with-spaces">
         <tr>
