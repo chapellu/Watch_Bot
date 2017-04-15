@@ -11,9 +11,7 @@ fclose($flagscript);
 <form action="<?=BASE_URL.'/admin/robotino/';?>" method="post">
     <div class="input-group">
         <span class="input-group-addon" id="basic-addon1">Seuil</span>
-        <?= 'ok';?>
         <input type="number" class="form-control" name="seuil" value="<?= $seuil;?>" placeholder="Veuillez saisir une température" aria-describedby="basic-addon1">
-        <?= 'plus ok';die()?>
     </div>
     <table class="table-with-spaces">
         <tr>
@@ -36,4 +34,5 @@ fclose($flagscript);
         </tr>
     </table>
 </form>
+<?php die();?>
 
