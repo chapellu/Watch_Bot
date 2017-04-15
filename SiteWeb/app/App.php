@@ -67,31 +67,41 @@ class App
         $addressRPI = '193.48.125.196';
         $portRPI    = '50003';
 
-        if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
-            echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
-        } else {
-            echo "socket_create() a réussi\n";
-        }
+        if(DEV==1){
+            if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
+                echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
+            } else {
+                echo "socket_create() a réussi\n";
+            }
 
 
-        echo "Essai de connexion à '$addressRPI' sur le port '$portRPI'...";
-        $result = socket_connect($socket, $addressRPI, $portRPI);
-        if ($socket === false) {
-            echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
-        } else {
-            echo "socket_connect() a réussi\n";
-        }
+            echo "Essai de connexion à '$addressRPI' sur le port '$portRPI'...";
+            $result = socket_connect($socket, $addressRPI, $portRPI);
+            if ($socket === false) {
+                echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
+            } else {
+                echo "socket_connect() a réussi\n";
+            }
 
-        //Construction de la requete JSON
-        $msg = '{"AuteurPrecedent":{"nom":"Site web","IP":"193.48.125.196"},"Destinataire":{"nom":"'.$nomdest.'","IP":"'.$addressdest.'"},"Date":{"date_string":'.date("Y-m-d-H-i-s").',"date":"'.date("M d, Y H:i:s a").'"},"type":'.$type.',"message":"'.$msg.'"}
+            //Construction de la requete JSON
+            $msg = '{"AuteurPrecedent":{"nom":"Site web","IP":"193.48.125.196"},"Destinataire":{"nom":"'.$nomdest.'","IP":"'.$addressdest.'"},"Date":{"date_string":'.date("Y-m-d-H-i-s").',"date":"'.date("M d, Y H:i:s a").'"},"type":'.$type.',"message":"'.$msg.'"}
         ';
 
-        echo "Envoi de la requête :".$msg;
-        socket_write($socket, $msg, strlen($msg));
+            echo "Envoi de la requête :".$msg;
+            socket_write($socket, $msg, strlen($msg));
 
-        echo "Fermeture du socket...";
-        socket_close($socket);
-        echo "Socket détruite\n\n";
+            echo "Fermeture du socket...";
+            socket_close($socket);
+            echo "Socket détruite\n\n";
+        } else {
+            $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+            $result = socket_connect($socket, $addressRPI, $portRPI);
+            $msg = '{"AuteurPrecedent":{"nom":"Site web","IP":"193.48.125.196"},"Destinataire":{"nom":"'.$nomdest.'","IP":"'.$addressdest.'"},"Date":{"date_string":'.date("Y-m-d-H-i-s").',"date":"'.date("M d, Y H:i:s a").'"},"type":'.$type.',"message":"'.$msg.'"}
+        ';
+            socket_write($socket, $msg, strlen($msg));
+            socket_close($socket);
+        }
+
 
     }
    
