@@ -1,11 +1,15 @@
 <?php
+$dev = True;
 //Mise à jour de la détection
-$flagscript = fopen('/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt', 'r');
+if($dev){
+    $flagscript = fopen('C:/wamp64/www/watchbot/scriptsD6T/flagscript.txt', 'r');
+} else {
+    $flagscript = fopen('/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt', 'r');
+}
 $ligne = fgets($flagscript);
 $seuil = fgets($flagscript);
 $detection = strstr($ligne,'script=False') ? false : true;
 fclose($flagscript);
-
 ?>
 
 
@@ -17,11 +21,20 @@ fclose($flagscript);
         <td>
 
             <?php
-            if($detection){
-                echo '<a class="btn btn-danger boutonsRobotino" id="stop-detection" type="submit" name="stop-detection" href="http://193.48.125.196/admin/robotino/?action=stop-detection">Arreter la détection</a>';
+            if($dev){
+                if($detection){
+                    echo '<a class="btn btn-danger boutonsRobotino" id="stop-detection" type="submit" name="stop-detection" href="http://localhost/watchbot/SiteWeb/admin/robotino/?action=stop-detection">Arreter la détection</a>';
+                } else {
+                    echo '<a class="btn btn-danger disabled boutonsRobotino" id="stop-detection" type="submit" name="stop-detection" href="http://localhost/watchbot/SiteWeb/admin/robotino/?action=stop-detection">Arreter la détection</a>';
+                }
             } else {
-                echo '<a class="btn btn-danger disabled boutonsRobotino" id="stop-detection" type="submit" name="stop-detection" href="http://193.48.125.196/admin/robotino/?action=stop-detection">Arreter la détection</a>';
+                if($detection){
+                    echo '<a class="btn btn-danger boutonsRobotino" id="stop-detection" type="submit" name="stop-detection" href="http://193.48.125.196/admin/robotino/?action=stop-detection">Arreter la détection</a>';
+                } else {
+                    echo '<a class="btn btn-danger disabled boutonsRobotino" id="stop-detection" type="submit" name="stop-detection" href="http://193.48.125.196/admin/robotino/?action=stop-detection">Arreter la détection</a>';
+                }
             }
+
 
             ?>
 
