@@ -110,12 +110,12 @@ if(isset($_POST['seuil'])){
                             <?= $form->bouttonRobotino('recule', 'primary');?>
                         </td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <td></td>
                         <td>
                             <?= $form->bouttonRobotino('auto', 'btn-success');?>
                         </td>
-                    </tr>
+                    </tr>-->
                 </table>
             </form>
         </div>
