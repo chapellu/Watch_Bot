@@ -8,5 +8,6 @@ public enum Ordre {
 	avance,
 	recule,
 	droite,
-	gauche
+	gauche, 
+	intruderDetected
 }

@@ -34,5 +34,12 @@ public class DateJson {
 	private void setDate(java.util.Date date) {
 		this.date = date;
 	}
+
+
+	@Override
+	public String toString() {
+		return "DateJson [date_string=" + date_string + ", date=" + date + "]";
+	}
+	
 	
 }

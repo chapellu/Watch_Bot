@@ -1,5 +1,7 @@
 <?php
-    if(DEV == 1){
+    $dev = false;
+
+    if($dev == TRUE){
         echo 'Mode de développement';
     } else{
         //Mise à jour du log
@@ -14,5 +16,3 @@
         }
     }
 
-
-?>

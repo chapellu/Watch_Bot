@@ -19,8 +19,18 @@ public class BaseDeDonnee {
 	
 private BaseDeDonnee(){
 	try {
+	 	 Class.forName("com.mysql.jdbc.Driver");
+	 	 String url = "jdbc:mysql://193.48.125.196:3306/Pi";
+	 	 conn = DriverManager.getConnection(url, "watchbot", "app2018");
+	 	 st = conn.createStatement();
+	 	 System.out.println("conn built");
+	 } catch (SQLException e) {
+	 	 e.printStackTrace();
+	 } catch (ClassNotFoundException e) {
+	 	 e.printStackTrace();
+	 }
+	try {
 		fileTxt = new FileHandler("BaseDeDonnee.txt");
-		LOGGER.addHandler(fileTxt);
 	} catch (SecurityException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -28,26 +38,14 @@ private BaseDeDonnee(){
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	
-	try {
-	 	 Class.forName("com.mysql.jdbc.Driver");
-	 	 String url = "jdbc:mysql://193.48.125.196:3306/Pi";
-	 	 conn = DriverManager.getConnection(url, "watchbot", "app2018");
-	 	 st = conn.createStatement();
-	 	 LOGGER.log(Level.INFO,"Connection built with BD");
-	 } catch (SQLException e) {
-	 	 LOGGER.log(Level.SEVERE,e.toString(),e);
-	 } catch (ClassNotFoundException e) {
-	 	 LOGGER.log(Level.SEVERE,e.toString(),e);
-	 }
-	
+	 LOGGER.addHandler(fileTxt);
 }
 
 public static BaseDeDonnee connect(){
 	if (instance == null){
-		LOGGER.log(Level.INFO, "Creating instance of BaseDeDonnee");
+		LOGGER.log(Level.FINE, "Creating instance of BaseDeDonnee");
 		instance = new BaseDeDonnee();}
-	LOGGER.log(Level.INFO, "Returning instance of BaseDeDonnee");
+	LOGGER.log(Level.FINE, "Returning instance of BaseDeDonnee");
 	return(instance);
 }
 
@@ -82,7 +80,10 @@ public String getNom(String ip){
 			ResultSet numOrdi = st.executeQuery(sql1);
 			numOrdi.next();
 			String num = numOrdi.getString("nom");
+			System.out.println(num);
 			String [] tokens = num.split(" ");
+			System.out.println(tokens);
+			System.out.println(tokens[1]);
 			idOrdi = Integer.valueOf(tokens[1])+1;
 			LOGGER.log(Level.INFO,String.valueOf(idOrdi));
 		}catch (SQLException e1) {

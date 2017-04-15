@@ -1,5 +1,5 @@
 <?php
-$dev = False;
+$dev = false;
 //Mise à jour de la détection
 if($dev){
     $flagscript = fopen('C:/wamp64/www/watchbot/scriptsD6T/flagscript.txt', 'r');

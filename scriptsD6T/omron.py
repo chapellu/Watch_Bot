@@ -1,4 +1,4 @@
-import pigpio, time, smbus
+import pigpio, time, smbus, socket
 from datetime import datetime
 
 class OmronD6T(object):
@@ -33,6 +33,8 @@ class OmronD6T(object):
 
 
 	# function to read the omron temperature array
+
+    #Fonction qui recupere la temperature
     def read(self, mode, seuil):
         self.temperature_data_raw=[0]*self.BUFFER_LENGTH
         self.temperature=[0.0]*self.arraySize         # holds the recently measured temperature
@@ -66,70 +68,129 @@ class OmronD6T(object):
                     self.values[i] = self.temperature_data_raw[i]
 
         #Affichage selon les modes
-        offset = 0
-        values = []
+
 
         if mode=='exact-temp':
-            for j in range(0, 4):
-                for i in range(0, 4):
-                    values.append(round(self.temperature[i + offset], 1))
-                    values.append("------")
-                print values
-                values = []
-                offset += 4
-                print ''
-                print ''
+            self.printExactTemp()
+
 
         elif mode=='symbols':
-            for j in range(0, 4):
-                for i in range(0, 4):
-                    if (self.temperature[i + offset] > seuil):
-                        values.append("x ")
-                    else:
-                        values.append("o ")
-                print values
-                values = []
-                offset += 4
-                print ''
-                print ''
+            self.printSymbols(seuil)
+
 
         elif mode=='auto':
-            # Recupere les valeurs sous formes dun tableau
-            for j in range(0, 4):
-                for i in range(0, 4):
-                    values.append(round(self.temperature[i + 4 * j], 1))
+            self.printAuto(seuil)
+    #End function to read temperature and print
+
+    # Fonction qui permet de recuperer la date au bon format
+    def date(self):
+        date = datetime.today()
+
+        date1 = date.ctime().split(" ")
+        d = ""
+        d1 = ""
+        for i in range(0, 5):
+            if date.timetuple()[i] < 10:
+                d = d + "0" + str(date.timetuple()[i]) + "-"
+        else:
+            d = d + str(date.timetuple()[i]) + "-"
+        d = d + str(date.timetuple()[5])
+        d1 = d1 + date1[1] + " " + date1[3] + ", " + date1[5] + " " + date1[4] + " "
+
+        if date.timetuple()[3] >= 12:
+            d1 = d1 + "PM"
+        else:
+            d1 = d1 + "AM"
+
+        return (d, d1)
+
+    #
+    # Methodes qui gerent l affichage selon le mode
+    #
+    #Mode automatique avec ecriture dans log
+    def printAuto(self, seuil):
+        values = []
+        # Recupere les valeurs sous formes dun tableau
+        for j in range(0, 4):
+            for i in range(0, 4):
+                values.append(round(self.temperature[i + 4 * j], 1))
+        print values
+        print ''
+        print ''
+
+        # Compteur de valeurs superieurs au seuil
+        compteurDeColonnes = 0
+        for j in range(0, 4):
+            compteurDePixels = 0
+
+            for i in range(0, 4):
+                tempPixel = values[j + 4 * i]  # Recupere les valeurs des pixels colonne par colonne
+                if tempPixel >= seuil and tempPixel < 50:
+                    compteurDePixels += 1
+                    numpixel = i + j * 4
+                    print 'pixel detecte:', numpixel
+            if compteurDePixels >= 3: #Si on a plus de 3 pixels dans une meme colonne au dessus du seuil
+                compteurDeColonnes += 1
+
+        if compteurDeColonnes >= 1: #Si on a plus de x colonne on considere quon a detecte un humain et on fait sonner lalarme
+            #On ecrit dans un log
+            print "On detecte"
+            log = open(self.chemin + "log.txt", "a")
+            log.write("<tr><td>" + datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "-- Humain detecte" + "</td></tr>\n")
+            log.close()
+
+            file = open(self.chemin + "log.txt", "r")
+            text = file.read()
+            file.close()
+            text = text.replace('\n', '')
+
+            log = open(self.chemin + "log.txt", "w")
+            log.write(text)
+            log.close()
+            #Fin ecriture log
+
+            #On envoie linfo au serveur quon a detecte une intrusion
+            hote = "localhost"
+            port = 50003
+
+            socketServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            socketServer.connect((hote, port))
+            (d, d1) = self.date()
+            socketServer.send('{"AuteurPrecedent":{"nom":"Raspberry","IP":"193.48.125.196"},"Destinataire":{"nom":"Raspberry","IP":"193.48.125.196"},"Date":{"date_string":' + d + ',"date":"' + d1 + '"},"type":Ordre,"message":"intruderDetected"}')
+            socketServer.close()
+
+            time.sleep(5)  # On attend avant dafficher une prochaine fois qu un humain a ete detecte
+    #End print auto
+
+    #Avec les temperatures exactes
+    def printExactTemp(self):
+        offset = 0
+        values = []
+        for j in range(0, 4):
+            for i in range(0, 4):
+                values.append(round(self.temperature[i + offset], 1))
+                values.append("------")
             print values
+            values = []
+            offset += 4
             print ''
             print ''
+    #End temp exactes
 
-            # Compteur de valeurs superieurs au seuil
-            compteurDeColonnes = 0
-            for j in range(0, 4):
-                compteurDePixels = 0
-
-                for i in range(0, 4):
-                    tempPixel = values[j + 4 * i]  # Recupere les valeurs des pixels colonne par colonne
-                    if tempPixel >= seuil and tempPixel < 50:
-                        compteurDePixels += 1
-                        numpixel = i+j*4
-                        print 'pixel detecte:', numpixel
-                if compteurDePixels >= 3:
-                    compteurDeColonnes += 1
-
-            if compteurDeColonnes >= 1:
-                print "On detecte"
-                log = open(self.chemin+"log.txt", "a")
-                log.write("<tr><td>" + datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "-- Humain detecte" + "</td></tr>\n")
-                log.close()
-
-                file = open(self.chemin+"log.txt", "r")
-                text = file.read()
-                file.close()
-                text = text.replace('\n', '')
-
-                log = open(self.chemin+"log.txt", "w")
-                log.write(text)
-                log.close()
-
-                time.sleep(5) #On attend avant dafficher une prochaine fois qu un humain a ete detecte
+    #Avec les symboles
+    def printSymbols(self, seuil):
+        offset = 0
+        values = []
+        for j in range(0, 4):
+            for i in range(0, 4):
+                if (self.temperature[i + offset] > seuil):
+                    values.append("x ")
+                else:
+                    values.append("o ")
+            print values
+            values = []
+            offset += 4
+            print ''
+            print ''
+    #End symbols
 
