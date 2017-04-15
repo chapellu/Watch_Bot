@@ -2,8 +2,7 @@
 if(isset($_GET['action'])){
     $action = $_GET['action'];
     if($action==='avance' || $action==='recule' || $action==='droite' || $action ==='gauche'){
-        $msg = "POST /?action=".$action." HTTP/1.1\r\n\r\n";
-        $msg .= "Connection: Close\r\n\r\n";
+        $msg = $action;
         App::sendSocket('Robotino','193.48.125.'.NUM_ROBOTINO,'Ordre',$action);
     }
     else if($action==='stop-detection'){
