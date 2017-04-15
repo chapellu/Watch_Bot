@@ -4,7 +4,6 @@ $flagscript = fopen('/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt', 'r');
 $ligne = fgets($flagscript);
 $seuil = fgets($flagscript);
 $detection = strstr($ligne,'script=False') ? false : true;
-var_dump($ligne, $seuil);
 fclose($flagscript);
 
 ?>
@@ -12,7 +11,8 @@ fclose($flagscript);
 <form action="http://193.48.125.196/admin/robotino/" method="post">
     <div class="input-group">
         <span class="input-group-addon" id="basic-addon1">Seuil</span>
-        <input type="number" class="form-control" name="seuil" value="<?= $seuil;?>" placeholder="Veuillez saisir une température" aria-describedby="basic-addon1">
+        <input type="number" class="form-control" name="seuil"
+               placeholder="<?php if(strstr($seuil,'0')){echo 'Veuillez saisir une température';} else{echo $seuil;}?>" aria-describedby="basic-addon1">
     </div>
     <table class="table-with-spaces">
         <tr>
