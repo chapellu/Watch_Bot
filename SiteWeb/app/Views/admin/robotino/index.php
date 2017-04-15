@@ -2,43 +2,9 @@
 if(isset($_GET['action'])){
     $action = $_GET['action'];
     if($action==='avancer' || $action==='reculer' || $action==='droite' || $action ==='gauche'){
-        error_reporting(E_ALL);
-
-        /* Interdit l'exécution infinie du script, en attente de connexion. */
-        set_time_limit(0);
-
-        /* Active le vidage implicite des buffers de sortie, pour que nous
-         * puissions voir ce que nous lisons au fur et à mesure. */
-        ob_implicit_flush();
-
-        $address = '193.48.125.'.NUM_ROBOTINO;
-        $port = 50000;
-
-
-        if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
-            echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
-        } else {
-            echo "socket_create() a réussi\n";
-        }
-
-
-        echo "Essai de connexion à '$address' sur le port '$port'...";
-        $result = socket_connect($socket, $address, $port);
-        if ($socket === false) {
-            echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
-        } else {
-            echo "socket_connect() a réussi\n";
-        }
-
         $msg = "POST /?action=".$action." HTTP/1.1\r\n\r\n";
         $msg .= "Connection: Close\r\n\r\n";
-
-        echo "Envoi de la requête :".$msg;
-        socket_write($socket, $msg, strlen($msg));
-
-        echo "Fermeture du socket...";
-        socket_close($socket);
-        echo "Socket détruite\n\n";
+        App::sendSocket('193.48.125.'.NUM_ROBOTINO,50000,$msg);
     }
     else if($action==='stop-detection'){
         if(SERVEUR == 0){
@@ -47,11 +13,9 @@ if(isset($_GET['action'])){
             fclose($flagscript);
         }
         else{
-            $msg = '{"AuteurPrecedent":{"nom":"Site web","IP":"193.48.125.196"},"Destinataire":{"nom":"Raspberry","IP":"193.48.125.196"},"Date":{"date_string":'.date("Y-m-d-H-i-s").',"date":"'.date("M d, Y H:i:s a").'"},"type":Ordre,"message":"startSurveillance"}
+            $msg = '{"AuteurPrecedent":{"nom":"Site web","IP":"193.48.125.196"},"Destinataire":{"nom":"Raspberry","IP":"193.48.125.196"},"Date":{"date_string":'.date("Y-m-d-H-i-s").',"date":"'.date("M d, Y H:i:s a").'"},"type":Ordre,"message":"stopSurveillance"}
         ';
-
             App::sendSocket('193.48.125.196',50003,$msg);
-            die();
         }
     }
     else if($action==='clear-logs'){
@@ -69,14 +33,20 @@ if(isset($_POST['seuil'])){
     if($_POST['seuil']==='' || $_POST['seuil']<0){
         echo '<script>alert("Vous devez saisir un seuil (positif)")</script>';
     } else{
-        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
-        fwrite($flagscript, 'script=True'."\n".$_POST['seuil']);
-        fclose($flagscript);
-        if(DEV == 0) {
-            exec('sudo  -u www-data python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
-            //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
-            //var_dump($msg);die();
+        if(SERVEUR == 0){
+            $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
+            fwrite($flagscript, 'script=True'."\n".$_POST['seuil']);
+            fclose($flagscript);
         }
+        else{
+
+            $msg = '{"AuteurPrecedent":{"nom":"Site web","IP":"193.48.125.196"},"Destinataire":{"nom":"Raspberry","IP":"193.48.125.196"},"Date":{"date_string":'.date("Y-m-d-H-i-s").',"date":"'.date("M d, Y H:i:s a").'"},"type":Ordre,"message":"startSurveillance : '.$_POST['seuil'].'"}
+        ';
+            App::sendSocket('193.48.125.196',50003,$msg);
+
+        }
+
+
 
     }
 }
