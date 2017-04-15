@@ -20,18 +20,11 @@ fclose($flagscript);
             </td>
             <td>
 
-                <?php
-                if($detection){
-                    echo $form->bouttonRobotino('stop-detection','danger ', 'Arreter la detection');
-                } else {
-                    echo $form->bouttonRobotino('stop-detection','danger disabled', 'Arreter la detection');
-                }
 
-                ?>
-                <?= 'ok2';die();?>
+
             </td>
         </tr>
     </table>
 </form>
-<?php die();?>
+
 
