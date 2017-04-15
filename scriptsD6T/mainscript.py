@@ -27,4 +27,4 @@ if __name__ == '__main__':
 
         omron.read('exact-temp', float(seuil))
         omron.read('auto', float(seuil))
-        time.sleep(1)
+        
