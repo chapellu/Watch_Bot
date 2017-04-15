@@ -37,16 +37,18 @@ if(isset($_POST['seuil'])){
             $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
             fwrite($flagscript, 'script=True'."\n".$_POST['seuil']);
             fclose($flagscript);
-        }
-        else{
+            if(DEV == 0) {
+                exec('sudo  -u www-data python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
+                //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
+                //var_dump($msg);die();
+            }
+        }else{
 
             $msg = '{"AuteurPrecedent":{"nom":"Site web","IP":"193.48.125.196"},"Destinataire":{"nom":"Raspberry","IP":"193.48.125.196"},"Date":{"date_string":'.date("Y-m-d-H-i-s").',"date":"'.date("M d, Y H:i:s a").'"},"type":Ordre,"message":"startSurveillance"}
         ';
             App::sendSocket('193.48.125.196',50003,$msg);
 
         }
-
-
 
     }
 }

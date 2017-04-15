@@ -102,7 +102,7 @@ class OmronD6T(object):
             print values
             print ''
             print ''
-            print "Valeurs modifiées : "
+            print "Valeurs modifiees : "
             # Compteur de valeurs superieurs au seuil
             compteurDeColonnes = 0
             for j in range(0, 4):
