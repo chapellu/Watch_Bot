@@ -24,7 +24,11 @@ public class Robot {
 	private Navigation robotino;
 	
 	static {
+<<<<<<< HEAD
 		//Chargement des bibliothèques nécessaires pour utiliser les capteurs à induction et lumineux
+=======
+		//Chargement des bibliotheques necessaires pour utiliser les capteurs a induction et lumineux
+>>>>>>> Mise Ã  jour Navigation + fichier.sh
 		System.loadLibrary("rec_robotino_com_c");
 		System.loadLibrary("CapteurInduction");
 		System.loadLibrary("CapteurLumineux");
