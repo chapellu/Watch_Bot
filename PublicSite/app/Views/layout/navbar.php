@@ -15,9 +15,18 @@
                 <li>
                     <a href="<?= BASE_URL.'/home/';?>" id="nav_item1">Accueil</a>
                 </li>
-                <li><a href="<?= BASE_URL.'/group/';?>" id="nav_item2">Groupe</a></li>
+                <li>
+					<a href="<?= BASE_URL.'/project/';?>" id="nav_item2">Projet</a>
+				</li>				
+				<li>
+					<a href="<?= BASE_URL.'/equipe/';?>" id="nav_item3">Equipe</a>
+				</li>		
+				<li>
+					<a href="<?= BASE_URL.'/contact/';?>" id="nav_item4">Contact</a>
+				</li>
+				
             </ul>
-            <ul class="nav navbar-nav navbar-right" id="nav_item3">
+            <ul class="nav navbar-nav navbar-right" id="nav_item5">
                
 
             </ul>

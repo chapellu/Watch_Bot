@@ -1,14 +1,18 @@
 <!-- Carousel
 ================================================== -->
-<div class="root">
+<div class="root overlay">
     <!--<img src="<?= BASE_URL.'/public/img/nao_home.jpg';?>" id="root_image" style="margin:0px auto;">-->
-    <header>
+    <header id="header-home">
         <div class="container-fluid">
             <div class="col-md-10 col-md-offset-1">
-                <p>Watchbot, restez détendus même quand vous n'êtes pas chez vous</p>
+                <h1 id="homeHeading">WATCHBOT</h1>
+				<hr>
+				<p>Restez détendus même quand vous n'êtes pas chez vous</p>
             </div>
         </div>
-
+		<div class="container-fluid">
+			<a class="btn btn-primary btn-xl" href="#about">Découvrir</a>
+		</div>
     </header>
 
 </div>
