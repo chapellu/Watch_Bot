@@ -18,7 +18,7 @@ class PostController extends AppController{
     public function index(){
         $posts = $this->post->all();
         $categories = $this->category->all();
-        $this->render('admin.post.index', compact('posts', 'categories'));
+        $this->render('admin.post.index', compact('posts'));
 
     }
 
@@ -51,7 +51,6 @@ class PostController extends AppController{
             $result = $this->post->update($_GET['id'],[
                 'title'         => $_POST['title'],
                 'content'       => $_POST['content'],
-                'date'          => date("Y-m-d H:i:s"),
                 'category_id'   => $_POST['category_id']
             ]);
             if($result){

@@ -43,10 +43,11 @@
 		</a>
 	</div>
 <!-- /.carousel -->
-
+<div>
 
 
 <!-- Page Content -->
+
 <div class="container-fluid">
     <div class="col-sr-7 post-layout">
         <div class="content-post">
@@ -57,16 +58,15 @@
 
     </div>
 
-    <?php foreach ($posts as $k):?>
-        <div class="col-sr-7 post-layout">
-            <div class="content-post">
-
+    <div class="col-sr-7 post-layout">
+        <div class="content-post">
+            <?php foreach ($posts as $k):?>
                 <h2 class="title"><?= $k->title; ?></h2>
                 <p class="date">Publié le <?= $k->date; ?></p>
                 <p><?= $k->content; ?></p>
-            </div>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
+    </div>
     <!-- <div class="col-sm-4">
          <h2>Contact Us</h2>
          <address>

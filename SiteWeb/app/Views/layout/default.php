@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="Website of Polytech Annecy students">
-    <meta name="author" content="APP-IAI, Watchbot2018">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <title><?= App::getInstance()->title; ?></title>
 
@@ -23,17 +23,31 @@
 
     
 
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <!--<div class="jumbotron">
+      <div class="container">
+        <h1>Hello, world!</h1>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+      </div>
+    </div>-->
     <?php
       require 'navbar.php';
     ?>
 
-    <div class="container">
+    <div class="container" style="padding-top: 50px">
         <?= $content;?>
+          <!--<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>-->
+
     </div>
+  
+
 
     <?php
     require 'footer.php';
     ?>
+
+
 
     <!-- jQuery -->
     <script src="<?= BASE_URL.'/public/js/jquery.js';?>"></script>
@@ -41,7 +55,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="<?= BASE_URL.'/public/js/bootstrap.min.js';?>"></script>
-
 
   </body>
 </html>
