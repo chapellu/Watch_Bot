@@ -1,3 +1,0 @@
-$flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
-        fwrite($flagscript, 'script=True');
-        fclose($flagscript);

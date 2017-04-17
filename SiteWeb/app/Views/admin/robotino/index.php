@@ -1,150 +1,96 @@
-<?php
-if(isset($_GET['action'])){
-    $action = $_GET['action'];
-    if($action==='avance' || $action==='recule' || $action==='droite' || $action ==='gauche'){
-        App::sendSocket('Raspberry','193.48.125.196','Ordre',$action);
-    }
-    else if($action==='auto'){
-        App::sendSocket('Raspberry','193.48.125.196','Ordre','startCartographie');
-    }
-    else if($action==='stop-detection'){
-        if(SERVEUR == 0){
-            $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
-            fwrite($flagscript, 'script=False');
-            fclose($flagscript);
-        }
-        else{
-            App::sendSocket('Raspberry','193.48.125.196','Ordre','stopSurveillance');
-        }
-    }
-    else if($action==='clear-logs'){
-        $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
-        fwrite($log, ' ');
-        fclose($log);
-    }
-    else if($action==='camera'){
-        exec('sudo -u www-data bash /etc/init.d/watchbot-camera start > /dev/null 2>/dev/null &', $msg);
-    }
-    header('Location: '.BASE_URL.'/admin/robotino');
-    exit();
-}
-if(isset($_POST['seuil'])){
-    if($_POST['seuil']==='' || $_POST['seuil']<0){
-        echo '<script>alert("Vous devez saisir un seuil (positif)")</script>';
-    } else{
-        if(SERVEUR == 0){
-            $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
-            fwrite($flagscript, 'script=True'."\n".$_POST['seuil']);
-            fclose($flagscript);
-            if(DEV == 0) {
-                exec('sudo  -u www-data python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
-                //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
-                //var_dump($msg);die();
-            }
-        }else{
-            App::sendSocket('Raspberry','193.48.125.196','Ordre','startSurveillance:'.$_POST['seuil']);
-        }
-
-    }
-}
-
-?>
-
-
-
-<div class="robotino col-sm-12">
-    <div class="video col-sm-9">
-        <?php if(DEV == 0):?>
-            <input class="stream" type="image" src="http://192.168.118.28:8080/?action=stream" onclick="(this.requestFullscreen || this.mozRequestFullScreen || this.webkitRequestFullscreen).call(this)"/>
-        <?php else:?>
-            <p>Mode de développement</p>
-        <?php endif;?>
-        <!--<form action="<?=BASE_URL.'/admin/robotino/?action=camera';?>" method="post">
-            <input class="btn btn-success" type="submit" value="Lancer la camera">
-        </form>-->
-
-    </div>
-
-
-    <div class="padding col-sm-12"><br></div>
-
-    <!--<div class="navbar-menu">
-       <dl>
-           <dt>Menu</dt>
-           <dd>
-               <ul>
-                   <li><a href="#">Un truc</a></li>
-                   <li><a href="#">Un deuxième truc</a></li>
-               </ul>
-           </dd>
-       </dl>
-    </div>
-
-    <div class="carte">
-        <img class="img_carte" src="<?= BASE_URL.'/public/img/carte.png';?>" alt="">
-    </div>-->
-
-    <div class="commandes">
-        <div class="commandes-manuelles bordered">
-            <form method="post" >
-                <table>
-                    <thead><h2>Commandes manuelles</h2></thead>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <?= $form->bouttonRobotino('avance', 'primary');?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <?= $form->bouttonRobotino('gauche', 'primary');?>
-                        </td>
-                        <td></td>
-                        <td>
-                            <?= $form->bouttonRobotino('droite', 'primary');?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <?= $form->bouttonRobotino('recule', 'primary');?>
-                        </td>
-                    </tr>
-                    <!--<tr>
-                        <td></td>
-                        <td>
-                            <?= $form->bouttonRobotino('auto', 'btn-success');?>
-                        </td>
-                    </tr>-->
-                </table>
-            </form>
-        </div>
-
-        <div class="d6t bordered">
-            <h2>Capteur D6T</h2>
-            <form action="http://193.48.125.196/admin/robotino/" method="post">
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">Seuil</span>
-                    <input type="number" class="form-control" name="seuil" aria-describedby="basic-addon1">
-                </div>
-
-                <div id="d6t"></div>
-            </form>
-        </div>
-
-        <div class="logs bordered">
-            <h2>Logs</h2>
-            <div class="scroll">
-                <table>
-                    <tbody id="log"></tbody>
-                </table>
-            </div>
-            <?= $form->bouttonRobotino('clear-logs', 'secondary', 'Effacer la console');?>
-        </div>
-    </div>
-
+<div class="col-sm-12">
 
 </div>
 
+<div class="col-sm-12">
+    <form method="post" >
+        <table class="tableBoutonsRobotino">
+            <thead><h2>Commandes mannuelles</h2></thead>
+            <tr>
+                <td></td>
+                <td>
+                    <?= $form->bouttonRobotino('avancer', 'boutonsRobotino');?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <?= $form->bouttonRobotino('gauche', 'boutonsRobotino');?>
+                </td>
+                <td></td>
+                <td>
+                    <?= $form->bouttonRobotino('droite', 'boutonsRobotino');?>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <?= $form->bouttonRobotino('reculer', 'boutonsRobotino');?>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
 
+<?php
+if(isset($_GET['action'])){
+    error_reporting(E_ALL);
 
+    /* Autorise l'exécution infinie du script, en attente de connexion. */
+    set_time_limit(0);
+
+    /* Active le vidage implicite des buffers de sortie, pour que nous
+     * puissions voir ce que nous lisons au fur et à mesure. */
+    ob_implicit_flush();
+
+    $address = '193.48.125'.NUM_ROBOTINO;
+    $port = 50000;
+
+    if (($sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
+        echo "socket_create() a échoué : raison : " . socket_strerror(socket_last_error()) . "\n";
+    }
+
+    if (socket_bind($sock, $address, $port) === false) {
+        echo "socket_bind() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n";
+    }
+
+    if (socket_listen($sock, 5) === false) {
+        echo "socket_listen() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n";
+    }
+
+    do {
+        if (($msgsock = socket_accept($sock)) === false) {
+            echo "socket_accept() a échoué : raison : " . socket_strerror(socket_last_error($sock)) . "\n";
+            break;
+        }
+        /* Send instructions. */
+        $msg = "Bienvenue sur le serveur de test PHP.\n" .
+            "Pour quitter, tapez 'quit'. Pour éteindre le serveur, tapez 'shutdown'.\n";
+        socket_write($msgsock, $msg, strlen($msg));
+
+        do {
+            if (false === ($buf = socket_read($msgsock, 2048, PHP_NORMAL_READ))) {
+                echo "socket_read() a échoué : raison : " . socket_strerror(socket_last_error($msgsock)) . "\n";
+                break 2;
+            }
+            if (!$buf = trim($buf)) {
+                continue;
+            }
+            if ($buf == 'quit') {
+                break;
+            }
+            if ($buf == 'shutdown') {
+                socket_close($msgsock);
+                break 2;
+            }
+            $talkback = "PHP: You said '$buf'.\n";
+            socket_write($msgsock, $talkback, strlen($talkback));
+            echo "$buf\n";
+        } while (true);
+        socket_close($msgsock);
+    } while (true);
+
+    socket_close($sock);
+
+    //header('Location: '.BASE_URL.'/admin/robotino');
+    //exit;
+}

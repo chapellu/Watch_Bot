@@ -3,17 +3,10 @@ $debut = microtime(true);
 
 define('DS',DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__DIR__));
+//define('BASE_URL',dirname(dirname($_SERVER['SCRIPT_NAME'])));
 define('NUM_ROBOTINO','38');
-define('DEV',0);
-define('SERVEUR',1);
+define('BASE_URL', "http://192.168.118.28");
 
-if(DEV == 1){
-    define('BASE_URL','http://localhost/watchbot/SiteWeb');
-    define('ROOT_SCRIPT', 'C:\wamp64\www\watchbot/scriptsD6T/');
-} else{
-    define('BASE_URL', 'http://192.168.118.28/SiteWeb');
-    define('ROOT_SCRIPT', '/var/www/html/Watch_Bot/scriptsD6T/');
-}
 
 require ROOT . '/app/App.php';
 

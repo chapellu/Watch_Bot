@@ -14,7 +14,8 @@ class HomeController extends AppController{
     }
 
     public function index(){
-        $posts = $this->post->getAllHomePosts();
+        $posts = $this->post->last();
+        $categories = $this->category->all();
         $this->render('index', compact('posts', 'categories'));
     }
 }

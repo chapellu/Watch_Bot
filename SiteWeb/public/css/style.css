@@ -11,37 +11,19 @@ body{
     background-color:#E5E0FE;
 }
 
-/*-------------------------------------------
-------------------Navbar---------------------
----------------------------------------------*/
-.navbar, .nav, .dropdown-menu{
+/*Navbar*/
+.navbar,.nav{
     margin-bottom: 0px;
-    background-color: /*#3097D1*/#0c1a2e;
+    background-color: #3097D1;
     border-radius:0px;
     border: 0px;
 }
-.navbar-default .navbar-brand{
-    color:white;
-}
-.navbar-default .navbar-nav > li > a, .dropdown-menu > li > a, .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: white;
-}
-/*Quand on selectionne un onglet de la barre de navigation*/
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-    background-color: #3097D1;
-    color: black;
-}
-/*Quand on passe la souris sur la marque*/
-.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
-    color: #3097D1;
-}
-.dropdown-header {
-    color : white;
+
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-brand {
+    color: #ffffff;
 }
 
-/*-------------------------------------------
-------------------Footer---------------------
----------------------------------------------*/
+/*Footer*/
 .footer {
     position: absolute;
     text-align: center;
@@ -52,159 +34,18 @@ body{
     width: 100%;
 }
 
-/*-------------------------------------------
------------------Robotino--------------------
----------------------------------------------*/
-.robotino{
+/*Robotino*/
+.tableBoutonsRobotino {
     border: solid 4px black;
-    min-height: 700px;
-    padding-left:0;
-    padding-right:0;
-    margin-top:20px;
-}
-
-.commandes {
-    position: absolute;
-    bottom: 0;
-    left:0;
-}
-.d6t, .logs, .commandes-manuelles{
-    float: left;
-    height: 210px;
-}
-.video-commands{
-    display: inline;
-}
-.stream:hover{
-    margin-left: -100px;
-    margin-top:-100px;
-    width: 840px;
-    height: 680px;
- }
-.logs{
-    display: inline-block;
-}
-.bordered{
-    border: solid 4px black;
-    padding:5px;
-    margin-left:-4px;
-    margin-bottom:-4px;
-    width: 350px;
-}
-.bordered > h2{
-    text-align: center;
-}
-.scroll{
-    min-height:100px;
-    height:60px;/*pour IE qui comprend rien, et qui ne reconnait pas min-height, mais qui comprend mal height*/
-    min-width:300px;
-    width:60px;/*pour IE qui comprend rien*/
-    overflow:auto;/*pour activer les scrollbarres*/
-}
-.commandes-manuelles{
-
-}
-.table-with-spaces > tbody > tr > td {
-    padding: 5px;
-}
-#clear-logs{
-    padding:0;
-}
-.commande > div{
-    display: inline-block;
-}
-.commandes > form {
-    padding: 10px;
-}
-.commandes > form > h2 {
-    margin-top:0;
-}
-.navbar-menu{
-    position: absolute; /* le bloc se positionnera en haut à gauche de ta page car il n'a pas de bloc parent */
-    top: 0;
-    right:0;
-    background-color: #E5E0FE;
-}
-@media (max-width: 990px) {
-    .robotino{
-        min-height: 900px;
-    }
-}
-dl{
-    height:40px;
-    margin:0;padding:0;
-    display:block;
-    float:left;
-    background-color: #3097D1;
-}
-
-dd ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-dd ul li a {
-    color: white;
-    display: block;
-    text-decoration: none;
-    height: 30px;
-    line-height: 30px;
-    background: #3097D1;
-    width: 150px;
-    text-align: center;
-}
-
-dt{
-    width:150px;
-    display: block;
-    height:40px;
-    color: #fff;
-    line-height: 40px;
-    text-align: center;
-}
-dl dd{
-    display: none;
-}
-dd{
-    display: block;
-    margin: 0;
-    padding: 0;
-}
-dl:hover dd{
-    display: block;
-}
-.menu{
-    background-color: #D2D3D3;
-}
-img  {
-    max-width: 100%;
-    max-height: 100%;
-}
-.img_carte{
-    position: absolute;
-    bottom: 0;
-    right:0;
-}
-.carte{
-    width: 250px;
-    height: 250px;
-    position: absolute;
-    top: 0;
-    right:0;
 }
 .liensBoutonsRobotino{
     margin-bottom: 0px;
 }
-
-
-.btn.boutonsRobotino.btn-primary{
+.btn.boutonsRobotino{
     width: 100px;
 }
 
-
-/*-------------------------------------------
------------------Connexion-------------------
----------------------------------------------*/
+/*Partie connexion*/
 .login-button{
     margin-top: 5px;
 }
@@ -216,9 +57,7 @@ img  {
 
 
 
-/*-------------------------------------------
---------------Page d'accueil-----------------
----------------------------------------------*/
+/*Page d'accueil*/
 .carousel-page
 {
     width:100%;
@@ -226,31 +65,21 @@ img  {
     background-color:#ffffff;
     color:white;
 }
-.carousel-control.right{
-    background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,200,.5) 100%);
-}
-.carousel-control.left{
-    background-image: linear-gradient(to left,rgba(0,0,0,.0001) 0,rgba(0,0,200,.5) 100%);
-}
 p.date{
     font-style: italic;
-    color: #000;
+    color: black;
     font-size: small;
-    margin-top:-10px;
 }
 h2.title {
-    color: #0c1a2e;
+    margin-bottom:0px;
 }
 
-/*-------------------------------------------
------------------Articles--------------------
----------------------------------------------*/
+/*Articles*/
 .post-layout {
-    background-color:rgba(255,255,255,0.6);
+    background-color: white;
     border-radius: 6px;
     margin-top:50px;
-    border: 3px solid #0c1a2e;
-    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .content-post {
@@ -258,25 +87,3 @@ h2.title {
     margin-right: 20px;
     margin-bottom: 20px;
 }
-
-/*-------------------------------------------
-----------------Responsive-------------------
----------------------------------------------*/
-@media (min-width:731px){
-    .padding {
-        padding-bottom:420px;
-    }
-}
-@media (min-width:1200px){
-    .padding {
-        padding-bottom:210px;
-    }
-}
-
-@media (max-width:730px){
-    .padding {
-        padding-bottom:630px;
-    }
-}
-
-
