@@ -8,7 +8,7 @@ use \App;
 use Core\HTML\BootstrapForm;
 
 class GroupController extends AppController{
-    protected $layout = 'default';
+	
     public function __construct()
     {
         parent::__construct();

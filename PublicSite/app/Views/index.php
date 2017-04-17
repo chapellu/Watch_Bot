@@ -11,79 +11,148 @@
             </div>
         </div>
 		<div class="container-fluid">
-			<a class="btn btn-primary btn-xl" href="#about">Découvrir</a>
+			<a id="home_button" class="btn btn-primary btn-xl" href="#about">Découvrir</a>
 		</div>
     </header>
 
 </div>
 <!-- /.carousel -->
 
-
-
 <!-- Page Content -->
-<div class="home_div">
+<div id="about" class="home_div">
     <div class="title">
         Notre projet
     </div>
+	<hr>
     <div class="content">
-        <div class="col-md-4">
-            <img src="<?= BASE_URL . '/public/img/java_code.jpg'; ?>" alt="">
-        </div>
+		<video controls autoplay loop>
+			<source src="<?= BASE_URL . '/public/video/SPOT_PUBLICITAIRE.mp4" type="video/mp4'; ?>">
+			Your browser does not support the video tag.
+		</video>
 
-        <div class="col-md-4">
-
-            <div class="content">
-                Nous vendons une solution de télésurveillance monitoré par 2 robots que sont Nao et Robotino.
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <img src="<?= BASE_URL . '/public/img/nao_robotino.jpg'; ?>" alt="">
-
-        </div>
+        <img src="<?= BASE_URL . '/public/img/Affiche.PNG'; ?>" alt="">
     </div>
 </div>
 
+<!-- Section description -->
 <div class="home_div colored">
     <div class="title">
-        Notre école
+        Description
     </div>
-    <div class="content">
-        <div class="container">
-            <img src="<?= BASE_URL . '/public/img/polytech.png'; ?>" alt="">
-        </div>
+	<hr>
+    <div class="content-row">
+        <div class="text">
+			Watchbot est un projet de télésurveillance robotisée.  
+			L'objectif est de surveiller un bâtiment afin de détecter une intrusion avec des robots mobiles.
+			Ainsi, la solution Watchbot est composée d'un robot majordome "Nao" et d'un robot de surveillance "Robotino". 						
+			
+		</div>
+		<div class="content">
+			<div class="description">
+				<img src="<?= BASE_URL . '/public/img/Nao.jpg'; ?>" alt="">
+				<span>
+				"Bonjour, je m'appelle Nao. Je suis à votre service et vous tiendrais 
+				informé en cas d'intrusion. Communiquez simplement avec moi via la parole, ou bien utilisez mon interface web."
+				</span>
+			</div>
+				
+			<div class="description">
+				<img src="<?= BASE_URL . '/public/img/Robotino.jpg'; ?>" alt="">
+				<span>
+				"Bonjour, je m'appelle Robotino. Je surveille votre maison en permanence lorsque vous n'êtes pas là. Si je détecte une intrusion,
+				Nao vous la signalera tout de suite. Grâce à mon retour vidéo et à l'interface web, prenez le contrôle à distance et communiquez 
+				directement avec l'intrus."
+				</span>
+			</div>
+		</div>
+		
+    </div>
+</div>
 
-        <div class="container">
+<!-- Section fonctionnement -->
+<div class="home_div">
+    <div class="title">
+        Fonctionnement
+    </div>
+	<hr>
+    <div class="content-row">
+		<div class="fonctionnement">
+			<img src="<?= BASE_URL . '/public/img/Nao_transparent.png'; ?>" alt="">
+			<span>
+				Nao est un petit robot humanoïde à qui nous avons donné le rôle de majordome. 
+				Il peut ainsi :
+				<ul>
+					<li>Superviser Robotino</li>
+					<li>Faire passer les informations importantes grâce à une interface transparente</li>
+				</ul>
+			</span>
+		</div>
+		<div class="fonctionnement">
+			<span>
+				<ul>
+					<li>Surveille sur demande</li>
+					<li>Ronde aléatoire maximisant la couverture</li>
+					<li>Caméra embarquée et commande à distance</li>
+				</ul>
+			</span>
+			<img src="<?= BASE_URL . '/public/img/Robotino_transparent.png'; ?>" alt="">
+		</div>
+		<div class="fonctionnement">
+			<img src="<?= BASE_URL . '/public/img/IHM.PNG'; ?>" alt="">
+			<span>
+			<ul>
+				<li>Contrôle à distance du système</li>
+				<li>Accès en direct à la vidéo</li>
+			</ul>
+			</span>
+		</div>
+    </div>
+</div>
 
-            <div class="content">
-                Polytech, école d'ingénieur, un des premier réseau d'école d'ingénieur en France
-            </div>
-        </div>
+<!-- Section Ecole -->
+<div class="home_div colored">
+    <div class="title">
+        Polytech Annecy-Chambéry
+    </div>
+	<hr>
+    <div class="content-row">	
+        <img id= "im_annecy" src="<?= BASE_URL . '/public/img/Annecy.jpg'; ?>" alt="">
+		<div class="presentation_polytech">
+			Le réseau Polytech, premier réseau français des écoles d'ingenieurs polytechniques des universités.<br>
+			Celui-ci regroupe 14 écoles publiques proposant 12 domaines de formation. <br>
+			Cela représente 70 000 ingénieurs en activité ainsi que 3 400 diplômés annuels.<br> 
+			Le réseau garantit une formation de grande qualité pour préparer les jeunes diplômés à relever les défis de demain.<br>
+			
+			Polytech Annecy-Chambéry propose 3 spécialités d'enseignements :
+			<ul>
+				<li>Environnement - Bâtiment - Energie</li>
+				<li>Instrumentation - Automatique - Informatique</li>
+				<li>Mécanique - Matériaux</li>
+			</ul>
+			L'une des spécificités de notre formation Instrumentation - Automatique - Informatique (IAI) est l'Apprentissage par Problèmes et par Projet (APP).<br>
+			L'objectif principal est de développer nos compétences au cours d'un projet sur trois ans.<br>
+			Watchbot répond à la problématique posée qui porte sur la télésurveillance robotisée. 
+		</div>
+        <img id="logo_polytech" src="<?= BASE_URL . '/public/img/logo_transparent.png'; ?>" alt="">
     </div>
 </div>
 
 <div class="home_div">
     <div class="title">Qui sommes nous ?</div>
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                Nous venons tous de différents cursus et nous sommes chacun spécialisés dans des domaines. Voici notre équipe :
-            </div>
-            <div class="row">
-                <a href="<?= BASE_URL.'/group/view/?name=jason.boileau';?>"><img src="<?= BASE_URL . '/public/img/team/jason.boileau.jpg';?>" alt="..." class="img-circle img_profile"></a>
-                <a href="<?= BASE_URL.'/group/view/?name=quentin.boutonnet';?>"><img src="<?= BASE_URL . '/public/img/team/quentin.boutonnet.jpg';?>" alt="..." class="img-circle img_profile"></a>
-                <a href="<?= BASE_URL.'/group/view/?name=sandrine.broutin';?>"><img src="<?= BASE_URL . '/public/img/team/sandrine.broutin.jpg';?>" alt="..." class="img-circle img_profile"></a>
-                <a href="<?= BASE_URL.'/group/view/?name=ludovic.chapelet';?>"><img src="<?= BASE_URL . '/public/img/team/ludovic.chapelet.jpg';?>" alt="..." class="img-circle img_profile"></a>
-                <a href="<?= BASE_URL.'/group/view/?name=alan.dupin';?>"><img src="<?= BASE_URL . '/public/img/team/alan.dupin.jpg';?>" alt="..." class="img-circle img_profile"></a>
-            </div>
-            <div class="row">
-                <a href="<?= BASE_URL.'/group/view/?name=nicolas.java';?>"><img src="<?= BASE_URL . '/public/img/team/nicolas.java.jpg';?>" alt="..." class="img-circle img_profile"></a>
-                <a href="<?= BASE_URL.'/group/view/?name=damien.morel';?>"><img src="<?= BASE_URL . '/public/img/team/damien.morel.jpg';?>" alt="..." class="img-circle img_profile"></a>
-                <a href="<?= BASE_URL.'/group/view/?name=arnaud.mignotte';?>"><img src="<?= BASE_URL . '/public/img/team/arnaud.mignotte.jpg';?>" alt="..." class="img-circle img_profile"></a>
-                <a href="<?= BASE_URL.'/group/view/?name=william.simon';?>"><img src="<?= BASE_URL . '/public/img/team/william.simon.jpg';?>" alt="..." class="img-circle img_profile"></a>
-            </div>
-        </div>
-
+	<hr>
+    <div class="content-row">
+		<p>Nous venons tous de différents cursus et nous sommes chacun spécialisés dans des domaines. Voici notre équipe :</p>
+		<div class="profiles">
+			<a class="portrait" href="<?= BASE_URL.'/group/view/?name=jason.boileau';?>"><img src="<?= BASE_URL . '/public/img/team/jason.boileau.jpg';?>" alt="..." class="img-circle img_profile"><p class="text_portrait">Jason BOILEAU</p></a>
+			<a class="portrait" href="<?= BASE_URL.'/group/view/?name=quentin.boutonnet';?>"><img src="<?= BASE_URL . '/public/img/team/quentin.boutonnet.jpg';?>" alt="..." class="img-circle img_profile"><p class="text_portrait">Quentin BOUTONNET</p></a>
+			<a class="portrait" href="<?= BASE_URL.'/group/view/?name=sandrine.broutin';?>"><img src="<?= BASE_URL . '/public/img/team/sandrine.broutin.jpg';?>" alt="..." class="img-circle img_profile"><p class="text_portrait">Sandrine BROUTIN</p></a>
+			<a class="portrait" href="<?= BASE_URL.'/group/view/?name=ludovic.chapelet';?>"><img src="<?= BASE_URL . '/public/img/team/ludovic.chapelet.jpg';?>" alt="..." class="img-circle img_profile"><p class="text_portrait">Ludovic CHAPELET</p></a>
+			<a class="portrait" href="<?= BASE_URL.'/group/view/?name=alan.dupin';?>"><img src="<?= BASE_URL . '/public/img/team/alan.dupin.jpg';?>" alt="..." class="img-circle img_profile"><p class="text_portrait">Alan DUPIN</p></a>
+			<a class="portrait" href="<?= BASE_URL.'/group/view/?name=nicolas.java';?>"><img src="<?= BASE_URL . '/public/img/team/nicolas.java.jpg';?>" alt="..." class="img-circle img_profile"><p class="text_portrait">Nicolas JAVA</p></a>
+			<a class="portrait" href="<?= BASE_URL.'/group/view/?name=damien.morel';?>"><img src="<?= BASE_URL . '/public/img/team/damien.morel.jpg';?>" alt="..." class="img-circle img_profile"><p class="text_portrait">Damien MOREL</p></a>
+			<a class="portrait" href="<?= BASE_URL.'/group/view/?name=arnaud.mignotte';?>"><img src="<?= BASE_URL . '/public/img/team/arnaud.mignotte.jpg';?>" alt="..." class="img-circle img_profile"><p class="text_portrait">Arnaud MIGNOTTE</p></a>
+			<a class="portrait" href="<?= BASE_URL.'/group/view/?name=william.simon';?>"><img src="<?= BASE_URL . '/public/img/team/william.simon.jpg';?>" alt="..." class="img-circle img_profile"><p class="text_portrait">William SIMON</p></a>
+		</div>
     </div>
 </div>
 <!--
@@ -130,10 +199,6 @@
      </div>
  </div>
  <!-- /.row -->
-
-
-
-
 
 </div>
 <!-- /.container -->

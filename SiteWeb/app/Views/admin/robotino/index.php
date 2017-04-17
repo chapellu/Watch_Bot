@@ -55,7 +55,7 @@ if(isset($_POST['seuil'])){
 <div class="robotino col-sm-12">
     <div class="video col-sm-9">
         <?php if(DEV == 0):?>
-            <input class="stream" type="image" src="http://193.48.125.196:8080/?action=stream" onclick="(this.requestFullscreen || this.mozRequestFullScreen || this.webkitRequestFullscreen).call(this)"/>
+            <input class="stream" type="image" src="http://192.168.118.28:8080/?action=stream" onclick="(this.requestFullscreen || this.mozRequestFullScreen || this.webkitRequestFullscreen).call(this)"/>
         <?php else:?>
             <p>Mode de développement</p>
         <?php endif;?>

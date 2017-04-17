@@ -18,7 +18,7 @@ class Router
         if(DEV == 1){
             $offset = 2; //Variable qui permet aux differents paramètres de bien prendre les bonnes infos
         } else{
-            $offset = 0;
+            $offset = 1;
         }
         $url = trim($url,'/'); //trim enlève les espaces en début et fin de chaine
 

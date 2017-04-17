@@ -6,11 +6,11 @@ var top_position;
 var navbar_horitontally = false;
 
 // define heights of each div in the home page (windows/6)
-var window_height=($(document).height()/5).toString();
-var divs_home=$('.home_div');
-for(var i=0;i<divs_home.length;i++){
-    divs_home[i].setAttribute("style","height:"+window_height+"px");
-}
+// var window_height=($(document).height()/5).toString();
+// var divs_home=$('.home_div');
+// for(var i=0;i<divs_home.length;i++){
+    // divs_home[i].setAttribute("style","height:"+window_height+"px");
+// }
 
 //hide navbar links before fading
 
@@ -32,7 +32,12 @@ function addListenersToDocument() {
 }
 
 
-
+$(function() {
+  $('a#home_button').on('click', function(e) {
+    e.preventDefault();
+    $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
+  });
+});
 
 $(document).ready(function() {
 

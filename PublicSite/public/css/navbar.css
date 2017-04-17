@@ -11,7 +11,6 @@
     overflow-x: hidden;
 }
 .container{
-    display: table-cell;
     vertical-align: middle;
 }
 

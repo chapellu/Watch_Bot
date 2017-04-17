@@ -11,7 +11,7 @@ if(DEV == 1){
     define('BASE_URL','http://localhost/watchbot/SiteWeb');
     define('ROOT_SCRIPT', 'C:\wamp64\www\watchbot/scriptsD6T/');
 } else{
-    define('BASE_URL', 'http://193.48.125.196');
+    define('BASE_URL', 'http://192.168.118.28/SiteWeb');
     define('ROOT_SCRIPT', '/var/www/html/Watch_Bot/scriptsD6T/');
 }
 
