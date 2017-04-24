@@ -60,15 +60,52 @@ body{
     min-height: 700px;
     padding-left:0;
     padding-right:0;
+    margin-top:20px;
 }
 
 .commandes {
-    border-top: solid 4px black;
-    border-right: solid 4px black;
-    border-bottom: hidden 4px ;
-    position: absolute; /* le bloc se positionnera en haut à gauche de ta page car il n'a pas de bloc parent */
+    position: absolute;
     bottom: 0;
     left:0;
+}
+.d6t, .logs, .commandes-manuelles{
+    float: left;
+    height: 210px;
+}
+.video-commands{
+    display: inline;
+}
+.logs{
+    display: inline-block;
+}
+.bordered{
+    border: solid 4px black;
+    padding:5px;
+    margin-left:-4px;
+    margin-bottom:-4px;
+    width: 350px;
+}
+.bordered > h2{
+    text-align: center;
+}
+.scroll{
+    min-height:100px;
+    height:60px;/*pour IE qui comprend rien, et qui ne reconnait pas min-height, mais qui comprend mal height*/
+    min-width:300px;
+    width:60px;/*pour IE qui comprend rien*/
+    overflow:auto;/*pour activer les scrollbarres*/
+}
+.commandes-manuelles{
+
+}
+.table-with-spaces > tbody > tr > td {
+    padding: 5px;
+}
+#clear-logs{
+    padding:0;
+}
+.commande > div{
+    display: inline-block;
 }
 .commandes > form {
     padding: 10px;
@@ -146,13 +183,15 @@ img  {
     width: 250px;
     height: 250px;
     position: absolute;
-    bottom: 0;
+    top: 0;
     right:0;
 }
 .liensBoutonsRobotino{
     margin-bottom: 0px;
 }
-.btn.boutonsRobotino{
+
+
+.btn.boutonsRobotino.btn-primary{
     width: 100px;
 }
 
@@ -212,4 +251,24 @@ h2.title {
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
+}
+
+/*-------------------------------------------
+----------------Responsive-------------------
+---------------------------------------------*/
+@media (min-width:768px) and (max-width:992px){
+    .padding {
+        padding-bottom:420px;
+    }
+}
+@media (min-width:992px){
+    .padding {
+        padding-bottom:210px;
+    }
+}
+
+@media (max-width:750px){
+    .padding {
+        padding-bottom:630px;
+    }
 }

@@ -43,11 +43,10 @@
 		</a>
 	</div>
 <!-- /.carousel -->
-<div>
+
 
 
 <!-- Page Content -->
-
 <div class="container-fluid">
     <div class="col-sr-7 post-layout">
         <div class="content-post">

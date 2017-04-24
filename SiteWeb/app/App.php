@@ -30,11 +30,20 @@ class App
         //Lit config et gènére db
         $config = Config::getInstance(ROOT . '\config\Configurations.php');
         if(is_null($this->db_instance)) {
-            $this->db_instance = new Database(
-                'localhost',
-                'watchbot',
-                'root',
-                '');
+            if(DEV == 1){
+                $this->db_instance = new Database(
+                    'localhost',
+                    'watchbot',
+                    'root',
+                    '');
+            } else{
+                $this->db_instance = new Database(
+                    'localhost',
+                    'watchbot',
+                    'root',
+                    'app2018');
+            }
+
         }
         return $this->db_instance;
     }

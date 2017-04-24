@@ -1,8 +1,11 @@
 <div class="robotino col-sm-12">
     <div class="video col-sm-9">
-        <div class="overlayWrapper ">
-            <video id="remote-video" class="img-responsive" autoplay=""></video>
-            <p class="overlay">Live</p>
+        <div id="container">
+            <div class="overlayWrapper">
+                <video id="remote-video" autoplay="" width="640" height="480">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
         </div>
         <div id="controls">
             <button type=button id="pause" onclick="pause();" title="pause or resume local player">Pause/Play</button>
@@ -10,21 +13,19 @@
             <button type=button id="fullscreen" onclick="fullscreen();">Plein écran</button>
             <button type=button id="record" onclick="start_stop_record();" title="start or stop recording audio/video">Enregistrer</button>
         </div>
-
-
-
+        <div id="commands">
+            <details open>
+                <summary><b>Advanced options</b></summary>
+                <fieldset>
+                    <span>Remote Peer/Signalling Server Address: </span><input required type="text" id="signalling_server" value="193.48.125.196:8080" title="<host>:<port>, default address is autodetected"/><br>
+                </fieldset>
+            </details>
+            <button id="start" style="background-color: green; color: white" onclick="start();">Call!</button>
+            <button disabled id="stop" style="background-color: red; color: white" onclick="stop();">Hang up</button>
+        </div>
     </div>
 
-    <div id="commands" class="video-commands col-sm-3">
-        <details open>
-            <summary><b>Options de connexion</b></summary>
-            <fieldset>
-               <input required type="text" id="signalling_server" value="193.48.125.196:8080" title="<host>:<port>, default address is autodetected"/><br>
-             </fieldset>
-        </details>
-        <button id="start" style="background-color: green; color: white" onclick="start();">Connexion</button>
-        <button disabled id="stop" style="background-color: red; color: white" onclick="stop();">Stop</button>
-    </div>
+    <div class="padding col-sm-12"><br></div>
 
     <!--<div class="navbar-menu">
        <dl>
@@ -43,89 +44,144 @@
     </div>
 
     <div class="commandes">
-        <form method="post" >
-            <table>
-                <thead><h2>Commandes mannuelles</h2></thead>
-                <tr>
-                    <td></td>
-                    <td>
-                        <?= $form->bouttonRobotino('avancer', 'boutonsRobotino');?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <?= $form->bouttonRobotino('gauche', 'boutonsRobotino');?>
-                    </td>
-                    <td></td>
-                    <td>
-                        <?= $form->bouttonRobotino('droite', 'boutonsRobotino');?>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <?= $form->bouttonRobotino('reculer', 'boutonsRobotino');?>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <div class="commandes-manuelles bordered">
+            <form method="post" >
+                <table>
+                    <thead><h2>Commandes manuelles</h2></thead>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <?= $form->bouttonRobotino('avancer', 'primary');?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <?= $form->bouttonRobotino('gauche', 'primary');?>
+                        </td>
+                        <td></td>
+                        <td>
+                            <?= $form->bouttonRobotino('droite', 'primary');?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <?= $form->bouttonRobotino('reculer', 'primary');?>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div class="d6t bordered">
+            <h2>Capteur D6T</h2>
+
+
+            <form action="<?=BASE_URL.'/admin/robotino/';?>" method="post">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Seuil</span>
+                    <input type="number" class="form-control" name="seuil" placeholder="Veuillez saisir une température" aria-describedby="basic-addon1">
+                </div>
+                <table class="table-with-spaces">
+                    <tr>
+                        <td>
+                            <input class="btn btn-success" type="submit" value="Lancer la detection">
+                           <!-- <?= $form->bouttonRobotino('start-detection', 'success', 'Lancer la detection');?>-->
+                        </td>
+                        <td>
+                            <?= $form->bouttonRobotino('stop-detection','danger', 'Arreter la detection');?>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div class="logs bordered">
+            <h2>Logs</h2>
+            <div class="scroll">
+                <table>
+                    <tbody id="log"></tbody>
+                </table>
+            </div>
+            <?= $form->bouttonRobotino('clear-logs', 'secondary', 'Effacer la console');?>
+        </div>
     </div>
+
+
 </div>
 
-<div>
-    <h3>Logs (à faire)</h3>
-    <p>
+
+
 <?php
-
-
 if(isset($_GET['action'])){
-    error_reporting(E_ALL);
+    if($_GET['action']==='avancer' || $_GET['action']==='reculer' || $_GET['action']==='droite' || $_GET['action'] ==='gauche'){
+        error_reporting(E_ALL);
 
-    /* Interdit l'exécution infinie du script, en attente de connexion. */
-    set_time_limit(0);
+        /* Interdit l'exécution infinie du script, en attente de connexion. */
+        set_time_limit(0);
 
-    /* Active le vidage implicite des buffers de sortie, pour que nous
-     * puissions voir ce que nous lisons au fur et à mesure. */
-    ob_implicit_flush();
+        /* Active le vidage implicite des buffers de sortie, pour que nous
+         * puissions voir ce que nous lisons au fur et à mesure. */
+        ob_implicit_flush();
 
-    $address = '193.48.125.'.NUM_ROBOTINO;
-    $port = 50000;
+        $address = '193.48.125.'.NUM_ROBOTINO;
+        $port = 50000;
 
 
-    if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
-        echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
-    } else {
-        echo "socket_create() a réussi\n";
+        if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
+            echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
+        } else {
+            echo "socket_create() a réussi\n";
+        }
+
+
+        echo "Essai de connexion à '$address' sur le port '$port'...";
+        $result = socket_connect($socket, $address, $port);
+        if ($socket === false) {
+            echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
+        } else {
+            echo "socket_connect() a réussi\n";
+        }
+
+        $msg = "POST /?action=".$_GET['action']." HTTP/1.1\r\n\r\n";
+        $msg .= "Connection: Close\r\n\r\n";
+        $out = "";
+
+        echo "Envoi de la requête :".$msg;
+        socket_write($socket, $msg, strlen($msg));
+
+        echo "Fermeture du socket...";
+        socket_close($socket);
+        echo "Socket détruite\n\n";
     }
-
-
-    echo "Essai de connexion à '$address' sur le port '$port'...";
-    $result = socket_connect($socket, $address, $port);
-    if ($socket === false) {
-        echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
-    } else {
-        echo "socket_connect() a réussi\n";
+    else if($_GET['action']==='stop-detection'){
+        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
+        fwrite($flagscript, 'script=False');
+        fclose($flagscript);
     }
-
-    $msg = "POST /?action=".$_GET['action']." HTTP/1.1\r\n\r\n";
-    $msg .= "Connection: Close\r\n\r\n";
-    $out = "";
-
-    echo "Envoi de la requête :".$msg;
-    socket_write($socket, $msg, strlen($msg));
-
-
-
-    echo "Fermeture du socket...";
-    socket_close($socket);
-    echo "Socket détruite\n\n";
-
+    else if($_GET['action']==='clear-logs'){
+        $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
+        fwrite($log, ' ');
+        fclose($log);
+    }
     header('Location: '.BASE_URL.'/admin/robotino');
     exit();
 }
+if(isset($_POST['seuil'])){
+    if($_POST['seuil']==='' || $_POST['seuil']<0){
+        echo '<script>alert("Vous devez saisir un seuil (positif)")</script>';
+    } else{
+        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
+        fwrite($flagscript, 'script=True'."\n".$_POST['seuil']);
+        fclose($flagscript);
+        if(DEV == 0) {
+            exec('sudo  -u www-data python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
+            //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
+            //var_dump($msg);die();
+        }
 
+    }
+}
 
 ?>
-    </p>
-</div>
 

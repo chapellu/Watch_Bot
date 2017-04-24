@@ -48,8 +48,17 @@ class Form {
         return '<input type="text" name="'.$name.'" value="'.$this->getValue($name).'"/>';
     }
 
-    public function bouttonRobotino($name){
-        return $this->surround('<a class="btn btn-primary boutonsRobotino" type="submit" name="'.$name.'" href="'.BASE_URL.'/admin/robotino/?action='.$name.'">'.ucfirst($name).'</a>', 'liensBoutonsRobotino');
+
+    /*
+     * Liste des différente types :
+     * bleu = primary
+     * vert = success
+     * rouge = danger
+     * orange = warning
+     */
+    public function bouttonRobotino($name, $type, $title=null){
+        $label = $title?$title:ucfirst($name);
+        return $this->surround('<a class="btn btn-'.$type.' boutonsRobotino" id="'.$name.'" type="submit" name="'.$name.'" href="'.BASE_URL.'/admin/robotino/?action='.$name.'">'.$label.'</a>', 'liensBoutonsRobotino');
 
     }
 }
