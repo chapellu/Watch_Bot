@@ -1,7 +1,5 @@
 package Communication;
 
-import java.util.ArrayList;
-
 public class Message {
 	
 	private Communicant AuteurPrecedent;

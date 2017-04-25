@@ -1,7 +1,7 @@
 package watchbot;
 
 import Communication.InterfaceCommunication;
-import Communication.InterfaceMessageRecu;
+
 
 public class serveur {
 
@@ -10,7 +10,15 @@ public class serveur {
 		Watchbot watchbot = Watchbot.create();
 		InterfaceCommunication com = InterfaceCommunication.newInterfaceCommunication();
 		com.startEcoute(watchbot);
+		/*
 		com.sendMessage("193.48.125.65", "Ordre", "startSurveillance");
+		com.sendMessage("193.48.125.65", "Ordre", "stopSurveillance");
+		com.sendMessage("193.48.125.65", "Ordre", "startCartographie");
+		com.sendMessage("193.48.125.65", "Ordre", "stopCartographie");
+		com.sendMessage("193.48.125.65", "Ordre", "avance");
+		com.sendMessage("193.48.125.65", "Ordre", "recule");
+		com.sendMessage("193.48.125.65", "Ordre", "gauche");
+		com.sendMessage("193.48.125.65", "Ordre", "droite");*/
 	}
 
 }

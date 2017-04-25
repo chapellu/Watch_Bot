@@ -1,5 +1,6 @@
 package watchbot;
 
+import Communication.InterfaceCommunication;
 import Communication.InterfaceMessageRecu;
 import Communication.Message;
 import Communication.Ordre;
@@ -9,6 +10,7 @@ import Communication.Ordre;
 public class Watchbot implements InterfaceMessageRecu{
 	private static Watchbot instance = null;
 	private Etat etat = Etat.Repos;
+	private boolean utilisateurPresent = true;
 	
 	private Watchbot(){
 		
@@ -68,40 +70,55 @@ public class Watchbot implements InterfaceMessageRecu{
 		default:
 			break;
 		}
-		System.out.println(mes.getMessage());
+		//System.out.println(mes.getMessage());
 		
 	}
 	
 	private void handleOrder(Message mes) {
-		switch(Ordre.valueOf(mes.getMessage())){
-		case startSurveillance:
-			startSurveillance();
-			break;
-		case stopSurveillance:
-			stopSurveillance();
-			break;
-		case startCartographie:
-			startCartographie();
-			break;
-		case stopCartographie:
-			stopCartographie();
-			break;
-		case avance:
-			break;
-		case recule:
-			break;
-		case gauche:
-			break;
-		case droite:
-			break;
-		default:
-			break;
+		try { 
+			switch(Ordre.valueOf(mes.getMessage())){
+			case startSurveillance:
+				startSurveillance();
+				break;
+			case stopSurveillance:
+				stopSurveillance();
+				break;
+			case startCartographie:
+				startCartographie();
+				break;
+			case stopCartographie:
+				stopCartographie();
+				break;
+			case avance:
+				break;
+			case recule:
+				break;
+			case gauche:
+				break;
+			case droite:
+				break;
+			default:
+				System.out.println(mes);
+				break;
+			}
 		}
+		catch (Exception e){System.out.println(e);};
+		
 		
 	}
 	
 	private void handleMessage(Message mes) {
-		// TODO Auto-generated method stub
+		if (mes.getMessage().equals("leaving")){
+			utilisateurPresent = false;
+			System.out.println(utilisateurPresent);
+		}
+		else if (mes.getMessage().equals("coming")){
+			utilisateurPresent = true;
+			System.out.println(utilisateurPresent);
+		}
+		else{
+			System.out.println("ninja");
+		}
 		
 	}
 
@@ -121,9 +138,21 @@ public class Watchbot implements InterfaceMessageRecu{
 
 	
 
-	private void handleRequete(Message mes) {
+	private void handleRequete(Message message) {
 		// TODO Auto-generated method stub
+		String mes = message.getMessage();
+		InterfaceCommunication com = InterfaceCommunication.newInterfaceCommunication();
 		
+		if(InterfaceCommunication.validate(mes)){
+			System.out.println("ip: "+mes+" \n");
+			System.out.println(com.getBd().getNom(mes)+" \n");
+			com.sendMessage("Nao Orange", "Message", com.getBd().getNom(mes));
+		}
+		else{
+			System.out.println("nom destinataire: "+mes +" \n");
+			System.out.println(com.getBd().getIP(mes));
+			com.sendMessage("Nao Orange", "Message", com.getBd().getIP(mes));
+		}
 	}
 
 	

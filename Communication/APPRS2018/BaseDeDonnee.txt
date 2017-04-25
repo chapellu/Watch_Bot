@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-04-25T14:48:00</date>
+  <millis>1493124480313</millis>
+  <sequence>0</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.65';</message>
+</record>
+<record>
+  <date>2017-04-25T14:48:00</date>
+  <millis>1493124480337</millis>
+  <sequence>1</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>Ordinateur 0</message>
+</record>
+<record>
+  <date>2017-04-25T14:56:23</date>
+  <millis>1493124983373</millis>
+  <sequence>2</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>15</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.196';</message>
+</record>
+<record>
+  <date>2017-04-25T14:56:23</date>
+  <millis>1493124983383</millis>
+  <sequence>3</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>15</thread>
+  <message>Pi</message>
+</record>
+<record>
+  <date>2017-04-25T14:56:38</date>
+  <millis>1493124998050</millis>
+  <sequence>4</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>16</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.196';</message>
+</record>
+<record>
+  <date>2017-04-25T14:56:38</date>
+  <millis>1493124998056</millis>
+  <sequence>5</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>16</thread>
+  <message>Pi</message>
+</record>

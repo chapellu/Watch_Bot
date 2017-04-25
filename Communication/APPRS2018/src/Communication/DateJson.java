@@ -1,7 +1,5 @@
 package Communication;
 
-import java.util.Date;
-
 public class DateJson {
 	
 	private String date_string;
@@ -13,7 +11,27 @@ public class DateJson {
 		java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat( format ); 
 		java.util.Date date = new java.util.Date(); 
 		
-		date_string = formater.format( date );
+		setDate_string(formater.format( date ));
+		this.setDate(date);
+	}
+
+
+	public String getDate_string() {
+		return date_string;
+	}
+
+
+	private void setDate_string(String date_string) {
+		this.date_string = date_string;
+	}
+
+
+	public java.util.Date getDate() {
+		return date;
+	}
+
+
+	private void setDate(java.util.Date date) {
 		this.date = date;
 	}
 	
