@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3">
+    <Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0">
+        <bitmap>media/images/box/root.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Box name="SocketServer" id="15" localization="8" tooltip="" x="214" y="57">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[import socket
+
+class MyClass(GeneratedClass):
+
+    # ---------------------------------------------------------
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.listenSocket=None
+        self.connectedSocket=None
+        self.doingUnload=False
+        pass
+
+    # ---------------------------------------------------------
+    def onLoad(self):
+        pass
+
+
+    # --------------------------------------------------------
+    # Handles a single connection by receiving a message and decomposing it into fields,
+    # which are then sent to an box output.
+    #
+    # Format incoming command string: "uid#command#param1#param2#...#paramN$",
+    #
+    # Format of the outgoing command array:
+    #     String[uid,command,param1,param2,...,paramN]
+    #
+    def handleConnection(self):
+
+        data=""
+
+        try:
+            data = self.connectedSocket.recv(5000)
+            self.logger.info(data)
+            self.command(data)
+            self.onDisconnect()
+
+        except Exception as ex:
+            self.onDisconnect()
+            self.logger.warning("Exception while listening on socket "+str(self.connectedSocket)+", close connection! ")
+            self.logger.warning(ex)
+
+        try:
+            self.connectedSocket.close();
+        except:
+            pass
+
+        self.connectedSocket=None
+        pass
+
+
+    # ---------------------------------------------------------
+    # Starts the TCP/IP listener on the configured port and delegates the connection to a
+    # handler. No multiple connections supported so far to avoid complicating things with
+    # multi-threading and synchronised data management.
+    #
+    def onInput_onStart(self):
+        try:
+            self.logger.info("Listening on port "+str(self.getParameter("port"))+" allowing 10 concurrent connection.")
+            self.listenSocket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+            self.listenSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 10)
+            self.listenSocket.bind(("",self.getParameter("port")))
+            self.listenSocket.listen(10)
+        except Exception as ex:
+            self.logger.warning(ex)
+
+        while True:
+
+            # Open port for listening
+            try:
+                self.logger.info('Ga Beu Zo Mu')
+                self.connectedSocket,address=self.listenSocket.accept()  # -> waiting for incoming connection
+                self.logger.info('zatfrrzefsd<fzaeRFEZ')
+            except Exception as ex:
+                self.logger.info('Ga Zo Meu')
+                # Very probably triggered by UNLOAD by stopping the behaviour
+                if self.doingUnload==False:
+                    self.onUnload()  # |_ don't call it twice
+                break
+
+            # Handle incoming connection
+            self.onConnect()
+            self.logger.info('Connected to '+str(address)+"/"+str(self.connectedSocket))
+
+            # Send back a welcome message. The ~ prefix indicates a small talk message (i.e. can be ignored by client)
+            #self.connectedSocket.sendall("~Hello, NAO4Scratch speaking! Waiting for your commands!nr")
+
+            self.handleConnection()
+
+        # |_ while True
+        pass
+
+    # ---------------------------------------------------------
+    # Stop the socket server box.  Closes all sockets and set the onStop output.
+    #
+    def onUnload(self):
+        self.logger.info('Unloading: closing all sockets')
+
+        self.doingUnload=True
+
+        try:
+            #self.connectedSocket.shutdown(socket.SHUT_RDWR)
+            self.connectedSocket.close()
+        except Exception as ex:
+            self.logger.warning(ex)
+
+        try:
+            self.listenSocket.shutdown(socket.SHUT_RDWR)
+            self.listenSocket.close()
+        except Exception as ex:
+            self.logger.warning(ex)
+
+        self.connectedSocket=None
+        self.listenSocket=None
+
+        self.onStopped()
+        pass
+
+    # ---------------------------------------------------------
+    # External signal forcing to stop the box.
+    #
+    def onInput_onStop(self):
+        self.onUnload()
+        #~ it is recommended to call onUnload of this box in a onStop method,
+        # as the code written in onUnload is used to stop the box as well
+        pass]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Output name="command" type="3" type_size="1" nature="2" inner="0" tooltip="" id="5" />
+                            <Output name="onConnect" type="1" type_size="1" nature="2" inner="0" tooltip="" id="6" />
+                            <Output name="onDisconnect" type="1" type_size="1" nature="2" inner="0" tooltip="" id="7" />
+                            <Parameter name="port" inherits_from_parent="0" content_type="1" value="50003" default_value="50000" min="0" max="100000" tooltip="" id="8" />
+                        </Box>
+                        <Box name="Wait" id="6" localization="8" tooltip="Wait a moment before sending a signal on the output. &#x0A;Can be stopped anytime. &#x0A;Stimulating the input again before output is activated restarts the waiting period.&#x0A;" x="114" y="302">
+                            <bitmap>media/images/box/wait.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.waiting = None
+
+    def onUnload(self):
+        self.cancelWaiting()
+
+    def triggerOutput(self):
+        self.timerOutput()
+
+    def cancelWaiting(self):
+        if self.waiting:
+            self.waiting.cancel()
+        self.waiting = None
+
+    def onInput_onStart(self):
+        self.cancelWaiting()
+        import qi
+        self.waiting = qi.async(self.triggerOutput, delay=int(self.getParameter("Timeout (s)") * 1000 * 1000))
+
+    def onInput_onStop(self):
+        if self.getParameter("Trigger timerOutput if cancelled") and self.waiting and self.waiting.isRunning():
+            self.timerOutput()
+        self.onUnload()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Start the Wait box with the configured timeout value." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Stop the wait and stimulate the output." id="3" />
+                            <Output name="timerOutput" type="1" type_size="1" nature="1" inner="0" tooltip="Send a bang once time set in parameters is elapsed, or if the box is stopped and the appropriate parameter is set." id="4" />
+                            <Parameter name="Timeout (s)" inherits_from_parent="0" content_type="2" value="2" default_value="1" min="0" max="5000" tooltip="Duration the box waits before stimulating the output." id="5" />
+                            <Parameter name="Trigger timerOutput if cancelled" inherits_from_parent="0" content_type="0" value="0" default_value="1" tooltip="If the box is currently waiting and cancelled, output will be stimulated." id="6" />
+                        </Box>
+                        <Box name="Say Text" id="1" localization="8" tooltip="Say the text received on its input." x="421" y="54">
+                            <bitmap>media/images/box/interaction/say.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        self.tts = ALProxy('ALTextToSpeech')
+        self.ttsStop = ALProxy('ALTextToSpeech', True) #Create another proxy as wait is blocking if audioout is remote
+
+    def onLoad(self):
+        self.bIsRunning = False
+        self.ids = []
+
+    def onUnload(self):
+        for id in self.ids:
+            try:
+                self.ttsStop.stop(id)
+            except:
+                pass
+        while( self.bIsRunning ):
+            time.sleep( 0.2 )
+
+    def onInput_onStart(self, p):
+        self.bIsRunning = True
+        try:
+            sentence = "\RSPD="+ str( self.getParameter("Speed (%)") ) + "\ "
+            sentence += "\VCT="+ str( self.getParameter("Voice shaping (%)") ) + "\ "
+            sentence += str(p)
+            sentence +=  "\RST\ "
+            id = self.tts.post.say(str(sentence))
+            self.ids.append(id)
+            self.tts.wait(id, 0)
+        finally:
+            try:
+                self.ids.remove(id)
+            except:
+                pass
+            if( self.ids == [] ):
+                self.onStopped() # activate output of the box
+                self.bIsRunning = False
+
+    def onInput_onStop(self):
+        self.onUnload()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                            <Input name="onStart" type="3" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this Input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this Input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when Box behavior is finished." id="4" />
+                            <Parameter name="Voice shaping (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="150" tooltip='Used to modify at runtime the voice feature (tone, speed). In a slighty&#x0A;different way than pitch and speed, it gives a kind of &quot;gender or age&#x0A;modification&quot; effect.&#x0A;&#x0A;For instance, a quite good male derivation of female voice can be&#x0A;obtained setting this parameter to 78%.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the&#x0A;speed parameter. For example, if you want to decrease by 20% the voice&#x0A;shaping, you will have to increase by 20% the speed to keep a constant&#x0A;average speed.' id="5" />
+                            <Parameter name="Speed (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="200" tooltip="Changes the speed of the voice.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the voice&#x0A;shaping parameter. For example, if you want to increase by 20% the speed, you&#x0A;will have to decrease by 20% the voice shaping to keep a constant average&#x0A;speed." id="6" />
+                            <Resource name="Speech" type="Lock" timeout="0" />
+                        </Box>
+                        <Box name="socketServer" id="3" localization="8" tooltip="" x="214" y="468">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyTCPHandler(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        #put initialization code here
+        pass
+
+    def onUnload(self):
+        #put clean-up code here
+        pass
+
+    def onInput_onStart(self):
+        HOST, PORT = "localhost", 50000
+
+        # Create the server, binding to localhost on port 9999
+        server = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
+
+        # Activate the server; this will keep running until you
+        # interrupt the program with Ctrl-C
+        server.serve_forever()
+
+    def handle(self):
+        # self.request is the TCP socket connected to the client
+        self.data = self.request.recv(1024).strip()
+        self.logger.info( "{} wrote:".format(self.client_address[0]))
+        self.logger.info( self.data)
+
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                        </Box>
+                        <Box name="date" id="4" localization="8" tooltip="" x="616" y="534">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[from datetime import datetime
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        #put initialization code here
+        pass
+
+    def onUnload(self):
+        #put clean-up code here
+        pass
+
+    def onInput_onStart(self):
+        #self.onStopped() #activate the output of the box
+        date=datetime.today()
+        date1=date.ctime().split(" ")
+        self.logger.info(date1)
+        d=""
+        d1=""
+        for i in range(0,5):
+            d=d+str(date.timetuple()[i]) + "-"
+        d=d+str(date.timetuple()[5])
+        d1=d1+date1[1]+" "+date1[2]+", "+date1[4]+" "+date1[3]+" "
+        #d=d+str(date.timetuple()[1]) + "-" #il manque le 0
+        #d=d+str(date.timetuple()[2]) + "-" #il manque le 0
+        #d=d+str(date.timetuple()[3]) + "-"
+        #d=d+str(date.timetuple()[4]) + "-"
+        #d=d+str(date.timetuple()[5])
+        self.logger.info(d)
+        self.logger.info(d1)
+        self.onStopped()
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                        </Box>
+                        <Box name="SocketIP" id="2" localization="8" tooltip="" x="231" y="184">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[import socket
+import os
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+
+    def onLoad(self):
+        #put initialization code here
+        pass
+
+    def onUnload(self):
+        #put clean-up code here
+        pass
+
+    def onInput_onStart(self):
+        s =  socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        ipDest = self.getParameter("ipDest")
+        port =self.getParameter("port")
+        d,d1=self.date()
+        try:
+            s.connect(("193.48.125.65",50003))
+            self.logger.info("connected")
+            s.send("{\"AuteurPrecedent\":{\"nom\":\"Nao Orange\",\"IP\":\"193.48.125.63\"},\"Destinataire\":{\"nom\":\"Ordinateur 0\",\"IP\":\"193.48.125.65\"},\"Date\":{\"date_string\":"+d+",\"date\":\""+d1+"\"},\"type\":Requete,\"message\":\""+ipDest+"\"}"+os.linesep)
+            rep = s.recv(5000)
+            s.close()
+            rep=rep[:-2]
+        except Exception as ex:
+            self.logger.warning(ex)
+
+        s =  socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        try:
+            s.connect((ipDest, port))
+            self.logger.info("Connecte a " + ipDest + " sur le port " + str(port))
+        except Exception as ex:
+            self.logger.warning("Couldn't connect with the socket-serveur")
+            self.logger.warning(ex)
+
+        try:
+            s.send("{\"AuteurPrecedent\":{\"nom\":\"Nao Orange\",\"IP\":\"193.48.125.63\"},\"Destinataire\":{\"nom\":\"?\",\"IP\":\""+ipDest+"\"},\"Date\":{\"date_string\":"+d+",\"date\":\""+d1+"\"},\"type\":"+self.getParameter("type")+",\"message\":\""+self.getParameter("message")+"\"}")
+            self.logger.info("{\"AuteurPrecedent\":{\"nom\":\"Nao Orange\",\"IP\":\"193.48.125.63\"},\"Destinataire\":{\"nom\":\""+rep+"\",\"IP\":\""+ipDest+"\"},\"Date\":{\"date_string\":"+d+",\"date\":\""+d1+"\"},\"type\":"+self.getParameter("type")+",\"message\":\""+self.getParameter("message")+"\"}"+os.linesep)
+            self.logger.info("Message envoye")
+            s.close()
+        except Exception as ex:
+            self.logger.warning("Error message")
+            self.logger.warning(ex)
+
+
+        self.onInput_onStop()
+
+    def date(self):
+        date=datetime.today()
+        date1=date.ctime().split(" ")
+        d=""
+        d1=""
+        for i in range(0,5):
+            if date.timetuple()[i] < 10 :
+                d=d+"0"+str(date.timetuple()[i]) + "-"
+            else :
+                d=d+str(date.timetuple()[i]) + "-"
+        d=d+str(date.timetuple()[5])
+        d1=d1+date1[1]+" "+date1[2]+", "+date1[4]+" "+date1[3]+" "
+
+        if date.timetuple()[3] >= 12 :
+            d1=d1+"PM"
+        else :
+            d1=d1+"AM"
+
+        return(d,d1)
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+                            <Parameter name="type" inherits_from_parent="0" content_type="3" value="Ordre" default_value="Message" custom_choice="0" tooltip="" id="4" />
+                            <Parameter name="port" inherits_from_parent="0" content_type="1" value="50003" default_value="50000" min="0" max="100000" tooltip="" id="5" />
+                            <Parameter name="ipDest" inherits_from_parent="0" content_type="3" value="193.48.125.65" default_value="" custom_choice="0" tooltip="" id="6" />
+                            <Parameter name="message" inherits_from_parent="0" content_type="3" value="startSurveillance" default_value="Info" custom_choice="0" tooltip="" id="7" />
+                        </Box>
+                        <Link inputowner="1" indexofinput="2" outputowner="15" indexofoutput="5" />
+                        <Link inputowner="0" indexofinput="4" outputowner="1" indexofoutput="4" />
+                        <Link inputowner="0" indexofinput="4" outputowner="4" indexofoutput="4" />
+                        <Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="0" indexofinput="4" outputowner="2" indexofoutput="3" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheProject>
