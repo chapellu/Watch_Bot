@@ -53,8 +53,6 @@ if(isset($_GET['action'])){
     }
     else if($action==='camera'){
         exec('sudo bash /etc/init.d/watchbot-camera start > /dev/null 2>/dev/null &', $msg);
-        $camera = True;
-        var_dump($camera);die();
     }
     header('Location: '.BASE_URL.'/admin/robotino');
     exit();
@@ -81,14 +79,11 @@ if(isset($_POST['seuil'])){
 
 <div class="robotino col-sm-12">
     <div class="video col-sm-9">
-        <?php var_dump($camera); ?>
-        <?php if(isset($camera)): ?>
-            <img src="http://193.48.125.196:8080/?action=stream" alt=""/>
-        <?php else: ?>
-            <form action="<?=BASE_URL.'/admin/robotino/?action=camera';?>" method="post">
-                <input class="btn btn-success" type="submit" value="Lancer la camera">
-            </form>
-        <?php endif; ?>
+        <img src="http://193.48.125.196:8080/?action=stream" alt=""/>
+        <form action="<?=BASE_URL.'/admin/robotino/?action=camera';?>" method="post">
+            <input class="btn btn-success" type="submit" value="Lancer la camera">
+        </form>
+
     </div>
 
     <div class="padding col-sm-12"><br></div>
