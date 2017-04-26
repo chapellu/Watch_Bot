@@ -1,7 +1,6 @@
 <?php
 if(isset($_GET['action'])){
     $action = $_GET['action'];
-    var_dump($action);
     if($action==='avancer' || $action==='reculer' || $action==='droite' || $action ==='gauche'){
         error_reporting(E_ALL);
 
@@ -53,9 +52,7 @@ if(isset($_GET['action'])){
         fclose($log);
     }
     else if($action==='camera'){
-        echo 'ok';
-        exec('sudo  -u www-data bash /etc/init.d/watchbot-camera start > /dev/null 2>/dev/null &', $msg);
-        $camera = True;die();
+        exec('sudo bash /etc/init.d/watchbot-camera start > /dev/null 2>/dev/null &', $msg);
     }
     header('Location: '.BASE_URL.'/admin/robotino');
     exit();
