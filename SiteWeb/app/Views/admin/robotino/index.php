@@ -1,6 +1,6 @@
 <div class="robotino col-sm-12">
     <div class="video col-sm-9">
-        <video id="test_video" controls autoplay src="rtsp://193.48.125.196:8888/h264"></video>
+        <img src="http://193.48.125.196:8080/?action=stream" alt=""/>
     </div>
 
     <div class="padding col-sm-12"><br></div>
