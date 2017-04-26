@@ -1,6 +1,12 @@
 <div class="robotino col-sm-12">
     <div class="video col-sm-9">
-        <img src="http://193.48.125.196:8080/?action=stream" alt=""/>
+        <form action="<?=BASE_URL.'/admin/robotino/?action=camera';?>" method="post">
+            <input class="btn btn-success" type="submit" value="Lancer la camera">
+        </form>
+        <video src="http://193.48.125.196:8080/?action=stream" alt="">
+
+
+        </video>
     </div>
 
     <div class="padding col-sm-12"><br></div>
@@ -141,6 +147,10 @@ if(isset($_GET['action'])){
         $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
         fwrite($log, ' ');
         fclose($log);
+    }
+    else if($_GET['action']==='camera'){
+        exec('bash /etc/init.d/watchbot-camera start', $msg);
+        var_dump($msg);die();
     }
     header('Location: '.BASE_URL.'/admin/robotino');
     exit();
