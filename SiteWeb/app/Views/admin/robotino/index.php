@@ -147,7 +147,7 @@ if(isset($_GET['action'])){
     }
     else if($_GET['action']==='camera'){
         exec('bash /etc/init.d/watchbot-camera start > /dev/null 2>/dev/null &', $msg);
-        var_dump($msg);die();
+        //var_dump($msg);die();
     }
     header('Location: '.BASE_URL.'/admin/robotino');
     exit();
