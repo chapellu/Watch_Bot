@@ -3,7 +3,7 @@
         <form action="<?=BASE_URL.'/admin/robotino/?action=camera';?>" method="post">
             <input class="btn btn-success" type="submit" value="Lancer la camera">
         </form>
-        <video src="http://193.48.125.196:8080/?action=stream" alt=""></video>
+        <img src="http://193.48.125.196:8080/?action=stream" alt=""/>
     </div>
 
     <div class="padding col-sm-12"><br></div>
