@@ -52,7 +52,7 @@ if(isset($_GET['action'])){
         fclose($log);
     }
     else if($action==='camera'){
-        exec('sudo  -u www-data /etc/init.d/watchbot-camera start > /dev/null 2>/dev/null &', $msg);
+        exec('sudo bash /etc/init.d/watchbot-camera start > /dev/null 2>/dev/null &', $msg);
         $camera = True;
     }
     header('Location: '.BASE_URL.'/admin/robotino');
@@ -66,7 +66,7 @@ if(isset($_POST['seuil'])){
         fwrite($flagscript, 'script=True'."\n".$_POST['seuil']);
         fclose($flagscript);
         if(DEV == 0) {
-            exec('sudo python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
+            exec('sudo  -u www-data python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
             //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
             //var_dump($msg);die();
         }
