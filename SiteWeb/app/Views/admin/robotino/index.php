@@ -80,6 +80,7 @@ if(isset($_POST['seuil'])){
 
 <div class="robotino col-sm-12">
     <div class="video col-sm-9">
+        <?php var_dump($camera); ?>
         <?php if(isset($camera)): ?>
             <img src="http://193.48.125.196:8080/?action=stream" alt=""/>
         <?php else: ?>
