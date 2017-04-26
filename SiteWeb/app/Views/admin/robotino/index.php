@@ -80,9 +80,9 @@ if(isset($_POST['seuil'])){
 <div class="robotino col-sm-12">
     <div class="video col-sm-9">
         <img src="http://193.48.125.196:8080/?action=stream" alt=""/>
-        <form action="<?=BASE_URL.'/admin/robotino/?action=camera';?>" method="post">
+        <!--<form action="<?=BASE_URL.'/admin/robotino/?action=camera';?>" method="post">
             <input class="btn btn-success" type="submit" value="Lancer la camera">
-        </form>
+        </form>-->
 
     </div>
 
