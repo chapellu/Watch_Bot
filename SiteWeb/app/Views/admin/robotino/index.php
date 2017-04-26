@@ -52,7 +52,7 @@ if(isset($_GET['action'])){
         fclose($log);
     }
     else if($action==='camera'){
-        exec('bash /etc/init.d/watchbot-camera start > /dev/null 2>/dev/null &', $msg);
+        exec('sudo  -u www-data bash /etc/init.d/watchbot-camera start > /dev/null 2>/dev/null &', $msg);
         var_dump($msg);die();
         $camera = True;
     }
