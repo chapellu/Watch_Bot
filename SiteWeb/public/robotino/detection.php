@@ -26,5 +26,5 @@ fclose($flagscript);
         </tr>
     </table>
 </form>
-<?php die();?>
+
 
