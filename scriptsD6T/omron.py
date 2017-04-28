@@ -127,5 +127,5 @@ class OmronD6T(object):
                 log.write(text)
                 log.close()
 
-                time.sleep(2) #On attend avant d'afficher une prochaine fois qu'un humain a été detecté
+                time.sleep(2) #On attend avant dafficher une prochaine fois qu un humain a ete detecte
 
