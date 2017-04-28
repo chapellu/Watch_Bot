@@ -41,11 +41,7 @@ if(isset($_POST['seuil'])){
                 //var_dump($msg);die();
             }
         }else{
-
-            $msg = '{"AuteurPrecedent":{"nom":"Site web","IP":"193.48.125.196"},"Destinataire":{"nom":"Raspberry","IP":"193.48.125.196"},"Date":{"date_string":'.date("Y-m-d-H-i-s").',"date":"'.date("M d, Y H:i:s a").'"},"type":Ordre,"message":"startSurveillance: '.$_POST['seuil'].'"}
-        ';
-            App::sendSocket('193.48.125.196',50003,$msg);
-
+            App::sendSocket('Raspberry','193.48.125.196','Ordre','startSurveillance:'.$_POST['seuil']);
         }
 
     }
@@ -128,7 +124,8 @@ if(isset($_POST['seuil'])){
                             <!-- <?= $form->bouttonRobotino('start-detection', 'success', 'Lancer la detection');?>-->
                         </td>
                         <td>
-                            <?php if(App::getInstance()->detection_en_cours){
+                            <?php
+                            if(App::getInstance()->detection_en_cours){
                                 echo $form->bouttonRobotino('stop-detection','danger ', 'Arreter la detection');
                             } else {
                                 echo $form->bouttonRobotino('stop-detection','danger disabled', 'Arreter la detection');
