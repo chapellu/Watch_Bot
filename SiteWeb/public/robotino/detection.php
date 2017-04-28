@@ -17,10 +17,9 @@ fclose($flagscript);
         <tr>
             <td>
                 <input class="btn btn-success <?php if($detection){echo 'disabled';}?>" type="submit" value="Lancer la detection">
-            <?= 'ok';?>
             </td>
             <td>
-                <?= 'ok1';?>
+                <?= 'ok1';die();?>
                 <?php
                 if($detection){
                     echo $form->bouttonRobotino('stop-detection','danger ', 'Arreter la detection');
@@ -29,7 +28,7 @@ fclose($flagscript);
                 }
 
                 ?>
-                <?= 'ok2';?>
+                <?= 'ok2';die();?>
             </td>
         </tr>
     </table>
