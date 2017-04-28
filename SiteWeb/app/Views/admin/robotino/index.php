@@ -1,28 +1,127 @@
+<?php
+if(isset($_GET['action'])){
+    $action = $_GET['action'];
+    if($action==='avancer' || $action==='reculer' || $action==='droite' || $action ==='gauche'){
+        error_reporting(E_ALL);
+
+        /* Interdit l'exécution infinie du script, en attente de connexion. */
+        set_time_limit(0);
+
+        /* Active le vidage implicite des buffers de sortie, pour que nous
+         * puissions voir ce que nous lisons au fur et à mesure. */
+        ob_implicit_flush();
+
+        $address = '193.48.125.'.NUM_ROBOTINO;
+        $port = 50000;
+
+
+        if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
+            echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
+        } else {
+            echo "socket_create() a réussi\n";
+        }
+
+
+        echo "Essai de connexion à '$address' sur le port '$port'...";
+        $result = socket_connect($socket, $address, $port);
+        if ($socket === false) {
+            echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
+        } else {
+            echo "socket_connect() a réussi\n";
+        }
+
+        $msg = "POST /?action=".$action." HTTP/1.1\r\n\r\n";
+        $msg .= "Connection: Close\r\n\r\n";
+
+        echo "Envoi de la requête :".$msg;
+        socket_write($socket, $msg, strlen($msg));
+
+        echo "Fermeture du socket...";
+        socket_close($socket);
+        echo "Socket détruite\n\n";
+    }
+    else if($action==='stop-detection'){
+        if(SERVEUR == 0){
+            $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
+            fwrite($flagscript, 'script=False');
+            fclose($flagscript);
+        }
+        else{
+            error_reporting(E_ALL);
+            set_time_limit(0);
+            ob_implicit_flush();
+
+            $address = '193.48.125.196';
+            $port = 50003;
+
+
+            if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
+                echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
+            } else {
+                echo "socket_create() a réussi\n";
+            }
+
+
+            echo "Essai de connexion à '$address' sur le port '$port'...";
+            $result = socket_connect($socket, $address, $port);
+            if ($socket === false) {
+                echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
+            } else {
+                echo "socket_connect() a réussi\n";
+            }
+
+            $msg = '{"AuteurPrecedent":{"nom":"Site web","IP":"193.48.125.196"},"Destinataire":{"nom":"Raspberry","IP":"193.48.125.196"},"Date":{"date_string":'.date("Y-m-d-H-i-s").',"date":"'.date("M d, Y H:i:s a").'"},"type":Ordre,"message":"startSurveillance"}
+        ';
+
+
+
+            echo "Envoi de la requête :".$msg;
+            socket_write($socket, $msg, strlen($msg));
+
+            echo "Fermeture du socket...";
+            socket_close($socket);
+            echo "Socket détruite\n\n";
+            die();
+        }
+    }
+    else if($action==='clear-logs'){
+        $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
+        fwrite($log, ' ');
+        fclose($log);
+    }
+    else if($action==='camera'){
+        exec('sudo -u www-data bash /etc/init.d/watchbot-camera start > /dev/null 2>/dev/null &', $msg);
+    }
+    header('Location: '.BASE_URL.'/admin/robotino');
+    exit();
+}
+if(isset($_POST['seuil'])){
+    if($_POST['seuil']==='' || $_POST['seuil']<0){
+        echo '<script>alert("Vous devez saisir un seuil (positif)")</script>';
+    } else{
+        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
+        fwrite($flagscript, 'script=True'."\n".$_POST['seuil']);
+        fclose($flagscript);
+        if(DEV == 0) {
+            exec('sudo  -u www-data python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
+            //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
+            //var_dump($msg);die();
+        }
+
+    }
+}
+
+?>
+
+
+
 <div class="robotino col-sm-12">
     <div class="video col-sm-9">
-        <div id="container">
-            <div class="overlayWrapper">
-                <video id="remote-video" autoplay="" width="640" height="480">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
-        <div id="controls">
-            <button type=button id="pause" onclick="pause();" title="pause or resume local player">Pause/Play</button>
-            <button type=button id="mute" onclick="mute();" title="mute or unmute remote audio source">Muter/Demuter</button>
-            <button type=button id="fullscreen" onclick="fullscreen();">Plein écran</button>
-            <button type=button id="record" onclick="start_stop_record();" title="start or stop recording audio/video">Enregistrer</button>
-        </div>
-        <div id="commands">
-            <details open>
-                <summary><b>Advanced options</b></summary>
-                <fieldset>
-                    <span>Remote Peer/Signalling Server Address: </span><input required type="text" id="signalling_server" value="193.48.125.196:8080" title="<host>:<port>, default address is autodetected"/><br>
-                </fieldset>
-            </details>
-            <button id="start" style="background-color: green; color: white" onclick="start();">Call!</button>
-            <button disabled id="stop" style="background-color: red; color: white" onclick="stop();">Hang up</button>
-        </div>
+        <img src="http://193.48.125.196:8080/?action=stream" alt=""/>
+        <!--<form action="<?=BASE_URL.'/admin/robotino/?action=camera';?>" method="post">
+            <input class="btn btn-success" type="submit" value="Lancer la camera">
+        </form>-->
+
     </div>
 
     <div class="padding col-sm-12"><br></div>
@@ -86,7 +185,7 @@
                     <tr>
                         <td>
                             <input class="btn btn-success" type="submit" value="Lancer la detection">
-                           <!-- <?= $form->bouttonRobotino('start-detection', 'success', 'Lancer la detection');?>-->
+                            <!-- <?= $form->bouttonRobotino('start-detection', 'success', 'Lancer la detection');?>-->
                         </td>
                         <td>
                             <?= $form->bouttonRobotino('stop-detection','danger', 'Arreter la detection');?>
@@ -111,77 +210,4 @@
 </div>
 
 
-
-<?php
-if(isset($_GET['action'])){
-    if($_GET['action']==='avancer' || $_GET['action']==='reculer' || $_GET['action']==='droite' || $_GET['action'] ==='gauche'){
-        error_reporting(E_ALL);
-
-        /* Interdit l'exécution infinie du script, en attente de connexion. */
-        set_time_limit(0);
-
-        /* Active le vidage implicite des buffers de sortie, pour que nous
-         * puissions voir ce que nous lisons au fur et à mesure. */
-        ob_implicit_flush();
-
-        $address = '193.48.125.'.NUM_ROBOTINO;
-        $port = 50000;
-
-
-        if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
-            echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
-        } else {
-            echo "socket_create() a réussi\n";
-        }
-
-
-        echo "Essai de connexion à '$address' sur le port '$port'...";
-        $result = socket_connect($socket, $address, $port);
-        if ($socket === false) {
-            echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
-        } else {
-            echo "socket_connect() a réussi\n";
-        }
-
-        $msg = "POST /?action=".$_GET['action']." HTTP/1.1\r\n\r\n";
-        $msg .= "Connection: Close\r\n\r\n";
-        $out = "";
-
-        echo "Envoi de la requête :".$msg;
-        socket_write($socket, $msg, strlen($msg));
-
-        echo "Fermeture du socket...";
-        socket_close($socket);
-        echo "Socket détruite\n\n";
-    }
-    else if($_GET['action']==='stop-detection'){
-        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
-        fwrite($flagscript, 'script=False');
-        fclose($flagscript);
-    }
-    else if($_GET['action']==='clear-logs'){
-        $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
-        fwrite($log, ' ');
-        fclose($log);
-    }
-    header('Location: '.BASE_URL.'/admin/robotino');
-    exit();
-}
-if(isset($_POST['seuil'])){
-    if($_POST['seuil']==='' || $_POST['seuil']<0){
-        echo '<script>alert("Vous devez saisir un seuil (positif)")</script>';
-    } else{
-        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
-        fwrite($flagscript, 'script=True'."\n".$_POST['seuil']);
-        fclose($flagscript);
-        if(DEV == 0) {
-            exec('sudo  -u www-data python ' . ROOT_SCRIPT . 'mainscript.py > /dev/null 2>/dev/null &');
-            //exec('sudo  -u www-data python '.ROOT_SCRIPT.'mainscript.py 2>&1', $msg);
-            //var_dump($msg);die();
-        }
-
-    }
-}
-
-?>
 

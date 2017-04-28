@@ -256,18 +256,18 @@ h2.title {
 /*-------------------------------------------
 ----------------Responsive-------------------
 ---------------------------------------------*/
-@media (min-width:768px) and (max-width:992px){
+@media (min-width:731px){
     .padding {
         padding-bottom:420px;
     }
 }
-@media (min-width:992px){
+@media (min-width:1200px){
     .padding {
         padding-bottom:210px;
     }
 }
 
-@media (max-width:750px){
+@media (max-width:730px){
     .padding {
         padding-bottom:630px;
     }

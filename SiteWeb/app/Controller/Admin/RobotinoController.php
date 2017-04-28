@@ -18,7 +18,7 @@ class RobotinoController extends AppController {
         $this->render('admin.robotino.index', compact('form'));
     }
 
-    public function camera(){
-        $this->render('admin.robotino.camera', compact(''));
-    }
+
+
+
 }

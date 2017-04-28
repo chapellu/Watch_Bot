@@ -25,6 +25,5 @@ if __name__ == '__main__':
                     seuil = line
                 i += 1
 
+        omron.read('exact-temp', float(seuil))
         omron.read('auto', float(seuil))
-
-        time.sleep(1)

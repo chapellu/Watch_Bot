@@ -24,7 +24,6 @@
                             <li><a href="<?= BASE_URL.'/admin/category/';?>">Gérer les catégories</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="<?= BASE_URL.'/admin/robotino/';?>">Déplacement robotino</a></li>
-                            <li><a href="<?= BASE_URL.'/admin/robotino/camera';?>">Paramétrage caméra</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>
