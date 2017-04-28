@@ -1,6 +1,13 @@
 package watchbot;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +37,7 @@ public class Watchbot implements InterfaceMessageRecu{
 			e.printStackTrace();
 		}
 		 LOGGER.addHandler(fileTxt);
+		 LOGGER.setLevel(Level.ALL);
 	}
 	
 	public static Watchbot create(){
@@ -44,6 +52,35 @@ public class Watchbot implements InterfaceMessageRecu{
 		if (etat==Etat.Repos) {
 			etat=Etat.Surveillance;
 			LOGGER.log(Level.FINE, "Surveillance started");
+			String chaine="";
+	        String fichier ="/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt";
+
+	        //création ou ajout dans le fichier texte
+	        try {
+	            FileWriter fw = new FileWriter (fichier);
+	            System.out.println(fw.toString());
+	            BufferedWriter bw = new BufferedWriter (fw);
+	            PrintWriter fichierSortie = new PrintWriter (bw);
+	            fichierSortie.println ("script=True"+"\n"+"28");
+	            fichierSortie.close();
+	            System.out.println("Le fichier " + fichier + " a été créé!");
+	        }
+	        catch (Exception e){
+	            System.out.println(e.toString());
+	        }
+	        
+	        ProcessBuilder pb = new ProcessBuilder("python","/var/www/Watch_Bot/scriptsD6T/mainscript.py");
+	        try {
+	        	System.out.println("ninja");
+	        	Process p = Runtime.getRuntime().exec("sudo python /var/www/html/Watch_Bot/scriptsD6T/mainscript.py > /dev/null 2>/dev/null &");
+				/*Process p = pb.start();
+				System.out.println(p.getOutputStream().toString());
+				System.out.println("plop");*/
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        
 		}
 	}
 	
@@ -95,9 +132,10 @@ public class Watchbot implements InterfaceMessageRecu{
 	
 	private void handleOrder(Message mes) {
 		try { 
-			switch(Ordre.valueOf(mes.getMessage())){
+			switch(Ordre.valueOf(mes.getMessage().split(":")[0])){
 			case startSurveillance:
 				startSurveillance();
+				//System.out.println(mes.getMessage().split(":")[1]);
 				break;
 			case stopSurveillance:
 				stopSurveillance();
