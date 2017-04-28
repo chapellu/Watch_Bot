@@ -42,9 +42,12 @@ if(isset($_GET['action'])){
         echo "Socket détruite\n\n";
     }
     else if($action==='stop-detection'){
-        $flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
-        fwrite($flagscript, 'script=False');
-        fclose($flagscript);
+        //$flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
+        //fwrite($flagscript, 'script=False');
+        //fclose($flagscript);
+        exec('sudo -u www-data java -cp /home/watchbot/Watch_bot/Communication/APPRS2018/bin/watchbot/ GestionMessageSiteWeb startSurveillance', $output);
+       var_dump($output);die();
+
     }
     else if($action==='clear-logs'){
         $log = fopen(ROOT_SCRIPT.'log.txt', 'w');
@@ -147,7 +150,7 @@ if(isset($_POST['seuil'])){
                     <tr>
                         <td>
                             <input class="btn btn-success" type="submit" value="Lancer la detection">
-                           <!-- <?= $form->bouttonRobotino('start-detection', 'success', 'Lancer la detection');?>-->
+                            <!-- <?= $form->bouttonRobotino('start-detection', 'success', 'Lancer la detection');?>-->
                         </td>
                         <td>
                             <?= $form->bouttonRobotino('stop-detection','danger', 'Arreter la detection');?>
