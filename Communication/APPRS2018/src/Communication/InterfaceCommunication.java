@@ -32,12 +32,13 @@ public class InterfaceCommunication implements InterfaceMessageRecu{
 		// On recupere l'adresse IP de la machine afin de definir celui qui envoi le message
 		try {
 			fileTxt = new FileHandler("InterfaceCommunication.txt");
+			LOGGER.addHandler(fileTxt);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}
-		 LOGGER.addHandler(fileTxt);
+		 
 		 
 		try {
 			ip = InetAddress.getLocalHost ().getHostAddress ();
@@ -54,10 +55,10 @@ public class InterfaceCommunication implements InterfaceMessageRecu{
 	
 	public static InterfaceCommunication newInterfaceCommunication(){
 		if(instance==null){
-			LOGGER.log(Level.FINE, "Creating instance of InterfaceCommunication");
+			LOGGER.log(Level.INFO, "Creating instance of InterfaceCommunication");
 			instance = new InterfaceCommunication();
 		}
-		LOGGER.log(Level.FINE, "Returning instance of InterfaceCommunication");
+		LOGGER.log(Level.INFO, "Returning instance of InterfaceCommunication");
 		return(instance);
 	}
 	
@@ -133,7 +134,7 @@ public class InterfaceCommunication implements InterfaceMessageRecu{
 		Gson gson = builder.create();
 		return(gson.toJson(mes));
 		*/
-		System.out.println("Recu " + mes);
+		LOGGER.log(Level.INFO,"Recu " + mes);
 	}
 
 	public void newMessageRecu(Message mess) {
