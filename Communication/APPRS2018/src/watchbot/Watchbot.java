@@ -49,7 +49,7 @@ public class Watchbot implements InterfaceMessageRecu{
 		}
 		
 	public void startSurveillance(String seuil){
-		if (etat==Etat.Repos) {
+		//if (etat==Etat.Repos) {
 			String fichier ="/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt";
 
 	        //creation ou ajout dans le fichier texte
@@ -66,7 +66,7 @@ public class Watchbot implements InterfaceMessageRecu{
 	        
 	        //Lancement du script 
 	        try {
-	        	Process p = Runtime.getRuntime().exec("sudo python /var/www/html/Watch_Bot/scriptsD6T/mainscript.py > /dev/null 2>/dev/null &");				
+	        	Process p = Runtime.getRuntime().exec("");				
 	        	etat=Etat.Surveillance;
 				LOGGER.log(Level.FINE, "Surveillance started");
 	        } catch (IOException e) {
@@ -74,11 +74,11 @@ public class Watchbot implements InterfaceMessageRecu{
 				e.printStackTrace();
 			}
 	        
-		}
+		//}
 	}
 	
 	public void stopSurveillance(){
-		if (etat==Etat.Surveillance) {
+		//if (etat==Etat.Surveillance) {
 	        String fichier ="/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt";
 
 			 //création ou ajout dans le fichier texte
@@ -86,7 +86,7 @@ public class Watchbot implements InterfaceMessageRecu{
 	            FileWriter fw = new FileWriter (fichier);
 	            BufferedWriter bw = new BufferedWriter (fw);
 	            PrintWriter fichierSortie = new PrintWriter (bw);
-	            fichierSortie.println ("script=True"+"\n"+"0");
+	            fichierSortie.println ("script=False"+"\n"+"0");
 	            fichierSortie.close();
 	            etat=Etat.Repos;
 				LOGGER.log(Level.FINE, "Surveillance stopped");
@@ -95,7 +95,7 @@ public class Watchbot implements InterfaceMessageRecu{
 	            System.out.println(e.toString());
 	        }
 			
-		}
+		//}
 	}
 	
 	public void startCartographie(){
@@ -152,6 +152,7 @@ public class Watchbot implements InterfaceMessageRecu{
 			//On lance la m
 			switch(ordre){
 			case startSurveillance:
+				
 				startSurveillance(arg);
 				break;
 			case stopSurveillance:
