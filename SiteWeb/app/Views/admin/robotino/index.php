@@ -115,8 +115,9 @@ if(isset($_POST['seuil'])){
                     <span class="input-group-addon" id="basic-addon1">Seuil</span>
                     <input type="number" class="form-control" name="seuil" aria-describedby="basic-addon1">
                 </div>
-                <div id="d6t"></div>
+
             </form>
+            <div id="d6t"></div>
         </div>
 
         <div class="logs bordered">
