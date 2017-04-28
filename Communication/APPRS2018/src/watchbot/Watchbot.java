@@ -1,5 +1,10 @@
 package watchbot;
 
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import Communication.InterfaceCommunication;
 import Communication.InterfaceMessageRecu;
 import Communication.Message;
@@ -11,41 +16,55 @@ public class Watchbot implements InterfaceMessageRecu{
 	private static Watchbot instance = null;
 	private Etat etat = Etat.Repos;
 	private boolean utilisateurPresent = true;
+	private static final Logger LOGGER = Logger.getLogger( Watchbot.class.getName() );
+	private static FileHandler fileTxt;
 	
 	private Watchbot(){
-		
+		try {
+			fileTxt = new FileHandler("Watchbot.txt");
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 LOGGER.addHandler(fileTxt);
 	}
 	
 	public static Watchbot create(){
-		if (instance == null){instance = new Watchbot();}
+		if (instance == null){
+			LOGGER.log(Level.FINE, "Creating instance of Watchbot");
+			instance = new Watchbot();}
+		LOGGER.log(Level.FINE, "Returning instance of Watchbot");
 		return(instance);
 		}
 		
 	public void startSurveillance(){
 		if (etat==Etat.Repos) {
 			etat=Etat.Surveillance;
-			System.out.println("surveillance started");
+			LOGGER.log(Level.FINE, "Surveillance started");
 		}
 	}
 	
 	public void stopSurveillance(){
 		if (etat==Etat.Surveillance) {
 			etat=Etat.Repos;
-			System.out.println("surveillance stopped");
+			LOGGER.log(Level.FINE, "Surveillance stopped");
 		}
 	}
 	
 	public void startCartographie(){
 		if (etat==Etat.Repos) {
 			etat=Etat.Cartographie;
-			System.out.println("Cartographie started");
+			LOGGER.log(Level.FINE, "Cartographie started");
 		}
 	}
 	
 	public void stopCartographie(){
 		if (etat==Etat.Cartographie) {
 			etat=Etat.Repos;
-			System.out.println("Cartographie stopped");
+			LOGGER.log(Level.FINE, "Cartographie stopped");
 		}
 	}
 
@@ -70,7 +89,7 @@ public class Watchbot implements InterfaceMessageRecu{
 		default:
 			break;
 		}
-		//System.out.println(mes.getMessage());
+		LOGGER.log(Level.WARNING,mes.getMessage());
 		
 	}
 	
@@ -98,11 +117,11 @@ public class Watchbot implements InterfaceMessageRecu{
 			case droite:
 				break;
 			default:
-				System.out.println(mes);
+				LOGGER.log(Level.FINE, mes.toString());
 				break;
 			}
 		}
-		catch (Exception e){System.out.println(e);};
+		catch (Exception e){LOGGER.log(Level.SEVERE,e.toString(),e);};
 		
 		
 	}
@@ -110,14 +129,14 @@ public class Watchbot implements InterfaceMessageRecu{
 	private void handleMessage(Message mes) {
 		if (mes.getMessage().equals("leaving")){
 			utilisateurPresent = false;
-			System.out.println(utilisateurPresent);
+			LOGGER.log(Level.FINE, "false");
 		}
 		else if (mes.getMessage().equals("coming")){
 			utilisateurPresent = true;
-			System.out.println(utilisateurPresent);
+			LOGGER.log(Level.FINE, "true");
 		}
 		else{
-			System.out.println("ninja");
+			LOGGER.log(Level.FINE, "handleMessage error");
 		}
 		
 	}
@@ -144,13 +163,13 @@ public class Watchbot implements InterfaceMessageRecu{
 		InterfaceCommunication com = InterfaceCommunication.newInterfaceCommunication();
 		
 		if(InterfaceCommunication.validate(mes)){
-			System.out.println("ip: "+mes+" \n");
-			System.out.println(com.getBd().getNom(mes)+" \n");
+			LOGGER.log(Level.FINE, "ip: "+mes+" \n");
+			LOGGER.log(Level.FINE, com.getBd().getNom(mes)+" \n");
 			com.sendMessage("Nao Orange", "Message", com.getBd().getNom(mes));
 		}
 		else{
-			System.out.println("nom destinataire: "+mes +" \n");
-			System.out.println(com.getBd().getIP(mes));
+			LOGGER.log(Level.FINE, "nom destinataire: "+mes +" \n");
+			LOGGER.log(Level.FINE, com.getBd().getIP(mes));
 			com.sendMessage("Nao Orange", "Message", com.getBd().getIP(mes));
 		}
 	}

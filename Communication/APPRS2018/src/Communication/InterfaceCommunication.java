@@ -31,23 +31,23 @@ public class InterfaceCommunication implements InterfaceMessageRecu{
 	private InterfaceCommunication(){
 		// On recupere l'adresse IP de la machine afin de definir celui qui envoi le message
 		try {
+			fileTxt = new FileHandler("InterfaceCommunication.txt");
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+		 LOGGER.addHandler(fileTxt);
+		 
+		try {
 			ip = InetAddress.getLocalHost ().getHostAddress ();
 			bd = BaseDeDonnee.connect();
 			nom = bd.getNom(ip);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE,e.toString(),e);
 		}
-		try {
-			fileTxt = new FileHandler("InterfaceCommunication.txt");
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 LOGGER.addHandler(fileTxt);
+		
 		
 		// Acces base de donnee
 	};
