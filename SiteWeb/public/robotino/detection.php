@@ -4,7 +4,6 @@ $flagscript = fopen('/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt', 'r');
 $ligne = fgets($flagscript);
 $seuil = fgets($flagscript);
 $detection = strstr($ligne,'script=False') ? false : true;
-var_dump($ligne, $seuil);
 fclose($flagscript);
 
 ?>
