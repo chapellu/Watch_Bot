@@ -3,7 +3,7 @@
 $detection = fopen('/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt', 'r');
 $content='';
 if($detection){
-    var_dump($detection);
+    var_dump($detection);die();
     $ligne = fgets($detection);
     $seuil = fgets($detection) ? fgets($detection) : '0';
     App::getInstance()->detection_en_cours = strstr($ligne,'script=False') ? True : False;
@@ -11,7 +11,7 @@ if($detection){
 } else{
     $seuil = "";
 }
-die();
+
 ?>
 
 <form action="<?=BASE_URL.'/admin/robotino/';?>" method="post">
