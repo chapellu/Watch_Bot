@@ -47,40 +47,10 @@ if(isset($_GET['action'])){
             fclose($flagscript);
         }
         else{
-            error_reporting(E_ALL);
-            set_time_limit(0);
-            ob_implicit_flush();
-
-            $address = '193.48.125.196';
-            $port = 50003;
-
-
-            if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
-                echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
-            } else {
-                echo "socket_create() a réussi\n";
-            }
-
-
-            echo "Essai de connexion à '$address' sur le port '$port'...";
-            $result = socket_connect($socket, $address, $port);
-            if ($socket === false) {
-                echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
-            } else {
-                echo "socket_connect() a réussi\n";
-            }
-
             $msg = '{"AuteurPrecedent":{"nom":"Site web","IP":"193.48.125.196"},"Destinataire":{"nom":"Raspberry","IP":"193.48.125.196"},"Date":{"date_string":'.date("Y-m-d-H-i-s").',"date":"'.date("M d, Y H:i:s a").'"},"type":Ordre,"message":"startSurveillance"}
         ';
 
-
-
-            echo "Envoi de la requête :".$msg;
-            socket_write($socket, $msg, strlen($msg));
-
-            echo "Fermeture du socket...";
-            socket_close($socket);
-            echo "Socket détruite\n\n";
+            App::sendSocket('193.48.125.196',50003,$msg);
             die();
         }
     }
