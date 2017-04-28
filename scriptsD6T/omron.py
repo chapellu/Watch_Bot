@@ -109,7 +109,7 @@ class OmronD6T(object):
 
                 for i in range(0, 4):
                     tempPixel = values[j + 4 * i]  # Recupere les valeurs des pixels colonne par colonne
-                    if tempPixel >= seuil:
+                    if tempPixel >= seuil and tempPixel < 50:
                         compteurDePixels += 1
                 if compteurDePixels >= 3:
                     compteurDeColonnes += 1
