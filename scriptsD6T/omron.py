@@ -95,14 +95,13 @@ class OmronD6T(object):
 
         elif mode=='auto':
             # Recupere les valeurs sous formes dun tableau
-            print "Valeurs recuperees : "
             for j in range(0, 4):
                 for i in range(0, 4):
                     values.append(round(self.temperature[i + 4 * j], 1))
             print values
             print ''
             print ''
-            print "Valeurs modifiees : "
+
             # Compteur de valeurs superieurs au seuil
             compteurDeColonnes = 0
             for j in range(0, 4):
@@ -110,7 +109,6 @@ class OmronD6T(object):
 
                 for i in range(0, 4):
                     tempPixel = values[j + 4 * i]  # Recupere les valeurs des pixels colonne par colonne
-                    print tempPixel, '--'
                     if tempPixel >= seuil:
                         compteurDePixels += 1
                 if compteurDePixels >= 3:
