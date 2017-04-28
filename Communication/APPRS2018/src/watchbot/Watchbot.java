@@ -48,35 +48,28 @@ public class Watchbot implements InterfaceMessageRecu{
 		return(instance);
 		}
 		
-	public void startSurveillance(){
+	public void startSurveillance(String seuil){
 		if (etat==Etat.Repos) {
-			etat=Etat.Surveillance;
-			LOGGER.log(Level.FINE, "Surveillance started");
-			String chaine="";
-	        String fichier ="/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt";
+			String fichier ="/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt";
 
-	        //création ou ajout dans le fichier texte
+	        //creation ou ajout dans le fichier texte
 	        try {
 	            FileWriter fw = new FileWriter (fichier);
-	            System.out.println(fw.toString());
 	            BufferedWriter bw = new BufferedWriter (fw);
-	            PrintWriter fichierSortie = new PrintWriter (bw);
-	            fichierSortie.println ("script=True"+"\n"+"28");
+	            PrintWriter fichierSortie = new PrintWriter (bw);	            
+	            fichierSortie.println ("script=True"+"\n"+seuil);
 	            fichierSortie.close();
-	            System.out.println("Le fichier " + fichier + " a été créé!");
 	        }
 	        catch (Exception e){
 	            System.out.println(e.toString());
 	        }
 	        
-	        ProcessBuilder pb = new ProcessBuilder("python","/var/www/Watch_Bot/scriptsD6T/mainscript.py");
+	        //Lancement du script 
 	        try {
-	        	System.out.println("ninja");
-	        	Process p = Runtime.getRuntime().exec("sudo python /var/www/html/Watch_Bot/scriptsD6T/mainscript.py > /dev/null 2>/dev/null &");
-				/*Process p = pb.start();
-				System.out.println(p.getOutputStream().toString());
-				System.out.println("plop");*/
-			} catch (IOException e) {
+	        	Process p = Runtime.getRuntime().exec("sudo python /var/www/html/Watch_Bot/scriptsD6T/mainscript.py > /dev/null 2>/dev/null &");				
+	        	etat=Etat.Surveillance;
+				LOGGER.log(Level.FINE, "Surveillance started");
+	        } catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -86,8 +79,22 @@ public class Watchbot implements InterfaceMessageRecu{
 	
 	public void stopSurveillance(){
 		if (etat==Etat.Surveillance) {
-			etat=Etat.Repos;
-			LOGGER.log(Level.FINE, "Surveillance stopped");
+	        String fichier ="/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt";
+
+			 //création ou ajout dans le fichier texte
+	        try {
+	            FileWriter fw = new FileWriter (fichier);
+	            BufferedWriter bw = new BufferedWriter (fw);
+	            PrintWriter fichierSortie = new PrintWriter (bw);
+	            fichierSortie.println ("script=True"+"\n"+"0");
+	            fichierSortie.close();
+	            etat=Etat.Repos;
+				LOGGER.log(Level.FINE, "Surveillance stopped");
+	        }
+	        catch (Exception e){
+	            System.out.println(e.toString());
+	        }
+			
 		}
 	}
 	
@@ -132,10 +139,20 @@ public class Watchbot implements InterfaceMessageRecu{
 	
 	private void handleOrder(Message mes) {
 		try { 
-			switch(Ordre.valueOf(mes.getMessage().split(":")[0])){
+			//On regarde si on a des arguments
+			Ordre ordre;
+			String arg = "";
+			if(mes.getMessage().contains(":")){
+				ordre = Ordre.valueOf(mes.getMessage().split(":")[0]);
+				arg = mes.getMessage().split(":")[1];
+			} else {
+				ordre = Ordre.valueOf(mes.getMessage());
+			}
+			
+			//On lance la m
+			switch(ordre){
 			case startSurveillance:
-				startSurveillance();
-				//System.out.println(mes.getMessage().split(":")[1]);
+				startSurveillance(arg);
 				break;
 			case stopSurveillance:
 				stopSurveillance();
