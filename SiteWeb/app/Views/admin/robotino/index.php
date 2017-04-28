@@ -81,7 +81,7 @@ if(isset($_GET['action'])){
             echo "Fermeture du socket...";
             socket_close($socket);
             echo "Socket détruite\n\n";
-
+            die();
         }
     }
     else if($action==='clear-logs'){
