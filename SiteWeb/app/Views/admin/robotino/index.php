@@ -45,7 +45,7 @@ if(isset($_GET['action'])){
         //$flagscript = fopen(ROOT_SCRIPT.'flagscript.txt', 'w');
         //fwrite($flagscript, 'script=False');
         //fclose($flagscript);
-        exec('sudo -u www-data java -cp /home/watchbot/Watch_bot/Communication/APPRS2018/bin/watchbot/ GestionMessageSiteWeb startSurveillance', $output);
+        exec('sudo -u www-data java -cp /home/watchbot/Watch_bot/Communication/APPRS2018/bin/ watchbot.GestionMessageSiteWeb startSurveillance', $output);
        var_dump($output);die();
 
     }
