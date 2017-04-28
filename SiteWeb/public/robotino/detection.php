@@ -5,9 +5,9 @@ $content='';
 if($detection){
     $ligne = fgets($detection);
     $seuil = fgets($detection) ? fgets($detection) : '0';
-    var_dump($ligne,$seuil);
+    var_dump(strstr($ligne,'script=False'));die();
     App::getInstance()->detection_en_cours = strstr($ligne,'script=False') ? True : False;
-    var_dump(App::getInstance()->detection_en_cours);die();
+    var_dump(App::getInstance()->detection_en_cours);
     fclose($detection);
 } else{
     $seuil = "";
