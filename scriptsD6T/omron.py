@@ -114,7 +114,7 @@ class OmronD6T(object):
                 if compteurDePixels >= 3:
                     compteurDeColonnes += 1
 
-            if compteurDeColonnes >= 2:
+            if compteurDeColonnes >= 1:
                 print "On detecte"
                 log = open(self.chemin+"log.txt", "a")
                 log.write("<tr><td>" + datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "-- Humain detecte" + "</td></tr>\n")
