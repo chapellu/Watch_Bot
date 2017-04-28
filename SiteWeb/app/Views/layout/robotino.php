@@ -28,7 +28,7 @@
         <?php if(DEV == 0):?>
             <script type="text/javascript">
                 $(document).ready( function() {
-                    var auto_refresh = setInterval(function () {
+                    setInterval(function () {
                         $("#log").load(<?='"'.BASE_URL.'/public/robotino/log.php"';?>).fadeIn("slow");
                     }, 1000);
                 });

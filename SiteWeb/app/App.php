@@ -11,6 +11,7 @@ class App
     public $name_website = 'Watchbot';
     public $title = "APPRS2018 - Watchbot";
     public $flash;
+    public $detection_en_cours = False;
 
     public static function getInstance()
     {
@@ -58,12 +59,13 @@ class App
         Core\Url\Router::prefix('admin','admin'); //Mot clé pour entrer dans le mode admin
     }
 
-    public static function sendSocket($address, $port, $msg){
+    public static function sendSocket($nomdest, $addressdest, $type, $msg){
         error_reporting(E_ALL);
         set_time_limit(0);
         ob_implicit_flush();
 
-
+        $addressRPI = '193.48.125.196';
+        $portRPI    = '50003';
 
         if (($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === false) {
             echo "socket_create() a échoué : raison :  " . socket_strerror(socket_last_error()) . "\n";
@@ -72,13 +74,17 @@ class App
         }
 
 
-        echo "Essai de connexion à '$address' sur le port '$port'...";
-        $result = socket_connect($socket, $address, $port);
+        echo "Essai de connexion à '$addressRPI' sur le port '$portRPI'...";
+        $result = socket_connect($socket, $addressRPI, $portRPI);
         if ($socket === false) {
             echo "socket_connect() a échoué : raison : ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
         } else {
             echo "socket_connect() a réussi\n";
         }
+
+        //Construction de la requete JSON
+        $msg = '{"AuteurPrecedent":{"nom":"Site web","IP":"193.48.125.196"},"Destinataire":{"nom":"'.$nomdest.'","IP":"'.$addressdest.'"},"Date":{"date_string":'.date("Y-m-d-H-i-s").',"date":"'.date("M d, Y H:i:s a").'"},"type":'.$type.',"message":"'.$msg.'"}
+        ';
 
         echo "Envoi de la requête :".$msg;
         socket_write($socket, $msg, strlen($msg));

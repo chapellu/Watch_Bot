@@ -1,10 +1,10 @@
 <?php
 if(isset($_GET['action'])){
     $action = $_GET['action'];
-    if($action==='avancer' || $action==='reculer' || $action==='droite' || $action ==='gauche'){
+    if($action==='avance' || $action==='recule' || $action==='droite' || $action ==='gauche'){
         $msg = "POST /?action=".$action." HTTP/1.1\r\n\r\n";
         $msg .= "Connection: Close\r\n\r\n";
-        App::sendSocket('193.48.125.'.NUM_ROBOTINO,50000,$msg);
+        App::sendSocket('Robotino','193.48.125.'.NUM_ROBOTINO,'Ordre',$action);
     }
     else if($action==='stop-detection'){
         if(SERVEUR == 0){
@@ -13,9 +13,7 @@ if(isset($_GET['action'])){
             fclose($flagscript);
         }
         else{
-            $msg = '{"AuteurPrecedent":{"nom":"Site web","IP":"193.48.125.196"},"Destinataire":{"nom":"Raspberry","IP":"193.48.125.196"},"Date":{"date_string":'.date("Y-m-d-H-i-s").',"date":"'.date("M d, Y H:i:s a").'"},"type":Ordre,"message":"stopSurveillance"}
-        ';
-            App::sendSocket('193.48.125.196',50003,$msg);
+            App::sendSocket('Raspberry','193.48.125.196','Ordre','stopSurveillance');
         }
     }
     else if($action==='clear-logs'){
@@ -78,11 +76,11 @@ if(isset($_POST['seuil'])){
                </ul>
            </dd>
        </dl>
-    </div>-->
+    </div>
 
     <div class="carte">
         <img class="img_carte" src="<?= BASE_URL.'/public/img/carte.png';?>" alt="">
-    </div>
+    </div>-->
 
     <div class="commandes">
         <div class="commandes-manuelles bordered">
@@ -92,7 +90,7 @@ if(isset($_POST['seuil'])){
                     <tr>
                         <td></td>
                         <td>
-                            <?= $form->bouttonRobotino('avancer', 'primary');?>
+                            <?= $form->bouttonRobotino('avance', 'primary');?>
                         </td>
                     </tr>
                     <tr>
@@ -107,7 +105,7 @@ if(isset($_POST['seuil'])){
                     <tr>
                         <td></td>
                         <td>
-                            <?= $form->bouttonRobotino('reculer', 'primary');?>
+                            <?= $form->bouttonRobotino('recule', 'primary');?>
                         </td>
                     </tr>
                 </table>
@@ -126,11 +124,18 @@ if(isset($_POST['seuil'])){
                 <table class="table-with-spaces">
                     <tr>
                         <td>
-                            <input class="btn btn-success" type="submit" value="Lancer la detection">
+                            <input class="btn btn-success <?php if(App::getInstance()->detection_en_cours){echo 'disabled';}?>" type="submit" value="Lancer la detection">
                             <!-- <?= $form->bouttonRobotino('start-detection', 'success', 'Lancer la detection');?>-->
                         </td>
                         <td>
-                            <?= $form->bouttonRobotino('stop-detection','danger', 'Arreter la detection');?>
+                            <?php if(App::getInstance()->detection_en_cours){
+                                echo $form->bouttonRobotino('stop-detection','danger ', 'Arreter la detection');
+                            } else {
+                                echo $form->bouttonRobotino('stop-detection','danger disabled', 'Arreter la detection');
+                            }
+
+                            ?>
+
                         </td>
                     </tr>
                 </table>
