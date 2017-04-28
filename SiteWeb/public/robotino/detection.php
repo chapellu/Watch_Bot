@@ -1,21 +1,10 @@
 <?php
 //Mise à jour de la détection
-$detection = fopen('/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt', 'r');
-$content='';
-if($detection){
-    $ligne = fgets($detection);
-    $seuil = fgets($detection);
-
-    if(strstr($ligne,'script=False')){
-        App::getInstance()->detection_en_cours = false;
-    } else {
-        App::getInstance()->detection_en_cours = true;
-    }
-    var_dump(App::getInstance()->detection_en_cours);die();
-    fclose($detection);
-} else{
-    $seuil = "";
-}
+$flagscript = fopen('/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt', 'r');
+$ligne = fgets($flagscript);
+$seuil = fgets($flagscript);
+$detection = strstr($ligne,'script=False') ? false : true;
+fclose($flagscript);
 
 ?>
 
@@ -27,12 +16,13 @@ if($detection){
     <table class="table-with-spaces">
         <tr>
             <td>
-                <input class="btn btn-success <?php if(App::getInstance()->detection_en_cours){echo 'disabled';}?>" type="submit" value="Lancer la detection">
+                <input class="btn btn-success <?php if($detection){echo 'disabled';}?>" type="submit" value="Lancer la detection">
                 <!-- <?= $form->bouttonRobotino('start-detection', 'success', 'Lancer la detection');?>-->
             </td>
             <td>
+
                 <?php
-                if(App::getInstance()->detection_en_cours){
+                if($detection){
                     echo $form->bouttonRobotino('stop-detection','danger ', 'Arreter la detection');
                 } else {
                     echo $form->bouttonRobotino('stop-detection','danger disabled', 'Arreter la detection');
