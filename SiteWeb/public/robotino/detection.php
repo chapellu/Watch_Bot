@@ -14,7 +14,6 @@ if($detection){
 }
 ?>
 
-<h2>Capteur D6T</h2>
 <form action="<?=BASE_URL.'/admin/robotino/';?>" method="post">
     <div class="input-group">
         <span class="input-group-addon" id="basic-addon1">Seuil</span>

@@ -109,9 +109,8 @@ if(isset($_POST['seuil'])){
         </div>
 
         <div class="d6t bordered">
-
-
-
+            <h2>Capteur D6T</h2>
+            <div id="d6t"></div>
         </div>
 
         <div class="logs bordered">
