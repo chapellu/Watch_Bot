@@ -37,7 +37,7 @@ public class Accepter_connexion implements Runnable {
 		try {
             while(running){
 	            socket = socketserver.accept();
-	            LOGGER.log(Level.Info,"Incomming message");
+	            LOGGER.log(Level.INFO,"Incomming message");
 	            t1 = new Thread(new MessageEntrant(socket,abonne));
 	            t1.start();
 	            Thread.currentThread();
