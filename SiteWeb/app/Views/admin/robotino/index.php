@@ -110,7 +110,13 @@ if(isset($_POST['seuil'])){
 
         <div class="d6t bordered">
             <h2>Capteur D6T</h2>
-            <div id="d6t"></div>
+            <form action="http://193.48.125.196/admin/robotino/" method="post">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Seuil</span>
+                    <input type="number" class="form-control" name="seuil" aria-describedby="basic-addon1">
+                </div>
+                <div id="d6t"></div>
+            </form>
         </div>
 
         <div class="logs bordered">
