@@ -22,9 +22,9 @@ fclose($flagscript);
 
                 <?php
                 if($detection){
-                    echo '<a class="btn btn-danger boutonsRobotino" id="stop-detection" type="submit" name="stop-detection" href="'.BASE_URL.'/admin/robotino/?action=stop-detection">Arreter la détection</a>';
+                    echo '<a class="btn btn-danger boutonsRobotino" id="stop-detection" type="submit" name="stop-detection" href="http://193.48.125.196/admin/robotino/?action=stop-detection">Arreter la détection</a>';
                 } else {
-                    echo '<a class="btn btn-danger disabled boutonsRobotino" id="stop-detection" type="submit" name="stop-detection" href="'.BASE_URL.'/admin/robotino/?action=stop-detection">Arreter la détection</a>';
+                    echo '<a class="btn btn-danger disabled boutonsRobotino" id="stop-detection" type="submit" name="stop-detection" href="http://193.48.125.196/admin/robotino/?action=stop-detection">Arreter la détection</a>';
                 }
 
                 ?>
