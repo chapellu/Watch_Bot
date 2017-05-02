@@ -65,7 +65,7 @@ public class Watchbot implements InterfaceMessageRecu{
 	        
 	        //Lancement du script 
 	        try {
-	        	Process p = Runtime.getRuntime().exec("");				
+	        	Process p = Runtime.getRuntime().exec("sudo  -u www-data python /var/www/html/Watch_Bot/scriptsD6T/mainscript.py > /dev/null 2>/dev/null &");
 	        	etat=Etat.Surveillance;
 				LOGGER.log(Level.FINE, "Surveillance started");
 	        } catch (IOException e) {
