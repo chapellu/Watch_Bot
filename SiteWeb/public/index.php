@@ -4,7 +4,7 @@ $debut = microtime(true);
 define('DS',DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__DIR__));
 define('NUM_ROBOTINO','38');
-define('DEV',1);
+define('DEV',0);
 define('SERVEUR',1);
 
 if(DEV == 1){
