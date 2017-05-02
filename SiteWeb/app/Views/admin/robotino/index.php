@@ -3,7 +3,7 @@ if(isset($_GET['action'])){
     $action = $_GET['action'];
     if($action==='avance' || $action==='recule' || $action==='droite' || $action ==='gauche'){
         $msg = $action;
-        App::sendSocket('Robotino','193.48.125.'.NUM_ROBOTINO,'Ordre',$action);
+        App::sendSocket('Raspberry','193.48.125.196','Ordre',$action);
     }
     else if($action==='stop-detection'){
         if(SERVEUR == 0){
