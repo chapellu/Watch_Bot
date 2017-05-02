@@ -25,6 +25,7 @@ public class Watchbot implements InterfaceMessageRecu{
 	private boolean utilisateurPresent = true;
 	private static final Logger LOGGER = Logger.getLogger( Watchbot.class.getName() );
 	private static FileHandler fileTxt;
+	private InterfaceCommunication com = InterfaceCommunication.newInterfaceCommunication();
 	
 	private Watchbot(){
 		try {
@@ -48,7 +49,7 @@ public class Watchbot implements InterfaceMessageRecu{
 		}
 		
 	public void startSurveillance(String seuil){
-		//if (etat==Etat.Repos) {
+		if (etat==Etat.Repos) {
 			String fichier ="/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt";
 
 	        //creation ou ajout dans le fichier texte
@@ -60,7 +61,7 @@ public class Watchbot implements InterfaceMessageRecu{
 	            fichierSortie.close();
 	        }
 	        catch (Exception e){
-	            System.out.println(e.toString());
+	            LOGGER.log(Level.SEVERE,e.toString(),e);
 	        }
 	        
 	        //Lancement du script 
@@ -70,14 +71,14 @@ public class Watchbot implements InterfaceMessageRecu{
 				LOGGER.log(Level.FINE, "Surveillance started");
 	        } catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE,e.toString(),e);
 			}
 	        
-		//}
+		}
 	}
 	
 	public void stopSurveillance(){
-		//if (etat==Etat.Surveillance) {
+		if (etat==Etat.Surveillance) {
 	        String fichier ="/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt";
 
 			 //création ou ajout dans le fichier texte
@@ -91,24 +92,26 @@ public class Watchbot implements InterfaceMessageRecu{
 				LOGGER.log(Level.FINE, "Surveillance stopped");
 	        }
 	        catch (Exception e){
-	            System.out.println(e.toString());
+	            LOGGER.log(Level.SEVERE,e.toString(),e);
 	        }
 			
-		//}
+		}
 	}
 	
 	public void startCartographie(){
 		if (etat==Etat.Repos) {
 			etat=Etat.Cartographie;
-			LOGGER.log(Level.INFO, "Cartographie started");
+			LOGGER.log(Level.INFO, "Starting Cartographie");
 		}
+		LOGGER.log(Level.INFO, "Cartographie started");
 	}
 	
 	public void stopCartographie(){
 		if (etat==Etat.Cartographie) {
 			etat=Etat.Repos;
-			LOGGER.log(Level.INFO, "Cartographie stopped");
+			LOGGER.log(Level.INFO, "Stopping Cartographie");
 		}
+		LOGGER.log(Level.INFO, "Cartographie stopped");
 	}
 
 	@Override
@@ -163,12 +166,16 @@ public class Watchbot implements InterfaceMessageRecu{
 				stopCartographie();
 				break;
 			case avance:
+				com.sendMessage("Robotino Standard","Ordre",mes.getMessage());	
 				break;
 			case recule:
+				com.sendMessage("Robotino Standard","Ordre",mes.getMessage());
 				break;
 			case gauche:
+				com.sendMessage("Robotino Standard","Ordre",mes.getMessage());
 				break;
 			case droite:
+				com.sendMessage("Robotino Standard","Ordre",mes.getMessage());
 				break;
 			default:
 				LOGGER.log(Level.INFO, mes.toString());
@@ -214,7 +221,6 @@ public class Watchbot implements InterfaceMessageRecu{
 	private void handleRequete(Message message) {
 		// TODO Auto-generated method stub
 		String mes = message.getMessage();
-		InterfaceCommunication com = InterfaceCommunication.newInterfaceCommunication();
 		
 		if(InterfaceCommunication.validate(mes)){
 			LOGGER.log(Level.INFO, "ip: "+mes+" \n");
