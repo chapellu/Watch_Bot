@@ -95,7 +95,7 @@ class OmronD6T(object):
         else:
             d = d + str(date.timetuple()[i]) + "-"
         d = d + str(date.timetuple()[5])
-        d1 = d1 + date1[1] + " " + date1[3] + ", " + date1[5] + " " + date1[4] + " "
+        d1 = d1 + date1[1] + " " + date1[2] + ", " + date1[4] + " " + date1[3] + " "
 
         if date.timetuple()[3] >= 12:
             d1 = d1 + "PM"
