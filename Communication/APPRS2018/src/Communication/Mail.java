@@ -19,10 +19,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
  
-/**
- * @author Crunchify.com
- * 
- */
  
 public class Mail {
  
@@ -30,7 +26,7 @@ public class Mail {
     static Session getMailSession;
     static MimeMessage msg;
  
-    public static void main(String args[]) throws AddressException, MessagingException {
+    public Mail (String robot) throws AddressException, MessagingException{
  
         System.out.println("\n1st ===> setup Mail Server Properties..");
  
@@ -44,8 +40,7 @@ public class Mail {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
  
-        System.out
-                .println("\n2nd ===> create Authenticator object to pass in Session.getInstance argument..");
+        System.out.println("\n2nd ===> create Authenticator object to pass in Session.getInstance argument..");
  
         Authenticator authentication = new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -56,9 +51,9 @@ public class Mail {
         generateAndSendEmail(
                 session,
                 toEmail,
-                "Crunchify's JavaMail API example with Image Attachment",
-                "Greetings, <br><br>Test email by Crunchify.com JavaMail API example. Please find here attached Image."
-                        + "<br><br> Regards, <br>Crunchify Admin");
+                "Alerte Intrusion " + new Date(),
+                "Bonjour, <br><br>Un intrus a été détecté par "+robot
+                        + "<br><br> Regards, <br>WatchBot");
  
     }
  
@@ -72,9 +67,9 @@ public class Mail {
             crunchifyMessage.addHeader("format", "flowed");
             crunchifyMessage.addHeader("Content-Transfer-Encoding", "8bit");
  
-            crunchifyMessage.setFrom(new InternetAddress("noreply@crunchify.com",
-                    "NoReply-Crunchify"));
-            crunchifyMessage.setReplyTo(InternetAddress.parse("noreply@crunchify.com", false));
+            crunchifyMessage.setFrom(new InternetAddress("noreply@watchbot.com",
+                    "NoReply-WatchBot"));
+            crunchifyMessage.setReplyTo(InternetAddress.parse("noreply@watchbot.com", false));
             crunchifyMessage.setSubject(subject, "UTF-8");
             crunchifyMessage.setSentDate(new Date());
             crunchifyMessage.setRecipients(Message.RecipientType.TO,
@@ -93,7 +88,7 @@ public class Mail {
             messageBodyPart = new MimeBodyPart();
  
             // Valid file location
-            String filename = "D:/Ludovic/Images/IMG_19042017_191510_0.png";
+            String filename = "C:/Users/Ludovic/Pictures/images.jpg";
             DataSource source = new FileDataSource(filename);
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(filename);
