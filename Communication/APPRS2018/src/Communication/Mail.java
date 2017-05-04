@@ -35,7 +35,7 @@ public class Mail {
         System.out.println("\n1st ===> setup Mail Server Properties..");
  
         final String sourceEmail = "civ.odul74@gmail.com"; // requires valid Gmail id
-        final String password = "code-civ2.0"; // correct password for Gmail id
+        final String password = ""; // correct password for Gmail id
         final String toEmail = "civ.odul74@gmail.com"; // any destination email id
  
         Properties props = new Properties();
