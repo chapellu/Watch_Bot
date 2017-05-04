@@ -22,7 +22,6 @@ public class Accepter_connexion implements Runnable {
 		 this.abonne = abonne;
 		 try {
 			fileTxt = new FileHandler("Accepter_connexion.txt");
-			LOGGER.addHandler(fileTxt);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -30,14 +29,14 @@ public class Accepter_connexion implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
+		 LOGGER.addHandler(fileTxt);
 		}
 	
 	public void run() {
 		try {
             while(running){
 	            socket = socketserver.accept();
-	            LOGGER.log(Level.INFO,"Incomming message");
+	            LOGGER.log(Level.FINE,"Incomming message");
 	            t1 = new Thread(new MessageEntrant(socket,abonne));
 	            t1.start();
 	            Thread.currentThread();

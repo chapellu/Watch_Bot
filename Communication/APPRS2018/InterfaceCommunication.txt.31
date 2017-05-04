@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-05-02T09:53:01</date>
+  <millis>1493711581279</millis>
+  <sequence>3</sequence>
+  <logger>Communication.InterfaceCommunication</logger>
+  <level>INFO</level>
+  <class>Communication.InterfaceCommunication</class>
+  <method>startEcoute</method>
+  <thread>1</thread>
+  <message>listening on port 50003</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:01</date>
+  <millis>1493711581558</millis>
+  <sequence>6</sequence>
+  <logger>Communication.InterfaceCommunication</logger>
+  <level>INFO</level>
+  <class>Communication.InterfaceCommunication</class>
+  <method>sendMessage</method>
+  <thread>1</thread>
+  <message>Sending : Message [AuteurPrecedent=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Destinataire=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Date=Communication.DateJson@25f38edc, type=Ordre, message=startSurveillance]</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582855</millis>
+  <sequence>9</sequence>
+  <logger>Communication.InterfaceCommunication</logger>
+  <level>INFO</level>
+  <class>Communication.InterfaceCommunication</class>
+  <method>sendMessage</method>
+  <thread>1</thread>
+  <message>Sending : Message [AuteurPrecedent=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Destinataire=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Date=Communication.DateJson@5b37e0d2, type=Ordre, message=stopSurveillance]</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582866</millis>
+  <sequence>12</sequence>
+  <logger>Communication.InterfaceCommunication</logger>
+  <level>INFO</level>
+  <class>Communication.InterfaceCommunication</class>
+  <method>sendMessage</method>
+  <thread>1</thread>
+  <message>Sending : Message [AuteurPrecedent=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Destinataire=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Date=Communication.DateJson@4459eb14, type=Ordre, message=startCartographie]</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582888</millis>
+  <sequence>17</sequence>
+  <logger>Communication.InterfaceCommunication</logger>
+  <level>INFO</level>
+  <class>Communication.InterfaceCommunication</class>
+  <method>sendMessage</method>
+  <thread>1</thread>
+  <message>Sending : Message [AuteurPrecedent=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Destinataire=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Date=Communication.DateJson@5a2e4553, type=Ordre, message=stopCartographie]</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582906</millis>
+  <sequence>21</sequence>
+  <logger>Communication.InterfaceCommunication</logger>
+  <level>INFO</level>
+  <class>Communication.InterfaceCommunication</class>
+  <method>sendMessage</method>
+  <thread>1</thread>
+  <message>Sending : Message [AuteurPrecedent=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Destinataire=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Date=Communication.DateJson@28c97a5, type=Ordre, message=avance]</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582920</millis>
+  <sequence>25</sequence>
+  <logger>Communication.InterfaceCommunication</logger>
+  <level>INFO</level>
+  <class>Communication.InterfaceCommunication</class>
+  <method>sendMessage</method>
+  <thread>1</thread>
+  <message>Sending : Message [AuteurPrecedent=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Destinataire=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Date=Communication.DateJson@6659c656, type=Ordre, message=recule]</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582928</millis>
+  <sequence>28</sequence>
+  <logger>Communication.InterfaceCommunication</logger>
+  <level>INFO</level>
+  <class>Communication.InterfaceCommunication</class>
+  <method>sendMessage</method>
+  <thread>1</thread>
+  <message>Sending : Message [AuteurPrecedent=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Destinataire=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Date=Communication.DateJson@6d5380c2, type=Ordre, message=gauche]</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582958</millis>
+  <sequence>42</sequence>
+  <logger>Communication.InterfaceCommunication</logger>
+  <level>INFO</level>
+  <class>Communication.InterfaceCommunication</class>
+  <method>sendMessage</method>
+  <thread>1</thread>
+  <message>Sending : Message [AuteurPrecedent=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Destinataire=Communicant [nom=Ordinateur 1, IP=193.48.125.66], Date=Communication.DateJson@45ff54e6, type=Ordre, message=droite]</message>
+</record>

@@ -39,7 +39,6 @@ public class InterfaceCommunication implements InterfaceMessageRecu{
 			// TODO Auto-generated catch block
 		}
 		 
-		 
 		try {
 			ip = InetAddress.getLocalHost ().getHostAddress ();
 			bd = BaseDeDonnee.connect();
@@ -55,10 +54,10 @@ public class InterfaceCommunication implements InterfaceMessageRecu{
 	
 	public static InterfaceCommunication newInterfaceCommunication(){
 		if(instance==null){
-			LOGGER.log(Level.INFO, "Creating instance of InterfaceCommunication");
+			LOGGER.log(Level.FINE, "Creating instance of InterfaceCommunication");
 			instance = new InterfaceCommunication();
 		}
-		LOGGER.log(Level.INFO, "Returning instance of InterfaceCommunication");
+		LOGGER.log(Level.FINE, "Returning instance of InterfaceCommunication");
 		return(instance);
 	}
 	
@@ -79,6 +78,7 @@ public class InterfaceCommunication implements InterfaceMessageRecu{
 		}
 		LOGGER.log(Level.INFO, "Sending : " + mes);
 		String messageJson = crypterMessage(mes);
+		System.out.println("msgJson "+ messageJson);
         try {
 			Socket socket = new Socket(ipDest, portServeur);
 			out = new PrintWriter(socket.getOutputStream());
@@ -134,7 +134,7 @@ public class InterfaceCommunication implements InterfaceMessageRecu{
 		Gson gson = builder.create();
 		return(gson.toJson(mes));
 		*/
-		LOGGER.log(Level.INFO,"Recu " + mes);
+		System.out.println("Recu " + mes);
 	}
 
 	public void newMessageRecu(Message mess) {

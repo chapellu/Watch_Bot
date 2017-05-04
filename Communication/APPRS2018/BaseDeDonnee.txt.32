@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-05-02T11:38:47</date>
+  <millis>1493717927808</millis>
+  <sequence>1</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.66';</message>
+</record>
+<record>
+  <date>2017-05-02T11:38:47</date>
+  <millis>1493717927833</millis>
+  <sequence>2</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>Ordinateur 1</message>
+</record>
+<record>
+  <date>2017-05-02T11:38:48</date>
+  <millis>1493717928106</millis>
+  <sequence>4</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.196';</message>
+</record>
+<record>
+  <date>2017-05-02T11:38:48</date>
+  <millis>1493717928111</millis>
+  <sequence>5</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>Pi</message>
+</record>

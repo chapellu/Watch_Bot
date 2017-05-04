@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-05-02T09:53:00</date>
+  <millis>1493711580050</millis>
+  <sequence>0</sequence>
+  <logger>watchbot.Watchbot</logger>
+  <level>FINE</level>
+  <class>watchbot.Watchbot</class>
+  <method>create</method>
+  <thread>1</thread>
+  <message>Returning instance of Watchbot</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582934</millis>
+  <sequence>30</sequence>
+  <logger>watchbot.Watchbot</logger>
+  <level>WARNING</level>
+  <class>watchbot.Watchbot</class>
+  <method>newMessageRecu</method>
+  <thread>14</thread>
+  <message>stopSurveillance</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582934</millis>
+  <sequence>31</sequence>
+  <logger>watchbot.Watchbot</logger>
+  <level>FINE</level>
+  <class>watchbot.Watchbot</class>
+  <method>startCartographie</method>
+  <thread>15</thread>
+  <message>Cartographie started</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582936</millis>
+  <sequence>33</sequence>
+  <logger>watchbot.Watchbot</logger>
+  <level>WARNING</level>
+  <class>watchbot.Watchbot</class>
+  <method>newMessageRecu</method>
+  <thread>15</thread>
+  <message>startCartographie</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582936</millis>
+  <sequence>32</sequence>
+  <logger>watchbot.Watchbot</logger>
+  <level>FINE</level>
+  <class>watchbot.Watchbot</class>
+  <method>stopCartographie</method>
+  <thread>16</thread>
+  <message>Cartographie stopped</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582939</millis>
+  <sequence>34</sequence>
+  <logger>watchbot.Watchbot</logger>
+  <level>WARNING</level>
+  <class>watchbot.Watchbot</class>
+  <method>newMessageRecu</method>
+  <thread>16</thread>
+  <message>stopCartographie</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582942</millis>
+  <sequence>36</sequence>
+  <logger>watchbot.Watchbot</logger>
+  <level>WARNING</level>
+  <class>watchbot.Watchbot</class>
+  <method>newMessageRecu</method>
+  <thread>13</thread>
+  <message>startSurveillance</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582944</millis>
+  <sequence>37</sequence>
+  <logger>watchbot.Watchbot</logger>
+  <level>WARNING</level>
+  <class>watchbot.Watchbot</class>
+  <method>newMessageRecu</method>
+  <thread>17</thread>
+  <message>avance</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582956</millis>
+  <sequence>39</sequence>
+  <logger>watchbot.Watchbot</logger>
+  <level>WARNING</level>
+  <class>watchbot.Watchbot</class>
+  <method>newMessageRecu</method>
+  <thread>18</thread>
+  <message>recule</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582964</millis>
+  <sequence>43</sequence>
+  <logger>watchbot.Watchbot</logger>
+  <level>WARNING</level>
+  <class>watchbot.Watchbot</class>
+  <method>newMessageRecu</method>
+  <thread>19</thread>
+  <message>gauche</message>
+</record>
+<record>
+  <date>2017-05-02T09:53:02</date>
+  <millis>1493711582971</millis>
+  <sequence>45</sequence>
+  <logger>watchbot.Watchbot</logger>
+  <level>WARNING</level>
+  <class>watchbot.Watchbot</class>
+  <method>newMessageRecu</method>
+  <thread>21</thread>
+  <message>droite</message>
+</record>

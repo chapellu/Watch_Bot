@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-04-28T14:24:14</date>
+  <millis>1493382254402</millis>
+  <sequence>0</sequence>
+  <logger>watchbot.Watchbot</logger>
+  <level>FINE</level>
+  <class>watchbot.Watchbot</class>
+  <method>create</method>
+  <thread>1</thread>
+  <message>Returning instance of Watchbot</message>
+</record>

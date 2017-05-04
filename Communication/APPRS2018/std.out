@@ -1,0 +1,29 @@
+Pro/ENGINEER is running with Unicode string encoding.
+License request failed for feature
+
+Requesting PROE_Educ1 ...
+7788@sea1: (-15) Cannot connect to license server system.
+DUMMY - pro_set_input_devices_allowed
+DUMMY - putxyres
+pglSetStatus: Pgl Session Initialize
+DUMMY - putxyres
+check_exec_file_accessible_():  C:\Program Files\proeWildfire 5.0\\x86e_win64\obj\SWConvert.exe accessible (INFO MESSAGE)
+browser_get_type_sysdep:  type = 1 (INFO MESSAGE)
+ProCmdSelBufferAttrSet():  Selection Buffer Attribute loaded 40 commands (INFO MESSAGE)
+uit_get_visual_style_low:  Style is PTC Wildfire 5 (INFO MESSAGE)
+pfa_set_content_hints:  leaving config.fav alone (INFO MESSAGE)
+pfa_set_content_hints:  leaving config.his alone (INFO MESSAGE)
+uit_get_visual_style_low:  Style is PTC Wildfire 5 (INFO MESSAGE)
+pglSetStatus: PglWindowEndNoGraphics: Not in nographics mode.
+pro_locate_colormap ()
+located color definition C:\Program Files\proeWildfire 5.0\graphic-library\appearances\appearance.dmt
+pro_locate_colormap ()
+located color definition C:\Program Files\proeWildfire 5.0\graphic-library\appearances\global.dmt
+
+ run mode = 3
+PFSTMakeTypeString:  no zip found (INFO MESSAGE)
+pro_notification_remove:  event_id 5 was never defined? (INFO MESSAGE)
+pro_notification_remove:  event_id 6 was never defined? (INFO MESSAGE)
+pro_notification_remove:  event_id 14 was never defined? (INFO MESSAGE)
+pro_notification_remove:  event_id 15 was never defined? (INFO MESSAGE)
+pglSetStatus: Pgl Session Terminate

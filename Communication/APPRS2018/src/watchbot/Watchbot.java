@@ -30,26 +30,27 @@ public class Watchbot implements InterfaceMessageRecu{
 	private Watchbot(){
 		try {
 			fileTxt = new FileHandler("Watchbot.txt");
-			LOGGER.addHandler(fileTxt);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
+		 LOGGER.addHandler(fileTxt);
+		 LOGGER.setLevel(Level.ALL);
 	}
 	
 	public static Watchbot create(){
 		if (instance == null){
-			LOGGER.log(Level.INFO, "Creating instance of Watchbot");
+			LOGGER.log(Level.FINE, "Creating instance of Watchbot");
 			instance = new Watchbot();}
-		LOGGER.log(Level.INFO, "Returning instance of Watchbot");
+		LOGGER.log(Level.FINE, "Returning instance of Watchbot");
 		return(instance);
 		}
 		
 	public void startSurveillance(String seuil){
-		if (etat==Etat.Repos) {
+		//if (etat==Etat.Repos) {
 			String fichier ="/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt";
 
 	        //creation ou ajout dans le fichier texte
@@ -61,27 +62,27 @@ public class Watchbot implements InterfaceMessageRecu{
 	            fichierSortie.close();
 	        }
 	        catch (Exception e){
-	            LOGGER.log(Level.SEVERE,e.toString(),e);
+	            System.out.println(e.toString());
 	        }
 	        
 	        //Lancement du script 
 	        try {
-	        	Process p = Runtime.getRuntime().exec("/etc/init.d/watchbot start-detection");
+	        	Process p = Runtime.getRuntime().exec("/etc/init.d/watchbot start-detection");				
 	        	etat=Etat.Surveillance;
 				LOGGER.log(Level.FINE, "Surveillance started");
 	        } catch (IOException e) {
 				// TODO Auto-generated catch block
-				LOGGER.log(Level.SEVERE,e.toString(),e);
+				e.printStackTrace();
 			}
 	        
-		}
+		//}
 	}
 	
 	public void stopSurveillance(){
-		if (etat==Etat.Surveillance) {
+		//if (etat==Etat.Surveillance) {
 	        String fichier ="/var/www/html/Watch_Bot/scriptsD6T/flagscript.txt";
 
-			 //crÃ©ation ou ajout dans le fichier texte
+			 //création ou ajout dans le fichier texte
 	        try {
 	            FileWriter fw = new FileWriter (fichier);
 	            BufferedWriter bw = new BufferedWriter (fw);
@@ -92,26 +93,24 @@ public class Watchbot implements InterfaceMessageRecu{
 				LOGGER.log(Level.FINE, "Surveillance stopped");
 	        }
 	        catch (Exception e){
-	            LOGGER.log(Level.SEVERE,e.toString(),e);
+	            System.out.println(e.toString());
 	        }
 			
-		}
+		//}
 	}
 	
 	public void startCartographie(){
 		if (etat==Etat.Repos) {
 			etat=Etat.Cartographie;
-			LOGGER.log(Level.INFO, "Starting Cartographie");
+			LOGGER.log(Level.FINE, "Cartographie started");
 		}
-		LOGGER.log(Level.INFO, "Cartographie started");
 	}
 	
 	public void stopCartographie(){
 		if (etat==Etat.Cartographie) {
 			etat=Etat.Repos;
-			LOGGER.log(Level.INFO, "Stopping Cartographie");
+			LOGGER.log(Level.FINE, "Cartographie stopped");
 		}
-		LOGGER.log(Level.INFO, "Cartographie stopped");
 	}
 
 	@Override
@@ -135,7 +134,7 @@ public class Watchbot implements InterfaceMessageRecu{
 		default:
 			break;
 		}
-		LOGGER.log(Level.SEVERE,mes.getMessage());
+		LOGGER.log(Level.WARNING,mes.getMessage());
 		
 	}
 	
@@ -201,14 +200,14 @@ public class Watchbot implements InterfaceMessageRecu{
 	private void handleMessage(Message mes) {
 		if (mes.getMessage().equals("leaving")){
 			utilisateurPresent = false;
-			LOGGER.log(Level.FINE, "false");
+			LOGGER.log(Level.INFO, "false");
 		}
 		else if (mes.getMessage().equals("coming")){
 			utilisateurPresent = true;
-			LOGGER.log(Level.FINE, "true");
+			LOGGER.log(Level.INFO, "true");
 		}
 		else{
-			LOGGER.log(Level.FINE, "handleMessage error");
+			LOGGER.log(Level.INFO, "handleMessage error");
 		}
 		
 	}
@@ -234,13 +233,13 @@ public class Watchbot implements InterfaceMessageRecu{
 		String mes = message.getMessage();
 		
 		if(InterfaceCommunication.validate(mes)){
-			LOGGER.log(Level.INFO, "ip: "+mes+" \n");
-			LOGGER.log(Level.INFO, com.getBd().getNom(mes)+" \n");
+			LOGGER.log(Level.FINE, "ip: "+mes+" \n");
+			LOGGER.log(Level.FINE, com.getBd().getNom(mes)+" \n");
 			com.sendMessage("Nao Orange", "Message", com.getBd().getNom(mes));
 		}
 		else{
-			LOGGER.log(Level.INFO, "nom destinataire: "+mes +" \n");
-			LOGGER.log(Level.INFO, com.getBd().getIP(mes));
+			LOGGER.log(Level.FINE, "nom destinataire: "+mes +" \n");
+			LOGGER.log(Level.FINE, com.getBd().getIP(mes));
 			com.sendMessage("Nao Orange", "Message", com.getBd().getIP(mes));
 		}
 	}

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-05-02T09:43:39</date>
+  <millis>1493711019461</millis>
+  <sequence>1</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.66';</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:39</date>
+  <millis>1493711019482</millis>
+  <sequence>2</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>Ordinateur 1</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:39</date>
+  <millis>1493711019676</millis>
+  <sequence>4</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.65';</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:39</date>
+  <millis>1493711019964</millis>
+  <sequence>5</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>Ordinateur 0</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:42</date>
+  <millis>1493711022528</millis>
+  <sequence>8</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.65';</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:42</date>
+  <millis>1493711022531</millis>
+  <sequence>9</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>Ordinateur 0</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:43</date>
+  <millis>1493711023532</millis>
+  <sequence>12</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.65';</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:43</date>
+  <millis>1493711023545</millis>
+  <sequence>13</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>Ordinateur 0</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:44</date>
+  <millis>1493711024548</millis>
+  <sequence>16</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.65';</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:44</date>
+  <millis>1493711024552</millis>
+  <sequence>17</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>Ordinateur 0</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:45</date>
+  <millis>1493711025564</millis>
+  <sequence>20</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.65';</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:45</date>
+  <millis>1493711025576</millis>
+  <sequence>21</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>Ordinateur 0</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:46</date>
+  <millis>1493711026586</millis>
+  <sequence>24</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.65';</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:46</date>
+  <millis>1493711026590</millis>
+  <sequence>25</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>Ordinateur 0</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:47</date>
+  <millis>1493711027608</millis>
+  <sequence>28</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.65';</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:47</date>
+  <millis>1493711027618</millis>
+  <sequence>29</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>Ordinateur 0</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:48</date>
+  <millis>1493711028621</millis>
+  <sequence>32</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>SELECT nom from nomIP where ip='193.48.125.65';</message>
+</record>
+<record>
+  <date>2017-05-02T09:43:48</date>
+  <millis>1493711028628</millis>
+  <sequence>33</sequence>
+  <logger>Communication.BaseDeDonnee</logger>
+  <level>INFO</level>
+  <class>Communication.BaseDeDonnee</class>
+  <method>getNom</method>
+  <thread>1</thread>
+  <message>Ordinateur 0</message>
+</record>
