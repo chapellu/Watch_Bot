@@ -166,17 +166,28 @@ public class Watchbot implements InterfaceMessageRecu{
 				stopCartographie();
 				break;
 			case avance:
-				com.sendMessage("193.48.125.68","Ordre",mes.getMessage());	
+				com.sendMessage("193.48.125.68","Ordre",mes.toString());	
 				break;
 			case recule:
-				com.sendMessage("Robotino Standard","Ordre",mes.getMessage());
+				com.sendMessage("Robotino Standard","Ordre",mes.toString());
 				break;
 			case gauche:
-				com.sendMessage("Robotino Standard","Ordre",mes.getMessage());
+				com.sendMessage("Robotino Standard","Ordre",mes.toString());
 				break;
 			case droite:
-				com.sendMessage("Robotino Standard","Ordre",mes.getMessage());
+				com.sendMessage("Robotino Standard","Ordre",mes.toString());
 				break;
+			case intrusDetected:
+				if (utilisateurPresent){
+					com.sendMessage("Nao Orange","Ordre",mes.toString());
+				}
+				else{
+					try {
+						new Mail("Robotino","emplacement du fichier");
+					} catch (MessagingException e) {
+						e.printStackTrace();
+					}
+				}
 			default:
 				LOGGER.log(Level.INFO, mes.toString());
 				break;
