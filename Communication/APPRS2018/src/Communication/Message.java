@@ -20,6 +20,7 @@ public class Message {
 		AuteurPrecedent = new Communicant(auteur, ipAuteur);
 		Destinataire = new Communicant (destinataire, ipDest);
 		Date = new DateJson();
+		System.out.println(Date);
 		this.type = t;
 		if (t==TypeMessage.Ordre){
 			try {
@@ -55,7 +56,7 @@ public class Message {
 	@Override
 	public String toString() {
 		return "Message [AuteurPrecedent=" + AuteurPrecedent
-				+ ", Destinataire=" + Destinataire + ", Date=" + Date
+				+ ", Destinataire=" + Destinataire + ", Date=" + Date.toString()
 				+ ", type=" + type + ", message=" + message + "]";
 	}
 	

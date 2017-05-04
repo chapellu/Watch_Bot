@@ -25,7 +25,6 @@ public class MessageEntrant implements Runnable{
 		this.abonne =abonne;
 		try {
 			fileTxt = new FileHandler("MessageEntrant.txt");
-			LOGGER.addHandler(fileTxt);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -33,7 +32,7 @@ public class MessageEntrant implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
+		 LOGGER.addHandler(fileTxt);
 	}
 	public void run() {
 		// TODO Auto-generated method stub
@@ -52,7 +51,6 @@ public class MessageEntrant implements Runnable{
 				out.flush();
 			}
 			else {
-				LOGGER.log(Level.INFO,"Message recu : " + mes + "Envoyé à : " + abonnes);
 				abonne.newMessageRecu(mes);
 			}
 			
