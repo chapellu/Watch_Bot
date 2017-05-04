@@ -23,7 +23,6 @@ private BaseDeDonnee(){
 	 	 String url = "jdbc:mysql://193.48.125.196:3306/Pi";
 	 	 conn = DriverManager.getConnection(url, "watchbot", "app2018");
 	 	 st = conn.createStatement();
-	 	 System.out.println("conn built");
 	 } catch (SQLException e) {
 	 	 e.printStackTrace();
 	 } catch (ClassNotFoundException e) {
@@ -67,7 +66,6 @@ public String getNom(String ip){
 	String sql = "SELECT nom from nomIP where ip='"+ip+"';";
 	LOGGER.log(Level.INFO,sql);
 	try {
-		System.out.println(ip);
 		ResultSet utilisateur = st.executeQuery(sql);
 		utilisateur.next();
 		LOGGER.log(Level.INFO,utilisateur.getString("nom"));
@@ -78,14 +76,14 @@ public String getNom(String ip){
 		int idOrdi = 0;
 		try{
 			ResultSet numOrdi = st.executeQuery(sql1);
-			numOrdi.next();
-			String num = numOrdi.getString("nom");
-			System.out.println(num);
-			String [] tokens = num.split(" ");
-			System.out.println(tokens);
-			System.out.println(tokens[1]);
-			idOrdi = Integer.valueOf(tokens[1])+1;
-			LOGGER.log(Level.INFO,String.valueOf(idOrdi));
+			while (numOrdi.next()){
+				String num = numOrdi.getString("nom");
+				String [] tokens = num.split(" ");
+				if (Integer.valueOf(tokens[1])>= idOrdi){
+					idOrdi = Integer.valueOf(tokens[1])+1;}
+				LOGGER.log(Level.INFO,String.valueOf(idOrdi));
+			}
+				
 		}catch (SQLException e1) {
 			LOGGER.log(Level.SEVERE,e1.toString(),e1);
 		}
