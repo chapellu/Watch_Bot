@@ -26,12 +26,12 @@ public class Mail {
     static Session getMailSession;
     static MimeMessage msg;
  
-    public Mail (String robot) throws AddressException, MessagingException{
+    public Mail (String robot, String filename) throws AddressException, MessagingException{
  
         System.out.println("\n1st ===> setup Mail Server Properties..");
  
         final String sourceEmail = "civ.odul74@gmail.com"; // requires valid Gmail id
-        final String password = ""; // correct password for Gmail id
+        final String password = "code-civ2.0"; // correct password for Gmail id
         final String toEmail = "civ.odul74@gmail.com"; // any destination email id
  
         Properties props = new Properties();
@@ -53,12 +53,13 @@ public class Mail {
                 toEmail,
                 "Alerte Intrusion " + new Date(),
                 "Bonjour, <br><br>Un intrus a été détecté par "+robot
-                        + "<br><br> Regards, <br>WatchBot");
+                        + "<br><br> Regards, <br>WatchBot",
+                filename);
  
     }
  
     public static void generateAndSendEmail(Session session, String toEmail, String subject,
-            String body) {
+            String body,String filename) {
         try {
             System.out.println("\n3rd ===> generateAndSendEmail() starts..");
  
@@ -88,7 +89,6 @@ public class Mail {
             messageBodyPart = new MimeBodyPart();
  
             // Valid file location
-            String filename = "C:/Users/Ludovic/Pictures/images.jpg";
             DataSource source = new FileDataSource(filename);
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(filename);
