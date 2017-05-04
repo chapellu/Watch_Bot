@@ -1,19 +1,18 @@
 package watchbot;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.mail.MessagingException;
+
 import Communication.InterfaceCommunication;
 import Communication.InterfaceMessageRecu;
+import Communication.Mail;
 import Communication.Message;
 import Communication.Ordre;
 
@@ -67,7 +66,7 @@ public class Watchbot implements InterfaceMessageRecu{
 	        
 	        //Lancement du script 
 	        try {
-	        	Process p = Runtime.getRuntime().exec("/etc/init.d/watchbot start-detection");				
+	        	Runtime.getRuntime().exec("/etc/init.d/watchbot start-detection");				
 	        	etat=Etat.Surveillance;
 				LOGGER.log(Level.FINE, "Surveillance started");
 	        } catch (IOException e) {
@@ -176,7 +175,7 @@ public class Watchbot implements InterfaceMessageRecu{
 			case droite:
 				com.sendMessage("Robotino Standard","Ordre",mes.toString());
 				break;
-			case intrusDetected:
+			case intruderDetected:
 				if (utilisateurPresent){
 					com.sendMessage("Nao Orange","Ordre",mes.toString());
 				}

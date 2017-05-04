@@ -80,7 +80,10 @@ public String getNom(String ip){
 			ResultSet numOrdi = st.executeQuery(sql1);
 			numOrdi.next();
 			String num = numOrdi.getString("nom");
+			System.out.println(num);
 			String [] tokens = num.split(" ");
+			System.out.println(tokens);
+			System.out.println(tokens[1]);
 			idOrdi = Integer.valueOf(tokens[1])+1;
 			LOGGER.log(Level.INFO,String.valueOf(idOrdi));
 		}catch (SQLException e1) {
