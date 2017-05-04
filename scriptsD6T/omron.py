@@ -82,6 +82,28 @@ class OmronD6T(object):
             self.printAuto(seuil)
     #End function to read temperature and print
 
+    # Fonction qui permet de recuperer la date au bon format
+    def date(self):
+        date = datetime.today()
+
+        date1 = date.ctime().split(" ")
+        d = ""
+        d1 = ""
+        for i in range(0, 5):
+            if date.timetuple()[i] < 10:
+                d = d + "0" + str(date.timetuple()[i]) + "-"
+        else:
+            d = d + str(date.timetuple()[i]) + "-"
+        d = d + str(date.timetuple()[5])
+        d1 = d1 + date1[1] + " " + date1[3] + ", " + date1[5] + " " + date1[4] + " "
+
+        if date.timetuple()[3] >= 12:
+            d1 = d1 + "PM"
+        else:
+            d1 = d1 + "AM"
+
+        return (d, d1)
+
     #
     # Methodes qui gerent l affichage selon le mode
     #
@@ -133,7 +155,8 @@ class OmronD6T(object):
 
             socketServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             socketServer.connect((hote, port))
-            socketServer.send('{"AuteurPrecedent":{"nom":"Raspberry","IP":"193.48.125.196"},"Destinataire":{"nom":"Raspberry","IP":"193.48.125.196"},"Date":{"date_string":' + date("Y-m-d-H-i-s") + ',"date":"' + date("M d, Y H:i:s a") + '"},"type":Ordre,"message":"intruderDetected"}')
+            (d, d1) = self.date()
+            socketServer.send('{"AuteurPrecedent":{"nom":"Raspberry","IP":"193.48.125.196"},"Destinataire":{"nom":"Raspberry","IP":"193.48.125.196"},"Date":{"date_string":' + d + ',"date":"' + d1 + '"},"type":Ordre,"message":"intruderDetected"}')
             socketServer.close()
 
             time.sleep(5)  # On attend avant dafficher une prochaine fois qu un humain a ete detecte
@@ -170,3 +193,4 @@ class OmronD6T(object):
             print ''
             print ''
     #End symbols
+
