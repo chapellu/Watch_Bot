@@ -114,9 +114,6 @@ class OmronD6T(object):
         for j in range(0, 4):
             for i in range(0, 4):
                 values.append(round(self.temperature[i + 4 * j], 1))
-        print values
-        print ''
-        print ''
 
         # Compteur de valeurs superieurs au seuil
         compteurDeColonnes = 0
