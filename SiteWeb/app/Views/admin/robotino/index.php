@@ -112,7 +112,7 @@ if(isset($_POST['seuil'])){
                     <tr>
                         <td></td>
                         <td>
-                            <?= $form->bouttonRobotino('auto', 'primary');?>
+                            <?= $form->bouttonRobotino('auto', 'btn-success');?>
                         </td>
                     </tr>
                 </table>
