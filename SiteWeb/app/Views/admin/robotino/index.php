@@ -70,9 +70,7 @@ if(isset($_POST['seuil'])){
                 <source src="http://193.48.125.196:8080/?action=stream" type="video/mp4" /> <!-- support for IE, Firefox, or Chrome -->
                 Sorry, video isn't supported
             </video>
-            <div id="div3" class="fullScreen" > Div3
-                <img class="fullScreen" src="image.jpg"  />
-            </div>
+
         </div>
     </div>
 
