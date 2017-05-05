@@ -67,7 +67,7 @@ if(isset($_POST['seuil'])){
     <div id="div1" class="fullScreen" > Div1
         <div id="div2" class="fullScreen" > Div2
             <video class="fullScreen" controls="controls" loop="loop" autoplay="autoplay" width="300">
-                <source src="http://193.48.125.196:8080/?action=stream" type="video/mp4" /> <!-- support for IE, Firefox, or Chrome -->
+                <source src="http://193.48.125.196:8080/?action=stream"  /> <!-- support for IE, Firefox, or Chrome -->
                 Sorry, video isn't supported
             </video>
             <div id="div3" class="fullScreen" > Div3
