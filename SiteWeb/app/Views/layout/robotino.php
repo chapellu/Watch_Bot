@@ -34,7 +34,55 @@
                 }, 1000);
             });
         </script>
+        <script>
 
+            // create click events for all the elements based on class.
+            var fsClass = document.getElementsByClassName("fullScreen");
+            for (var i = 0; i < fsClass.length; i++) {
+                fsClass[i].addEventListener("click", function (evt) { makeFullScreen(evt); }, false);
+            }
+
+            function makeFullScreen(evt) {
+                // Test for each of the supported versions of full screen APIs and call
+                // either requestFullscreen or cancelFullScreen (or exitFullScreen)
+                //  Structure:
+                //  Does the incoming target support requestFullscreen (or prefaced version)
+                //  if (there is a fullscreen element)
+                //      then cancel or exit
+                //  else request full screen mode
+
+                var divObj = evt.target;  //  get the target element
+
+                if (divObj.requestFullscreen)
+                    if (document.fullScreenElement) {
+                        document.cancelFullScreen();
+                    } else {
+                        divObj.requestFullscreen();
+                    }
+                else if (divObj.msRequestFullscreen)
+                    if (document.msFullscreenElement) {
+                        document.msExitFullscreen();
+                    } else {
+                        divObj.msRequestFullscreen();
+                    }
+                else if (divObj.mozRequestFullScreen)
+                    if (document.mozFullScreenElement) {
+                        document.mozCancelFullScreen();
+                    } else {
+                        divObj.mozRequestFullScreen();
+                    }
+                else if (divObj.webkitRequestFullscreen)
+                    if (document.webkitFullscreenElement) {
+                        document.webkitCancelFullScreen();
+                    } else {
+                        divObj.webkitRequestFullscreen();
+                    }
+                //  stop bubbling so we don't get bounce back
+                evt.stopPropagation();
+
+            }
+
+        </script>
     </head>
 
     <body>
