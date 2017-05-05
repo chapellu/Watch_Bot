@@ -21,7 +21,7 @@
                     <li><a href="<?= BASE_URL.'/group/view/?name=william.simon';?>">William</a></li>
                     <li><a href="<?= BASE_URL.'/group/view/?name=damien.morel';?>">Damien</a>
                     <li><a href="<?= BASE_URL.'/group/view/?name=nicolas.java';?>">Nicolas</a>
-                    <li><a href="<?= BASE_URL.'/group/view/?name=quentin';?>">Quentin</a>
+                    <li><a href="<?= BASE_URL.'/group/view/?name=quentin.boutonnet';?>">Quentin</a>
                 </ul>
             </div>
             <!--<div class="col-md-3 col-sm-6 paddingtop-bottom">
