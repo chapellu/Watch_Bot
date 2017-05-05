@@ -53,28 +53,18 @@ if(isset($_POST['seuil'])){
 
 
 <div class="robotino col-sm-12">
-    <!--<div class="video col-sm-9">
+    <div class="video col-sm-9">
         <?php if(DEV == 0):?>
-            <img src="http://193.48.125.196:8080/?action=stream" alt=""/>
+            <input type="image" src="http://193.48.125.196:8080/?action=stream" onclick="(this.requestFullscreen || this.mozRequestFullScreen || this.webkitRequestFullscreen).call(this)">/>
         <?php else:?>
             <p>Mode de développement</p>
         <?php endif;?>
         <!--<form action="<?=BASE_URL.'/admin/robotino/?action=camera';?>" method="post">
             <input class="btn btn-success" type="submit" value="Lancer la camera">
-        </form>
+        </form>-->
 
-    </div>-->
-    <div id="div1" class="fullScreen" > Div1
-        <div id="div2" class="fullScreen" > Div2
-            <video class="fullScreen" controls="controls" loop="loop" autoplay="autoplay" width="300">
-                <source src="http://193.48.125.196:8080/?action=stream"  /> <!-- support for IE, Firefox, or Chrome -->
-                Sorry, video isn't supported
-            </video>
-            <div id="div3" class="fullScreen" > Div3
-                <img class="fullScreen" src="image.jpg"  />
-            </div>
-        </div>
     </div>
+
 
     <div class="padding col-sm-12"><br></div>
 
