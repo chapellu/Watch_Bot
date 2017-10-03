@@ -36,7 +36,11 @@ public class Navigation
 	private String hostname;
 	static ArrayList<Float> capteurs = new ArrayList<Float>();
 	
+<<<<<<< HEAD
 	private boolean carto = true;		//Booléen pour arrêter le robot quand il en reçoit l'ordre
+=======
+	private boolean carto = true;		//Booleen pour arreter le robot quand il en recoit l'ordre
+>>>>>>> Mise Ã  jour Navigation + fichier.sh
 	
 	public Navigation(Com communication, OmniDrive omniDrive, Bumper bumper)
 	{
@@ -134,7 +138,11 @@ public class Navigation
     	getCapteursValue(capteurs);
     	carto =  true;
 		//-----------------------------------------------------------//
+<<<<<<< HEAD
 		//        Le robot avance jusqu'au mur pour s'arrêter        //
+=======
+		//        Le robot avance jusqu'au mur pour s'arreter        //
+>>>>>>> Mise Ã  jour Navigation + fichier.sh
 		//-----------------------------------------------------------//
     	while(capteurs.get(0)<2.0f && once && carto){
     		getCapteursValue(capteurs);	
@@ -266,7 +274,11 @@ public class Navigation
 		//-----------------------------------------------------------//
 		//              		Mode manuel				             //
 		//-----------------------------------------------------------//
+<<<<<<< HEAD
     //Avance : paramètre positif / Recule : paramètre négatif
+=======
+    //Avance : parametre positif / Recule : parametre negatif
+>>>>>>> Mise Ã  jour Navigation + fichier.sh
     public void avance(int nombre)throws InterruptedException //Nombre de fois 10cms
     {
 		long startTime = System.currentTimeMillis();
