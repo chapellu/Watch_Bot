@@ -1,0 +1,24 @@
+#container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-end;
+}
+video {
+    background: #eee none repeat scroll 0 0;
+    border: 1px solid #aaa;
+}
+.overlayWrapper {
+    position: relative;
+}
+.overlayWrapper .overlay {
+    position: absolute;
+    top: 0;
+    left: 5px;
+}
+p {
+    margin: 0.125em;
+}
+.overlayWrapper > video{
+    height: 350px;
+    width: auto;
+}
